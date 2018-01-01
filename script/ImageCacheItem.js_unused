@@ -1,0 +1,24 @@
+function ImageCacheItem(cache, url, nodeList) {
+	this.ownerCache = cache;
+	this.imageURL = url;
+	this.imageElementList = nodeList;
+	
+	this.ownerCache.lookupImage(
+		url,
+		(res) => {
+			let url = res.blobURL
+				? res.blobURL
+				: res.url;
+			for (let i = 0; i < this.imageElementList.length; i++) {
+				this.imageElementList[i].src = url;
+			}
+		}
+	);
+};
+ImageCacheItem.prototype = Object.create(
+	Object.prototype, {
+		ownerCache : { writable : true },
+		imageElementList : { writable : true },
+		imageURL : { writable : true },
+	}
+);

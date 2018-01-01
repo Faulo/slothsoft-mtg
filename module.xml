@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<fragment name="index">
+		<template name="_index" />
+		<struc name="default" />
+		<call name="chat" />
+		<res name="news" load="xml" />
+	</fragment>
+
+	<fragment name="player">
+		<data name="httpConfig" />
+		<template name="_player" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="deck">
+		<data name="httpConfig" />
+		<template name="_deck" />
+		<data name="deck" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="mcm">
+		<template name="_mcm" />
+		<data name="search" />
+		<struc name="default" />
+	</fragment>
+	<fragment name="dci">
+		<template name="_dci" />
+		<data name="dci" />
+		<!--<resDir name="dci-log" load="xml"/> -->
+		<struc name="default" />
+		<call name="dci.timeline.graph" />
+	</fragment>
+	<fragment name="dci.timeline">
+		<template name="_dci.timeline" />
+		<struc name="default" />
+		<call name="dci.timeline.graph" />
+	</fragment>
+	<fragment name="dci.timeline.graph">
+		<data name="dci" />
+		<data name="sets" />
+		<template name="_dci.timeline.graph" />
+	</fragment>
+
+	<fragment name="deck-edit">
+		<data name="httpConfig" />
+		<data name="deck.edit" />
+	</fragment>
+
+	<fragment name="print">
+		<param name="standalone" scope="global" />
+		<template name="_print" />
+		<data name="print" />
+	</fragment>
+
+	<fragment name="print-wizards">
+		<param name="standalone" scope="global" />
+		<template name="_print" />
+		<data name="print-wizards" />
+	</fragment>
+
+	<fragment name="show">
+		<param name="standalone" scope="global" />
+		<template name="_deck" />
+		<data name="show" />
+		<struc name="default" />
+		<!--<data name="sets.old"/> -->
+	</fragment>
+
+	<fragment name="decklist">
+		<param name="standalone" scope="global" />
+		<template name="_decklist" />
+		<data name="show" />
+	</fragment>
+
+
+	<fragment name="manager">
+		<template name="_manager" />
+		<struc name="default" />
+		<!--<data name="sets.old"/> -->
+		<struc name="/core/DOM" />
+		<script name="MTG" />
+		<script name="MTG.Manager" />
+		<script name="MTG.Deck" />
+	</fragment>
+
+	<fragment name="chat">
+		<param name="chat-database" value="mtg" />
+		<template name="/chat/shoutbox" />
+		<call name="/chat/default" as="chat" />
+	</fragment>
+
+	<struc name="default">
+		<res name="/core/sites" load="xml" />
+		<style name="/slothsoft/default" />
+		<style name="/slothsoft/fonts" />
+		<style name="default" />
+		<struc name="/core/HTML5" />
+		<struc name="/core/XPath" />
+		<script name="ImageCache" />
+	</struc>
+
+
+	<fragment name="bill">
+		<data name="bill" />
+		<template name="_bill" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="wizards">
+		<template name="_wizards" />
+		<param name="standalone" scope="global" />
+	</fragment>
+
+	<fragment name="prerelease">
+		<res name="prerelease" load="xml" />
+		<template name="_prerelease" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="tokens">
+		<resDir name="custom-sets" load="xml" />
+		<template name="_tokens" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="reviews">
+		<data name="oracle" />
+		<data name="reviews" />
+		<resDir name="reviews" load="xml" />
+		<template name="_reviews" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="booster">
+		<data name="httpConfig" />
+		<template name="_booster" />
+		<data name="booster" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="prices">
+		<template name="_prices" />
+		<data name="prices" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="search">
+		<data name="httpConfig" />
+		<template name="_search" />
+		<data name="oracle" />
+		<struc name="default" />
+	</fragment>
+
+	<fragment name="events">
+		<data name="httpConfig" />
+		<struc name="/slothsoft/default" />
+		<template name="_events" />
+		<data name="events" />
+		<struc name="default" />
+	</fragment>
+
+	<!-- <resource name="oracle" path="oracle.xml" type="application/xml"/> 
+		<resource name="db" path="db.json" type="application/json"/> <resource name="editions" 
+		path="editions.txt" type="text/csv" del="|" sep="" output="table"/> <resourceDir 
+		name="cards" path="cards" type="image/png"/> -->
+	<resource name="bill" path="bill.csv" type="text/csv" del="&#09;"
+		output="thead" />
+	<resource name="sites" path="sites.xml" type="application/xml" />
+	<resource name="sites.players" path="sites.players.xml" type="application/xml" />
+
+	<resource name="news" path="news.xhtml" type="application/xhtml+xml" />
+	<resource name="samlWidget" path="samlWidget.xhtml" type="application/xhtml+xml" />
+
+	<resource name="prerelease" path="prerelease.xml" type="application/xml" />
+
+	<resourceDir name="players" path="players" type="application/json" />
+	<resourceDir name="dci-log" path="dci" type="application/xml" />
+	<!-- <resourceDir name="db" path="db" ext="txt" type="text/csv" del="|" 
+		sep="" output="thead"/> <resourceDir name="tokens" path="tokens" type="image/png"/> -->
+
+	<resourceDir name="misc" path="misc" type="*/*" />
+
+	<resourceDir name="reviews" path="reviews" type="application/json" />
+
+	<resource name="rules-comp" path="rules/MagicCompRules_20150717.txt"
+		type="text/plain" />
+	<resource name="rules-mtr" path="rules/mtg_mtr_17jul15_en_0.pdf"
+		type="application/pdf" />
+	<resource name="rules-ipg" path="rules/mtg_ipg_17jul15_en.pdf"
+		type="application/pdf" />
+
+	<resource name="custom-border" path="custom-cards/border.png"
+		type="image/png" />
+	<resourceDir name="custom-cards" path="custom-cards" type="image/png" />
+	<resourceDir name="custom-sets" path="custom-sets" type="text/html" />
+
+	<resource name="events" path="events.xml" type="application/xml" />
+	<resource name="oracle" path="oracle.xml" type="application/xml" />
+
+	<!-- <resourceDir name="custom-sets" path="custom-sets" type="text/html"> 
+		<resourceDir name="avatar-files" path="custom-sets/avatar-files" type="*/*"/> 
+		<resourceDir name="dragonage-files" path="custom-sets/dragonage-files" type="*/*"/> 
+		<resourceDir name="onepiece-files" path="custom-sets/onepiece-files" type="*/*"/> 
+		</resourceDir> <resourceDir name="avatar-files" path="custom-sets/avatar-files" 
+		type="image/png"/> <resourceDir name="dragonage-files" path="custom-sets/dragonage-files" 
+		type="image/png"/> <resourceDir name="onepiece-files" path="custom-sets/onepiece-files" 
+		type="image/png"/> -->
+</module>

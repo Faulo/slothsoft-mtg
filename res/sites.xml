@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<page name="MTG" module="mtg" title="MTG" status-active="">
+		<page name="News" ref="index" title="News" status-active="" status-public=""/>
+		
+		<page name="Prereleases" ref="prerelease" title="Prereleases" status-active="" status-public=""/>
+		<page name="Search" ref="search" title="Search" status-active="" status-public=""/>
+		<page name="Events" ref="events" title="Events" status-active="" status-public=""/>
+		<page name="Booster" ref="booster" title="Booster" status-active="" status-public=""/>
+		<page name="Reviews" ref="reviews" title="Reviews" status-active="" status-public=""/>
+		
+		<res ref="/mtg/sites.players"/>
+		
+		<page name="Bill" ref="bill" title="Bill" status-active=""/>
+		<page name="MCM" ref="mcm" title="MCM" status-active=""/>
+		<page name="DCI" ref="dci" title="DCI" status-active="">
+			<page name="Timeline" ref="dci.timeline" title="Timeline" status-active=""/>
+		</page>
+		
+		<page name="Prices" ref="prices" title="Prices" status-active=""/>
+	</page>
+	<page name="Prereleases" ref="prerelease" title="Prereleases" status-active="" status-public=""/>
+	<page name="Tokens" ref="tokens" title="Tokens" status-active="" status-public=""/>
+	<page name="Events" ref="events" title="Events" status-active="" status-public=""/>
+	<page name="Booster" ref="booster" title="Booster" status-active="" status-public=""/>
+	<page name="Reviews" ref="reviews" title="Reviews" status-active="">
+		<page name="edit" ref="reviews" title="Reviews" status-active=""/>
+	</page>
+	<page name="DCI" ref="dci" title="DCI" status-active="">
+		<page name="Timeline" ref="dci.timeline" title="Timeline" status-active=""/>
+	</page>
+</data>

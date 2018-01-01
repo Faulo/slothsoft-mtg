@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><xsl:stylesheet version="1.0"	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">	<xsl:import href="/getTemplate.php/core/graph"/>		<xsl:template match="/data">		<xsl:variable name="dci" select="request/param[@name = 'dci']"/> 		<xsl:apply-templates select="//graph[@_dci = $dci]"/>	</xsl:template></xsl:stylesheet>

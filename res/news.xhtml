@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.w3.org/1999/xhtml">
+	<article>
+		<details open="open">
+			<summary><h3>13.01.2017</h3></summary>
+			<div>
+				<p>New search feature!</p>
+				<p>It's now possible to search specifically for mana (and other) symbols in the rules text of cards.</p>
+				<p>To do that, you write "{" + symbol key + "}".</p>
+				<p>For example, the key for the tap symbol is "tap", so writing <a href="/?search-query[description]={tap}">{tap}"</a> searches for all cards that have an activated tap ability.</p>
+				<p>Some other symbol keys are:</p>
+				<dl>
+					<dt><pre><a href="/?search-query[description]={W}+{U}+{B}+{R}+{G}">{W}{U}{B}{R}{G}</a></pre></dt>
+					<dd>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=W&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=U&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=B&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=R&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=G&amp;type=symbol"/>
+						(regular mana)
+					</dd>
+					<dt><pre><a href="/?search-query[description]={0}|{8}|{X}">{0}{8}{X}</a></pre></dt>
+					<dd>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=0&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=8&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=X&amp;type=symbol"/>
+						(generic mana)
+					</dd>
+					<dt><pre><a href="/?search-query[description]={C}">{C}</a></pre></dt>
+					<dd>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=C&amp;type=symbol"/>
+						(colorless mana)
+					</dd>
+					<dt><pre><a href="/?search-query[description]={WP}|{UP}|{BP}|{RP}|{GP}">{WP}{UP}{BP}{RP}{GP}</a></pre></dt>
+					<dd>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=WP&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=UP&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=BP&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=RP&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=GP&amp;type=symbol"/>
+						(phyrexian mana)
+					</dd>
+					<dt><pre><a href="/?search-query[description]={tap} {untap}">{tap}{untap}</a></pre></dt>
+					<dd>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=tap&amp;type=symbol"/>
+						<img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=untap&amp;type=symbol"/>
+						(tap + untap action)
+					</dd>
+				</dl>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>28.01.2016</h3></summary>
+			<div>
+				<p>Paul joins!</p>
+				<p>Also, the <a href="/MTG/Temp/repository/import-txt/">Import</a> page now supports a different kind of card identification, "set abbreviation + # + card number".</p>
+				<p>For instance,</p>
+				<pre>4 bfz#123</pre>
+				<p>imports 4 copies of card number 123 from the set Battle for Zendikar.</p>
+				<p>(This is for when you don't know the English name of the card you want to import. Hope it helps!)</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>13.12.2015</h3></summary>
+			<div>
+				<p><a href="/MTG/Search/?search-query[expansion_name]=gatewatch">Oath of the Gatewatch</a> is upon us!!</p>
+				<p>Go to the <a href="/MTG/Prereleases/">Prerelease</a> y'all!</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>08.09.2015</h3></summary>
+			<div>
+				<p><a href="/MTG/Search/?search-query[expansion_name]=battle+for+zendikar">Battle for Zendikar</a> is upon us!!</p>
+				<p>Go to the <a href="/MTG/Prereleases/">Prerelease</a> y'all!</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details open="open">
+			<summary><h3>24.07.2015</h3></summary>
+			<div>
+				<p><a href="/MTG/Booster/">Boosters</a>!!</p>
+				<p>I made a booster generator. Very much WIP. I'm contemplating setting up a whole draft simulator... something... hmm ~/o/</p>
+			</div>	
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>07.07.2015</h3></summary>
+			<div>
+				<p>There's now dedicated pages for upcoming <a href="/MTG/Prereleases/">Prereleases</a> and <a href="/MTG/Events/">Tournaments</a>!</p>
+				<p>Tournaments are filterable by things, for instance,</p>
+				<ul>
+					<li><a href="/MTG/Events/?country=Estonia">What's up in Estonia</a>!?</li>
+					<li>Why does EVERYTHING happen <a href="/MTG/Events/?date=01.08.15">on August 1st</a>?!?</li>
+				</ul>
+				<p>
+					You get the idea.
+				</p>
+				<p>I also created a global <a href="/MTG/Search/">Search</a> page, not tied to the rest of this site, feel free to link to it anywhere</p>
+				<p>Furthermore, <em>flavor text</em> and <em>number of colors</em> are now searchable! Are there any multicolored cards that mention Sorin??? <a href="/MTG/Search/?search-query[flavor]=sorin&amp;search-query[colors]=2">FIND OUT</a>!!</p>
+			</div>	
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>10.06.2015</h3></summary>
+			<div>
+				<p><a href="/MTG/Search/?search-query[expansion_name]=origins">Magic Origins</a> is upon us!! \o\ /o/</p>
+			</div>	
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>05.03.2015</h3></summary>
+			<div>
+				<p><a href="/MTG/Search/?search-query[expansion_name]=dragons+tarkir">Dragons of Tarkir</a>!!! /o/</p>
+				<p>Oh, also, Converted Mana Cost as a search parameter! Didn't you always wonder how many cards there are that cost 12 mana? <a href="/MTG/Search/?search-query[cmc]=12">WONDER NO LONGER</a></p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>14.01.2015</h3></summary>
+			<div>
+				<p>OR operator!</p>
+				<p>The Search and Filter forms now support an OR operator. I called it... <code>|</code>. Now it's possible to, for instance, search for <a href="/MTG/Search/?search-query[name]=&amp;search-query[type]=&amp;search-query[rarity]=rare|mythic&amp;search-query[expansion_name]=fate+reforged+|+khans&amp;search-query[description]=&amp;search-query[legality]=">all cards that are in Khans of Tarkir OR Fate Reforged and that are Rare OR Mythic Rare</a>.</p>
+				<p>Not sure how useful that's gonna be, I needed it just now so there you go. Hurra! /o/</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>06.01.2015</h3></summary>
+			<div>
+				<p>Laziness ftw!</p>
+				<p>My Firefox kept crashing (every once in a while) when trying to show <a href="/MTG/Daniel/repository/view/">my cards</a>. I blame those 1000+ images, so I changed the page to only load the card images when hovering over them with the mouse. Hope this helps.</p>
+				<p>Decks with less than 100 cards are unaffected. Searches with less than 500 cards are unaffected, so that a single set can still be displayed in its entirety.</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>05.01.2015</h3></summary>
+			<div>
+				<p>Spoilers!</p>
+				<p><a href="http://magic.wizards.com/en/articles/archive/announcingfrf-en" rel="external">Fate Reforged</a> is upon us, so I extended my update script to include the cards already spoiled over at <a href="http://www.magicspoiler.com/fate-reforged/" rel="external">Magic Spoiler</a>. <a href="/MTG/Search/?search-query[expansion_name]=fate+reforged">Enjoy</a>!</p>
+				<p>P.S. Go to the prerelease y'all!! /o/</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>21.09.2014</h3></summary>
+			<div>
+				<p>Navi!</p>
+				<p>Okay so here is my first attempt at a semi-useful navigation bar. I usually don't like dropdown menus like this one, but the amount of navigation options were just getting too unwieldy...</p>
+				<p>This should also work fine on touch devices, at least my Vita has no trouble displaying/navigating this.</p>
+				<p>Enjoy? /o/</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>09.09.2014</h3></summary>
+			<div>
+				<p>Tokens!</p>
+				<p>I wrote a thing to import all <a href="/MTG/Search/?search-query[type]=token">Tokens</a> and <a href="/MTG/Search/?search-query[type]=emblem">Emblems</a> that are on <a href="http://magiccards.info/extras.html" rel="external">magiccards.info</a> into the thingy! \o/</p>
+				<p>Printing!</p>
+				<p>Furthermore, every deck now has a "Print" link to a more-or-less perfect print version of all the cards in the deck.</p>
+				<p>Using both of these new features, you can now</p>
+				<ul>
+					<li><span>Add some tokens you'd like to own to a <a href="/MTG/Temp/wishlist/view/">new deck</a></span></li>
+					<li><span>And then, <a href="/getFragment.php/mtg/print?deck=50d324947b184d18d596c9838d2baddf">print them</a>!!</span></li>
+				</ul>
+				<p>Take care to print-preview before printing, to set the zoom to 100%, to remove page margins, and to print the background. <a href="/getResource.php/dev/misc/mtg.print.png">This is what the preview should look like.</a></p>
+				<p>P.S. I couldn't find Safari's print preview, or options to set the zoom/margin, so maybe don't use that, ever again.</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>09.07.2014</h3></summary>
+			<div>
+				<p>Built a workaround for the "waiting for Magic Assistant to update its database" thing, now <a href="/MTG/Search/?search-query%5Bexpansion_name%5D=Conspiracy">Conspiracy</a> and <a href="/MTG/Search/?search-query%5Bexpansion_name%5D=2015">M15</a> are searchable! \o/</p>
+				<p>Also, Shoutbox! ~/o/</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>06.07.2014</h3></summary>
+			<div>
+				<p>Makeover!</p>
+				<p>New things:</p>
+				<ul>
+					<li>Overhauled the layout of the cards and decks</li>
+					<li>Renamed the URLs, no more ".xml"</li>
+					<li>"Sort: Expansion" tab now lists ALL expansions that your cards were printed in (which makes it a quite long list)</li>
+					<li>"Search" tab now allows search by card name, type, rarity, expansion, rules text, and color</li>
+					<li>new "Filter" tab allows searching cards inside a deck</li>
+					<li>Drag'n'Drop Manager now has more filters, and allows moving cards between the decks</li>
+					<li>Switched to using Magic Assistant's card database instead of Wizard's Gatherer, which resulted in a) crazy fast searches and b) new sets are gonna take a while longer to appear here. Waiting for Conspiracy atm</li>
+					<li>Downloaded images for all cards instead of hotlinking to Magicinfo, may or may not make them faster to display</li>
+				</ul>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>02.01.2014</h3></summary>
+			<div>
+				<p>Steffi joins!</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>13.11.2013</h3></summary>
+			<div>
+				<p>Joana joins!</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>17.07.2013</h3></summary>
+			<div>
+				<p>Minna joins!</p>
+			</div>
+		</details>
+	</article>
+	<article>
+		<details>
+			<summary><h3>10.07.2013</h3></summary>
+			<div>
+				<p>The MTG Thing launches!</p>
+			</div>
+		</details>
+	</article>
+</div>

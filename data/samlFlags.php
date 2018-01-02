@@ -7,4 +7,4 @@ $data[] = \Slothsoft\Core\Storage::loadExternalFile($host . $url, TIME_DAY);
 
 $js = implode(PHP_EOL, $data);
 
-return \Slothsoft\CMS\HTTPFile::createfromString($js, 'samlFlags.js');
+return \Slothsoft\Farah\HTTPFile::createfromString($js, 'samlFlags.js');

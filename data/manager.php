@@ -20,7 +20,7 @@ if (isset($resDir[$playerName])) {
     $player->parseRequest($this->httpRequest, $dataDoc);
     $player->save();
     
-    $ret = \Slothsoft\CMS\HTTPFile::createFromDocument($player->asNode());
+    $ret = \Slothsoft\Farah\HTTPFile::createFromDocument($player->asNode());
     
     /*
      * $nodeList = $player->parseRequest($this->httpRequest, $dataDoc);

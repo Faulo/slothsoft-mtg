@@ -1,5 +1,5 @@
 <?php
-namespace Slothsoft\CMS;
+namespace Slothsoft\Farah;
 
 return new HTTPClosure([
     'isThreaded' => true
@@ -22,7 +22,7 @@ return new HTTPClosure([
         $player = $oracle->getPlayer($playerFile);
         $playerDoc = $player->asNode();
         
-        // return \Slothsoft\CMS\HTTPFile::createFromDocument($playerDoc);
+        // return \Slothsoft\Farah\HTTPFile::createFromDocument($playerDoc);
         
         $sitesNode = $dom->transformToFragment($playerDoc, $templateDoc, $dataDoc);
         $retFragment->appendChild($sitesNode);
@@ -34,7 +34,7 @@ return new HTTPClosure([
     
     $ret = sprintf('Saved %d bytes to %s!', $res, $this->getResourcePath($resourcePath));
     
-    return \Slothsoft\CMS\HTTPFile::createFromString($ret);
+    return \Slothsoft\Farah\HTTPFile::createFromString($ret);
     
     // ;
     

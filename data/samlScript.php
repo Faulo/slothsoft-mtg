@@ -10,4 +10,4 @@ if ($xpath = \Slothsoft\Core\Storage::loadExternalXPath($host . $url, TIME_DAY))
 
 $js = implode(PHP_EOL, $data);
 
-return \Slothsoft\CMS\HTTPFile::createfromString($js, 'samlScript.js');
+return \Slothsoft\Farah\HTTPFile::createfromString($js, 'samlScript.js');

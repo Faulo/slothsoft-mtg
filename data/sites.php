@@ -18,7 +18,7 @@ foreach ($resDir as $key => $doc) {
     $playerNode = $player->asNode($playerDoc, false);
     $playerDoc->appendChild($playerNode);
     
-    // return \Slothsoft\CMS\HTTPFile::createFromDocument($playerDoc);
+    // return \Slothsoft\Farah\HTTPFile::createFromDocument($playerDoc);
     
     $sitesNode = $dom->transformToFragment($playerDoc, $templateDoc, $dataDoc);
     $retFragment->appendChild($sitesNode);

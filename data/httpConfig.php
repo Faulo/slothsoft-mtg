@@ -1,5 +1,5 @@
 <?php
-use Slothsoft\CMS\HTTPResponse;
+use Slothsoft\Farah\HTTPResponse;
 
 HTTPResponse::setHttpConfig([
     'cache-duration' => 0

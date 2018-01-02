@@ -81,4 +81,4 @@ if ($xpath = \Slothsoft\Core\Storage::loadExternalXPath($setURL, TIME_DAY)) {
     }
 }
 
-return \Slothsoft\CMS\HTTPFile::createFromJSON($abbrList);
+return \Slothsoft\Farah\HTTPFile::createFromJSON($abbrList);

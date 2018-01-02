@@ -18,5 +18,5 @@ if ($card['expansion_name']) {
 
 $path = \Slothsoft\MTG\OracleInfo::getRarityPath($card);
 if ($path = realpath($path)) {
-    return \Slothsoft\CMS\HTTPFile::createFromPath($path);
+    return \Slothsoft\Farah\HTTPFile::createFromPath($path);
 }

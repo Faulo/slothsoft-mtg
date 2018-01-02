@@ -14,5 +14,5 @@ if ($name = $this->httpRequest->getInputValue('name')) {
 
 $path = \Slothsoft\MTG\OracleInfo::getImagePath($card);
 if ($path = realpath($path)) {
-    return \Slothsoft\CMS\HTTPFile::createFromPath($path);
+    return \Slothsoft\Farah\HTTPFile::createFromPath($path);
 }

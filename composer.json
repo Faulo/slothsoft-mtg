@@ -12,6 +12,7 @@
 		"slothsoft/core" : "*",
 		"slothsoft/dbms" : "*",
 		"slothsoft/dev" : "*",
+		"slothsoft/farah" : "*",
 		
 		"php" : ">=7.0"
 	},

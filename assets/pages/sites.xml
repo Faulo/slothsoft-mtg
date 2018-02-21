@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data>
+<pages xmlns="http://schema.slothsoft.net/farah/sites"
+xmlns:sfm="http://schema.slothsoft.net/farah/module">
 	<page name="MTG" module="mtg" title="MTG" status-active="">
 		<page name="News" ref="index" title="News" status-active="" status-public=""/>
 		
@@ -9,7 +10,7 @@
 		<page name="Booster" ref="booster" title="Booster" status-active="" status-public=""/>
 		<page name="Reviews" ref="reviews" title="Reviews" status-active="" status-public=""/>
 		
-		<res ref="/mtg/sites.players"/>
+		<include-pages ref="pages/sites.players"/>
 		
 		<page name="Bill" ref="bill" title="Bill" status-active=""/>
 		<page name="MCM" ref="mcm" title="MCM" status-active=""/>
@@ -29,4 +30,4 @@
 	<page name="DCI" ref="dci" title="DCI" status-active="">
 		<page name="Timeline" ref="dci.timeline" title="Timeline" status-active=""/>
 	</page>
-</data>
+</pages>

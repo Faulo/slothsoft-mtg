@@ -22,6 +22,27 @@ Llo
     <resource-directory name="xsl" path="template" type="application/xslt+xml"/>
     <resource-directory name="dictionary" path="dictionary" type="application/xml"/>
     <resource-directory name="pages" path="pages" type="application/xml"/>
+    <directory name="static">
+      <resource name="bill" path="bill.csv" type="text/csv">
+        <options del="&#9;" output="thead"/>
+      </resource>
+      <resource name="sites.players" path="sites.players.xml" type="application/xml"/>
+      <resource name="news" path="news.xhtml" type="application/xhtml+xml"/>
+      <resource name="samlWidget" path="samlWidget.xhtml" type="application/xhtml+xml"/>
+      <resource name="prerelease" path="prerelease.xml" type="application/xml"/>
+      <resource-directory name="players" path="players" type="application/json"/>
+      <resource-directory name="dci-log" path="dci" type="application/xml"/>
+      <resource-directory name="misc" path="misc" type="*/*"/>
+      <resource-directory name="reviews" path="reviews" type="application/json"/>
+      <resource name="rules-comp" path="rules/MagicCompRules_20150717.txt" type="text/plain"/>
+      <resource name="rules-mtr" path="rules/mtg_mtr_17jul15_en_0.pdf" type="application/pdf"/>
+      <resource name="rules-ipg" path="rules/mtg_ipg_17jul15_en.pdf" type="application/pdf"/>
+      <resource name="custom-border" path="custom-cards/border.png" type="image/png"/>
+      <resource-directory name="custom-cards" path="custom-cards" type="image/png"/>
+      <resource-directory name="custom-sets" path="custom-sets" type="text/html"/>
+      <resource name="events" path="events.xml" type="application/xml"/>
+      <resource name="oracle" path="oracle.xml" type="application/xml"/>
+    </directory>
     <fragment name="index">
       <use-template ref="xsl/_index"/>
       <include-fragment ref="default"/>
@@ -103,8 +124,8 @@ Llo
       <use-stylesheet ref="//slothsoft@slothsoft/css/default"/>
       <use-stylesheet ref="//slothsoft@slothsoft/css/fonts"/>
       <use-stylesheet ref="css/default"/>
-      <fragment name="/core/HTML5"/>
-      <fragment name="/core/XPath"/>
+      <include-fragment ref="//core/HTML5"/>
+      <include-fragment ref="//core/XPath"/>
       <use-script ref="js/ImageCache"/>
     </fragment>
     <fragment name="bill">
@@ -157,27 +178,5 @@ Llo
       <use-document ref="data/events"/>
       <include-fragment ref="default"/>
     </fragment>
-    <directory name="static">
-      <resource name="bill" path="bill.csv" type="text/csv">
-        <options del="&#9;" output="thead"/>
-      </resource>
-      <resource name="sites" path="sites.xml" type="application/xml"/>
-      <resource name="sites.players" path="sites.players.xml" type="application/xml"/>
-      <resource name="news" path="news.xhtml" type="application/xhtml+xml"/>
-      <resource name="samlWidget" path="samlWidget.xhtml" type="application/xhtml+xml"/>
-      <resource name="prerelease" path="prerelease.xml" type="application/xml"/>
-      <resource-directory name="players" path="players" type="application/json"/>
-      <resource-directory name="dci-log" path="dci" type="application/xml"/>
-      <resource-directory name="misc" path="misc" type="*/*"/>
-      <resource-directory name="reviews" path="reviews" type="application/json"/>
-      <resource name="rules-comp" path="rules/MagicCompRules_20150717.txt" type="text/plain"/>
-      <resource name="rules-mtr" path="rules/mtg_mtr_17jul15_en_0.pdf" type="application/pdf"/>
-      <resource name="rules-ipg" path="rules/mtg_ipg_17jul15_en.pdf" type="application/pdf"/>
-      <resource name="custom-border" path="custom-cards/border.png" type="image/png"/>
-      <resource-directory name="custom-cards" path="custom-cards" type="image/png"/>
-      <resource-directory name="custom-sets" path="custom-sets" type="text/html"/>
-      <resource name="events" path="events.xml" type="application/xml"/>
-      <resource name="oracle" path="oracle.xml" type="application/xml"/>
-    </directory>
   </assets>
 </module>

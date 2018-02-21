@@ -1,7 +1,7 @@
 <?php
 namespace Slothsoft\MTG;
 
-use Slothsoft\Farah\HTTPDocument;
+use Slothsoft\Core\DOMHelper;
 use Slothsoft\Farah\HTTPRequest;
 use DOMDocument;
 use Exception;
@@ -35,10 +35,11 @@ class Player
 
     public function __construct($playerFile, Oracle $oracle)
     {
+        $dom = new DOMHelper();
         $this->file = $playerFile;
         $this->oracle = $oracle;
-        $this->doc = HTTPDocument::loadDocument($this->file);
-        $this->xpath = HTTPDocument::loadXPath($this->doc);
+        $this->doc = $dom->loadDocument($this->file);
+        $this->xpath = $dom->loadXPath($this->doc);
         $this->key = basename($this->file);
         if ($name = $this->xpath->evaluate('string(/player/@name)')) {
             $this->name = $name;

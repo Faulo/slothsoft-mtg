@@ -20,7 +20,7 @@ foreach ($resDir as $key => $doc) {
     
     // return \Slothsoft\Farah\HTTPFile::createFromDocument($playerDoc);
     
-    $sitesNode = $dom->transformToFragment($playerDoc, $templateDoc, $dataDoc);
+    $sitesNode = $dom->transformToFragment($playerDoc, $templateDoc, [], $dataDoc);
     $retFragment->appendChild($sitesNode);
 }
 

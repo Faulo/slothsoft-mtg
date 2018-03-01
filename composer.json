@@ -21,7 +21,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"Slothsoft\\MTG\\" : "php/"
+			"Slothsoft\\MTG\\": "src/Slothsoft/MTG/"
 		}
 	}
 }

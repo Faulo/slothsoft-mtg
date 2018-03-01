@@ -45,35 +45,35 @@ Llo
     </directory>
     <fragment name="index">
       <use-template ref="xsl/_index"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
       <use-document ref="chat"/>
       <use-document ref="static/news"/>
     </fragment>
     <fragment name="player">
       <use-document ref="data/httpConfig"/>
       <use-template ref="xsl/_player"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="deck">
       <use-document ref="data/httpConfig"/>
       <use-template ref="xsl/_deck"/>
       <use-document ref="data/deck"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="mcm">
       <use-template ref="xsl/_mcm"/>
       <use-document ref="data/search"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="dci">
       <use-template ref="xsl/_dci"/>
       <use-document ref="data/dci"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
       <use-document ref="dci.timeline.graph"/>
     </fragment>
     <fragment name="dci.timeline">
       <use-template ref="xsl/_dci.timeline"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
       <use-document ref="dci.timeline.graph"/>
     </fragment>
     <fragment name="dci.timeline.graph">
@@ -99,7 +99,7 @@ Llo
       <param name="standalone" scope="global"/>
       <use-template ref="xsl/_deck"/>
       <use-document ref="data/show"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="decklist">
       <param name="standalone" scope="global"/>
@@ -108,8 +108,8 @@ Llo
     </fragment>
     <fragment name="manager">
       <use-template ref="xsl/_manager"/>
-      <include-fragment ref="default"/>
-      <include-fragment ref="//slothsoft@core/DOM"/>
+      <import ref="default"/>
+      <import ref="//slothsoft@core/DOM"/>
       <use-script ref="js/MTG"/>
       <use-script ref="js/MTG.Manager"/>
       <use-script ref="js/MTG.Deck"/>
@@ -124,14 +124,14 @@ Llo
       <use-stylesheet ref="//slothsoft@slothsoft/css/default"/>
       <use-stylesheet ref="//slothsoft@slothsoft/css/fonts"/>
       <use-stylesheet ref="css/default"/>
-      <include-fragment ref="//core/HTML5"/>
-      <include-fragment ref="//core/XPath"/>
+      <import ref="//core/HTML5"/>
+      <import ref="//core/XPath"/>
       <use-script ref="js/ImageCache"/>
     </fragment>
     <fragment name="bill">
       <use-document ref="data/bill"/>
       <use-template ref="xsl/_bill"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="wizards">
       <use-template ref="xsl/_wizards"/>
@@ -140,43 +140,43 @@ Llo
     <fragment name="prerelease">
       <use-document ref="static/prerelease"/>
       <use-template ref="xsl/_prerelease"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="tokens">
       <use-document ref="static/custom-sets"/>
       <use-template ref="xsl/_tokens"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="reviews">
       <use-document ref="data/oracle"/>
       <use-document ref="data/reviews"/>
       <use-document ref="static/reviews"/>
       <use-template ref="xsl/_reviews"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="booster">
       <use-document ref="data/httpConfig"/>
       <use-template ref="xsl/_booster"/>
       <use-document ref="data/booster"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="prices">
       <use-template ref="xsl/_prices"/>
       <use-document ref="data/prices"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="search">
       <use-document ref="data/httpConfig"/>
       <use-template ref="xsl/_search"/>
       <use-document ref="data/oracle"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
     <fragment name="events">
       <use-document ref="data/httpConfig"/>
-      <include-fragment ref="//slothsoft@slothsoft/default"/>
+      <import ref="//slothsoft@slothsoft/default"/>
       <use-template ref="xsl/_events"/>
       <use-document ref="data/events"/>
-      <include-fragment ref="default"/>
+      <import ref="default"/>
     </fragment>
   </assets>
 </module>

@@ -1,0 +1,27 @@
+{
+	"name" : "slothsoft/mtg",
+	"description" : "A Farah module that contains the content of mtg.slothsoft.net.",
+	"license" : "WTFPL",
+	"authors" : [{
+			"name" : "Daniel Schulz",
+			"email" : "info.slothsoft@gmail.com"
+		}
+	],
+	"type" : "library",
+	"require" : {
+		"slothsoft/core" : "*",
+		"slothsoft/dbms" : "*",
+		"slothsoft/dev" : "*",
+		"slothsoft/farah" : "*",
+		
+		"php" : ">=7.0"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : ">=6.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Slothsoft\\MTG\\": "src/Slothsoft/MTG/"
+		}
+	}
+}

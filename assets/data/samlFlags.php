@@ -3,7 +3,7 @@ $host = 'https://accounts.wizards.com';
 $url = '/SamlWidget/flags.json';
 
 $data = [];
-$data[] = \Slothsoft\Core\Storage::loadExternalFile($host . $url, TIME_DAY);
+$data[] = \Slothsoft\Core\Storage::loadExternalFile($host . $url, Seconds::DAY);
 
 $js = implode(PHP_EOL, $data);
 

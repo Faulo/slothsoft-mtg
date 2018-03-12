@@ -53,7 +53,7 @@ $skipList[] = 'Vanguard';
 
 $abbrList = [];
 
-if ($xpath = \Slothsoft\Core\Storage::loadExternalXPath($setURL, TIME_DAY)) {
+if ($xpath = \Slothsoft\Core\Storage::loadExternalXPath($setURL, Seconds::DAY)) {
     foreach ($expansionList as $expansion) {
         if (in_array($expansion, $skipList)) {
             continue;

@@ -13,13 +13,14 @@ class MKM
 
     const URL_SHOP = '%s/Users/%s';
 
-    protected $storageTime = TIME_DAY;
+    protected $storageTime;
 
     protected $shopList = [];
 
     public function __construct(Oracle $oracle)
     {
         $this->oracle = $oracle;
+        $this->storageTime = Seconds::DAY;
     }
 
     public function getShopByName($name)

@@ -4,7 +4,7 @@
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/DS"/>
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/pthreads"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
-	<buildpathentry kind="src" path="src/Slothsoft/MTG">
+	<buildpathentry kind="src" path="src">
 		<attributes>
 			<attribute name="composer" value="source"/>
 		</attributes>
@@ -169,22 +169,22 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/slothsoft/core/src/Slothsoft/Core">
+	<buildpathentry kind="src" path="vendor/slothsoft/core/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/slothsoft/dbms/src/Slothsoft/DBMS">
+	<buildpathentry kind="src" path="vendor/slothsoft/dbms/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/slothsoft/dev/src/Slothsoft/Dev">
+	<buildpathentry kind="src" path="vendor/slothsoft/dev/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/slothsoft/farah/src/Slothsoft/Farah">
+	<buildpathentry kind="src" path="vendor/slothsoft/farah/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>

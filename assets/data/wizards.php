@@ -55,7 +55,7 @@ foreach ($playerList as $no => $name) {
     $options['method'] = 'POST';
     $options['header'] = $header;
     
-    if ($data = \Slothsoft\Core\Storage::loadExternalJSON($url, TIME_HOUR, '', $options)) {
+    if ($data = \Slothsoft\Core\Storage::loadExternalJSON($url, Seconds::HOUR, '', $options)) {
         $parentNode = $dataDoc->createElement('player');
         $parentNode->setAttribute('number', $no);
         $parentNode->setAttribute('name', $name);
@@ -98,10 +98,10 @@ foreach ($playerList as $no => $name) {
                 if ($event['id'] = (int) $event['id']) {
                     $url = $host . $eventURI . $event['id'];
                     // *
-                    if ($data = \Slothsoft\Core\Storage::loadExternalJSON($url, TIME_HOUR, '', $options)) {
+                    if ($data = \Slothsoft\Core\Storage::loadExternalJSON($url, Seconds::HOUR, '', $options)) {
                         if (! $data['Result']) {
-                            \Slothsoft\Core\Storage::clearExternalDocument($url, TIME_HOUR, '', $options);
-                            $data = \Slothsoft\Core\Storage::loadExternalJSON($url, TIME_HOUR, '', $options);
+                            \Slothsoft\Core\Storage::clearExternalDocument($url, Seconds::HOUR, '', $options);
+                            $data = \Slothsoft\Core\Storage::loadExternalJSON($url, Seconds::HOUR, '', $options);
                         }
                     }
                     my_dump($data);

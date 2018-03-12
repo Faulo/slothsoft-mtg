@@ -1,7 +1,7 @@
 <?php
 $eventList = [];
 
-$cacheTime = TIME_WEEK;
+$cacheTime = Seconds::WEEK;
 
 // GPTs und PPTQs
 $eventTypeCodeNames = [
@@ -80,7 +80,6 @@ if ($res = \Slothsoft\Core\Storage::loadExternalJSON($uri, $cacheTime, json_enco
                     // my_dump($eve);
                     
                     $startDate = preg_match('/\d+/', $eve['StartDate'], $match) ? (int) substr($match[0], 0, - 3) : 0;
-                    // $startDate = date(DATE_W3C, $startDate);
                     
                     $event = [];
                     $event['type'] = $eventTypeCodeNames[$eve['EventTypeCode']];
@@ -360,9 +359,6 @@ foreach ($eventList as $i => &$event) {
         'date-start',
         'date-end'
     ] as $key) {
-        if (! isset($event[$key])) {
-            // $event[$key] = date(DATE_W3C);
-        }
         // $val = $event[$key];
         if (! isset($event[$key])) {
             $event[$key] = 0;
@@ -378,7 +374,7 @@ foreach ($eventList as $i => &$event) {
             if ($sort === null) {
                 $sort = $event[$key];
             }
-            $event[$key] = date(DATE_DATE, $event[$key]);
+            $event[$key] = date(DateTimeFormatter::FORMAT_DATE, $event[$key]);
         } else {
             /*
              * my_dump($val);

@@ -1,14 +1,14 @@
 <?php
 namespace Slothsoft\MTG;
 
-use Slothsoft\Farah\HTTPFile;
-use Slothsoft\Core\Storage;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\Image;
+use Slothsoft\Core\Storage;
+use Slothsoft\Core\IO\HTTPFile;
 use Slothsoft\Core\Lambda\Stackable;
-use NumberFormatter;
 use DOMDocument;
+use NumberFormatter;
 
 class OracleWork extends Stackable
 {
@@ -77,7 +77,7 @@ class OracleWork extends Stackable
 
     const XPATH_SET_CARDNAME = 'normalize-space(td[2])';
 
-    const HTTP_CACHETIME = TIME_YEAR;
+    const HTTP_CACHETIME = Seconds::YEAR;
 
     const MAX_ERRORS = - 1;
 
@@ -768,7 +768,7 @@ class OracleWork extends Stackable
         $priceList = [];
         $nf = new NumberFormatter(setlocale(LC_ALL, 0), NumberFormatter::PATTERN_DECIMAL);
         while ($marketURL) {
-            $xpath = Storage::loadExternalXPath($marketURL, TIME_WEEK);
+            $xpath = Storage::loadExternalXPath($marketURL, Seconds::WEEK);
             $marketURL = null;
             if ($xpath) {
                 if ($next = $xpath->evaluate('string(//*[@rel="next"]/@href)')) {

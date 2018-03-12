@@ -1,7 +1,7 @@
 <?php
 namespace Slothsoft\MTG;
 
-use Slothsoft\Farah\HTTPFile;
+use Slothsoft\Core\IO\HTTPFile;
 use Exception;
 
 class OracleColorImage

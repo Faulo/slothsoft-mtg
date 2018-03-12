@@ -154,7 +154,7 @@ class Oracle implements Serializable
     public function getOracleSetList($downloadFreshCopy = false)
     {
         if ($this->_oracleSetList === null) {
-            if ($xpath = Storage::loadExternalXPath($this->_oracleSetURL, $downloadFreshCopy ? 0 : TIME_YEAR)) {
+            if ($xpath = Storage::loadExternalXPath($this->_oracleSetURL, $downloadFreshCopy ? 0 : Seconds::YEAR)) {
                 $this->_oracleSetList = [];
                 $nodeList = $xpath->evaluate($this->_oracleSetQuery);
                 foreach ($nodeList as $node) {

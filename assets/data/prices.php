@@ -12,7 +12,7 @@ $oracleNode = $dataDoc->createElement('oracle');
 $oracleNode->appendChild($oracle->createCategoriesElement($dataDoc));
 
 $host = 'https://www.magiccardmarket.eu';
-$storageTime = TIME_DAY;
+$storageTime = Seconds::DAY;
 $languageList = [
     'German',
     'English'

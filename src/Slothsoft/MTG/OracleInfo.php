@@ -360,7 +360,7 @@ class OracleInfo
     {
         if (self::$_legalityModernList === null) {
             self::$_legalityModernList = self::$_legalityStandardList;
-            if ($xpath = Storage::loadExternalXPath(self::URL_LEGALITY_MODERN, TIME_MONTH)) {
+            if ($xpath = Storage::loadExternalXPath(self::URL_LEGALITY_MODERN, Seconds::MONTH)) {
                 $nodeList = $xpath->evaluate('//*[@class="list"]//em');
                 foreach ($nodeList as $node) {
                     $setName = $xpath->evaluate('normalize-space(.)', $node);
@@ -403,7 +403,7 @@ class OracleInfo
             $_setXPathTable = '//h2[.//*[@id="List_of_Magic_expansions_and_sets"]]/following::table[1]';
             $_setXPathCell = './/tr/td[2]';
             $setList = [];
-            if ($xpath = Storage::loadExternalXPath(self::URL_LEGALITY_VINTAGE, TIME_MONTH)) {
+            if ($xpath = Storage::loadExternalXPath(self::URL_LEGALITY_VINTAGE, Seconds::MONTH)) {
                 // output($xpath->document);die();
                 $tableNodeList = $xpath->evaluate($_setXPathTable);
                 foreach ($tableNodeList as $tableNode) {
@@ -428,7 +428,7 @@ class OracleInfo
                                 case 'expansion set':
                                 case 'core set':
                                     $href = self::URL_LEGALITY_VINTAGE . '/..' . $href;
-                                    if ($setXPath = Storage::loadExternalXPath($href, TIME_MONTH)) {
+                                    if ($setXPath = Storage::loadExternalXPath($href, Seconds::MONTH)) {
                                         if ($time = $setXPath->evaluate('normalize-space(//tr[normalize-space(td[1]) = "Release date"]/td[2]/text())')) {
                                             if ($time = strtotime($time)) {
                                                 $date = date('Y-m-d', $time);
@@ -694,7 +694,7 @@ class OracleInfo
         self::_initOracleXSLT();
         $ret = null;
         if ($url = self::getOracleURL($card)) {
-            if ($dataDoc = Storage::loadExternalDocument($url, TIME_MONTH)) {
+            if ($dataDoc = Storage::loadExternalDocument($url, Seconds::MONTH)) {
                 $resDoc = self::$_oracleXSLT->transformToDoc($dataDoc);
                 if ($cardNode = $resDoc->documentElement) {
                     $ret = [];
@@ -739,7 +739,7 @@ class OracleInfo
     {
         if (self::$_oracleImageGallery === null) {
             self::$_oracleImageGallery = [];
-            $res = Storage::loadExternalJSON(self::URL_GALLERY_HOST . self::URL_GALLERY_INDEX, TIME_WEEK);
+            $res = Storage::loadExternalJSON(self::URL_GALLERY_HOST . self::URL_GALLERY_INDEX, Seconds::WEEK);
             if ($res) {
                 $dom = self::domHelper();
                 foreach ($res['data'] as $html) {
@@ -814,7 +814,7 @@ class OracleInfo
     public static function getMarketSetURLList()
     {
         $ret = [];
-        if ($xpath = Storage::loadExternalXPath(self::URL_MARKET_SET_INDEX, TIME_WEEK)) {
+        if ($xpath = Storage::loadExternalXPath(self::URL_MARKET_SET_INDEX, Seconds::WEEK)) {
             $nodeList = $xpath->evaluate('//*[@name="idExpansion"]/*[@value > 0]');
             foreach ($nodeList as $node) {
                 $setName = $xpath->evaluate('normalize-space(.)', $node);
@@ -822,7 +822,7 @@ class OracleInfo
                 $ret[self::translateSetName($setName)] = sprintf(self::URL_MARKET_SET_LIST, rawurlencode($setName));
             }
         } else {
-            // $ret[] = Storage::loadExternalFile(self::URL_MARKET_SET_INDEX, TIME_MONTH);
+            // $ret[] = Storage::loadExternalFile(self::URL_MARKET_SET_INDEX, Seconds::MONTH);
         }
         return $ret;
     }

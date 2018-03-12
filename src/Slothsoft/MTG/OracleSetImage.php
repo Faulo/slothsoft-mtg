@@ -2,7 +2,7 @@
 namespace Slothsoft\MTG;
 
 use Slothsoft\Core\Image;
-use Slothsoft\Farah\HTTPFile;
+use Slothsoft\Core\IO\HTTPFile;
 use Exception;
 
 class OracleSetImage

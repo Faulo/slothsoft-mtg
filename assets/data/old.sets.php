@@ -53,7 +53,7 @@ foreach ($blockList as $blockName => $setList) {
         $arr['name'] = $setName;
         $arr['uri'] = sprintf($wikiArticle, $wikiHost, str_replace(' ', '_', $setName));
         
-        if ($doc = self::loadExternalDocument($arr['uri'], 'html', TIME_MONTH)) {
+        if ($doc = self::loadExternalDocument($arr['uri'], 'html', Seconds::MONTH)) {
             $xpath = self::loadXPath($doc);
             if ($imageLink = $xpath->evaluate('string(.//tr[.//*[normalize-space(.) = "Set symbol"]]//img/@src)')) {
                 // $imageLink = str_replace('/thumb/', '/', $imageLink);

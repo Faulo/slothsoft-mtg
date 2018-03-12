@@ -35,7 +35,7 @@ $categoryList = [];
 for ($i = 0; $i < 10; $i ++) {
     $found = false;
     $uri = sprintf($baseURI, urlencode($keyword), $i);
-    if ($xpath = \Slothsoft\Core\Storage::loadExternalXPath($uri, TIME_DAY)) {
+    if ($xpath = \Slothsoft\Core\Storage::loadExternalXPath($uri, Seconds::DAY)) {
         // output($xpath->document);die();
         $tableNodeList = $xpath->evaluate('//*[@class="MKMTable SearchTable"]');
         foreach ($tableNodeList as $tableNode) {

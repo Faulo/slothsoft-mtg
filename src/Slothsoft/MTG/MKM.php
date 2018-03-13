@@ -5,15 +5,22 @@ namespace Slothsoft\MTG;
 use Slothsoft\Core\Storage;
 use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
+use Slothsoft\Core\Configuration\ConfigurationField;
 
 class MKM
 {
-    private static $defaultAuthority;
-    public static function setDefaultAuthority(MKMAuthority $defaultAuthority) {
-        self::$defaultAuthority = $defaultAuthority;
+    private static function defaultAuthority() : ConfigurationField {
+        static $field;
+        if ($field === null) {
+            $field = new ConfigurationField();
+        }
+        return $field;
+    }
+    public static function setDefaultAuthority(MKMAuthority $authority) {
+        self::defaultAuthority()->setValue($authority);
     }
     public static function getDefaultAuthority() : MKMAuthority {
-        return self::$defaultAuthority;
+        return self::defaultAuthority()->getValue();
     }
     
 

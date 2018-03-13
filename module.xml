@@ -110,9 +110,9 @@ Llo
       <use-template ref="xsl/_manager"/>
       <import ref="default"/>
       <import ref="//slothsoft@core/DOM"/>
-      <use-script ref="js/MTG"/>
-      <use-script ref="js/MTG.Manager"/>
-      <use-script ref="js/MTG.Deck"/>
+      <link-script ref="js/MTG"/>
+      <link-script ref="js/MTG.Manager"/>
+      <link-script ref="js/MTG.Deck"/>
     </fragment>
     <fragment name="chat">
       <param name="chat-database" value="mtg"/>
@@ -121,12 +121,12 @@ Llo
     </fragment>
     <fragment name="default">
       <use-document ref="//slothsoft@core/static/sites"/>
-      <use-stylesheet ref="//slothsoft@slothsoft/css/default"/>
-      <use-stylesheet ref="//slothsoft@slothsoft/css/fonts"/>
-      <use-stylesheet ref="css/default"/>
+      <link-stylesheet ref="//slothsoft@slothsoft/css/default"/>
+      <link-stylesheet ref="//slothsoft@slothsoft/css/fonts"/>
+      <link-stylesheet ref="css/default"/>
       <import ref="//core/HTML5"/>
       <import ref="//core/XPath"/>
-      <use-script ref="js/ImageCache"/>
+      <link-script ref="js/ImageCache"/>
     </fragment>
     <fragment name="bill">
       <use-document ref="data/bill"/>

@@ -5,6 +5,7 @@ use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\Image;
 use Slothsoft\Core\Storage;
+use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\IO\HTTPFile;
 use Slothsoft\Core\Lambda\Stackable;
 use DOMDocument;

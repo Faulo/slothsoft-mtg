@@ -2,10 +2,19 @@
 namespace Slothsoft\MTG;
 
 use Slothsoft\Core\Storage;
+use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
 
 class MKM
 {
+    private static $defaultAuthority;
+    public static function setDefaultAuthority(MKMAuthority $defaultAuthority) {
+        self::$defaultAuthority = $defaultAuthority;
+    }
+    public static function getDefaultAuthority() : MKMAuthority {
+        return self::$defaultAuthority;
+    }
+    
 
     const HOST = 'https://www.magiccardmarket.eu';
 

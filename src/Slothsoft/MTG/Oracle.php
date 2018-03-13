@@ -3,9 +3,10 @@ namespace Slothsoft\MTG;
 
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\Storage;
-use Serializable;
+use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
 use Exception;
+use Serializable;
 
 class Oracle implements Serializable
 {

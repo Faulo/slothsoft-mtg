@@ -1,6 +1,7 @@
 <?php
 namespace Slothsoft\MTG;
 
+use Slothsoft\Core\ServerEnvironment;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\Storage;
 use Slothsoft\Core\Calendar\Seconds;
@@ -849,7 +850,7 @@ class OracleInfo
 
     public static function getImagePath(array &$card)
     {
-        return sprintf('%smod/mtg/res/images/set-%s/%s', SERVER_ROOT, $card['expansion_abbr'], self::getCardImageName($card));
+        return sprintf('%smod/mtg/res/images/set-%s/%s', ServerEnvironment::getRootDirectory(), $card['expansion_abbr'], self::getCardImageName($card));
     }
 
     public static function getRarityURL(array &$card)
@@ -859,11 +860,11 @@ class OracleInfo
 
     public static function getRarityPath(array &$card)
     {
-        return sprintf('%smod/mtg/res/images/set-%s/%s-%s.png', SERVER_ROOT, $card['expansion_abbr'], $card['expansion_abbr'], substr(strtolower($card['rarity']), 0, 1));
+        return sprintf('%smod/mtg/res/images/set-%s/%s-%s.png', ServerEnvironment::getRootDirectory(), $card['expansion_abbr'], $card['expansion_abbr'], substr(strtolower($card['rarity']), 0, 1));
     }
 
     public static function getColorPath(array &$card)
     {
-        return sprintf('%smod/mtg/res/images/color.%s.png', SERVER_ROOT, $card['color']);
+        return sprintf('%smod/mtg/res/images/color.%s.png', ServerEnvironment::getRootDirectory(), $card['color']);
     }
 }

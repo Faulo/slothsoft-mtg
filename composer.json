@@ -24,6 +24,9 @@
         "slothsoft\/farah": "dev-master"
     },
     "autoload": {
+        "files": [
+            "src\/registerModule.php"
+        ],
         "psr-0": {
             "Slothsoft\\MTG\\": "src\/"
         }

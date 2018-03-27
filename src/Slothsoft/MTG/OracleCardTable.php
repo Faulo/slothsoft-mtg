@@ -4,6 +4,8 @@ namespace Slothsoft\MTG;
 
 use w3c\dom\Node;
 
+
+
 class OracleCardTable extends OracleTable
 {
 

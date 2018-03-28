@@ -2,7 +2,7 @@
 <projectDescription>
 	<name>slothsoft-mtg</name>
 	<comment/>
-	<projects><project>slothsoft-core</project><project>slothsoft-dbms</project><project>slothsoft-dev</project><project>slothsoft-farah</project><project>slothsoft-lang</project><project>slothsoft-pt</project><project>slothsoft-w3c</project></projects>
+	<projects><project>slothsoft-amber</project><project>slothsoft-chat</project><project>slothsoft-core</project><project>slothsoft-dbms</project><project>slothsoft-dev</project><project>slothsoft-extensions</project><project>slothsoft-farah</project><project>slothsoft-fireemblem</project><project>slothsoft-lang</project><project>slothsoft-minecraft</project><project>slothsoft-pt</project><project>slothsoft-savegame</project><project>slothsoft-slothsoft</project><project>slothsoft-sse</project><project>slothsoft-talesof</project><project>slothsoft-w3c</project></projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.php.composer.core.builder.buildPathManagementBuilder</name>

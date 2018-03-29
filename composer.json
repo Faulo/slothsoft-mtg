@@ -34,10 +34,14 @@
 	},
 	"autoload" : {
 		"files" : [
-			"C:\\Webserver\\workspace\\slothsoft-mtg\\src\\registerModule.php"
+			"src/registerModule.php"
 		],
 		"psr-0" : {
 			"Slothsoft\\MTG\\" : "src/"
 		}
-	}
+	},
+	"keywords" : [
+		"farah-app",
+		"farah-domain"
+	]
 }

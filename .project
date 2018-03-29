@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>slothsoft-mtg</name>
-	<comment/>
-	<projects><project>slothsoft-chat</project><project>slothsoft-core</project><project>slothsoft-farah</project><project>slothsoft-w3c</project></projects>
+	<comment></comment>
+	<projects>
+		<project>slothsoft-chat</project>
+		<project>slothsoft-core</project>
+		<project>slothsoft-farah</project>
+		<project>slothsoft-w3c</project>
+	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.php.composer.core.builder.buildPathManagementBuilder</name>

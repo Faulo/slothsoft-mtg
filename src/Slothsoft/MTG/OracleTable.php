@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\DBMS\Manager;
+use Slothsoft\Core\DBMS\Manager;
 use Serializable;
 
 abstract class OracleTable implements Serializable

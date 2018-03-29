@@ -3,7 +3,6 @@
 	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-chat"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-core"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-farah"/>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-slothsoft"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-w3c"/>
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/COM"/>
 	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/DS"/>

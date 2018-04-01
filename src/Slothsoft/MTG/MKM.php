@@ -9,20 +9,25 @@ use Slothsoft\Core\Configuration\ConfigurationField;
 
 class MKM
 {
-    private static function defaultAuthority() : ConfigurationField {
+
+    private static function defaultAuthority(): ConfigurationField
+    {
         static $field;
         if ($field === null) {
             $field = new ConfigurationField();
         }
         return $field;
     }
-    public static function setDefaultAuthority(MKMAuthority $authority) {
+
+    public static function setDefaultAuthority(MKMAuthority $authority)
+    {
         self::defaultAuthority()->setValue($authority);
     }
-    public static function getDefaultAuthority() : MKMAuthority {
+
+    public static function getDefaultAuthority(): MKMAuthority
+    {
         return self::defaultAuthority()->getValue();
     }
-    
 
     const HOST = 'https://www.magiccardmarket.eu';
 

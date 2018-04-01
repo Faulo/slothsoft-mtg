@@ -452,8 +452,8 @@ class OracleInfo
                     }
                 }
             } else {
-				throw new Exception(sprintf('no XML document at %s', self::URL_LEGALITY_VINTAGE));
-			}
+                throw new Exception(sprintf('no XML document at %s', self::URL_LEGALITY_VINTAGE));
+            }
             self::$_setList = array_reverse($setList);
         }
     }

@@ -49,7 +49,7 @@
 	    <fragment name="index">
 	      <import ref="api/default"/>
 	      <use-template ref="xsl/_index"/>
-	      <use-document ref="api/chat"/>
+	      <use-document ref="api/shoutbox"/>
 	      <use-document ref="static/news"/>
 	    </fragment>
 	    <fragment name="player">
@@ -159,11 +159,6 @@
 	      <import ref="//slothsoft@core/api/XPath"/>
 	      <import ref="api/ImageCache"/>
 	    </fragment>
-	    <fragment name="chat">
-	      <param name="chat-database" value="mtg"/>
-	      <use-template ref="//slothsoft@chat/xsl/shoutbox"/>
-	      <use-document as="chat" ref="//slothsoft@chat/default"/>
-	    </fragment>
 	    <fragment name="dci.timeline.graph">
 	      <use-document ref="data/dci"/>
 	      <use-document ref="data/sets"/>
@@ -177,6 +172,11 @@
 	      <link-script ref="js/MTG"/>
 	      <link-script ref="js/MTG.Manager"/>
 	      <link-script ref="js/MTG.Deck"/>
+	    </fragment>
+	    
+    	<fragment name="shoutbox">
+	      <param name="chat-database" value="mtg"/>
+	      <import ref="//chat/api/shoutbox"/>
 	    </fragment>
     </fragment>
   </assets>

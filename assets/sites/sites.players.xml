@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pages xmlns="http://schema.slothsoft.net/farah/sites" xmlns:sfm="http://schema.slothsoft.net/farah/module"
+<sitemap version="1.0" xmlns="http://schema.slothsoft.net/farah/sitemap" xmlns:sfm="http://schema.slothsoft.net/farah/module"
 	>
 	<page name="Daniel-Limited" title="Daniel-Limited" ref="player"
 		module="mtg" status-active="" status-public="">
@@ -4287,4 +4287,4 @@
 				status-active="" status-public="" />
 		</page>
 	</page>
-</pages>
+</sitemap>

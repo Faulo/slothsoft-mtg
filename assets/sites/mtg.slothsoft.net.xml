@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <domain 
-	xmlns="http://schema.slothsoft.net/farah/sites"
+	xmlns="http://schema.slothsoft.net/farah/sitemap"
 	xmlns:sfd="http://schema.slothsoft.net/farah/dictionary"
 	xmlns:sfm="http://schema.slothsoft.net/farah/module"
 	name="mtg.slothsoft.net"

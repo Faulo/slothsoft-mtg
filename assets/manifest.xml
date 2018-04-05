@@ -5,7 +5,9 @@
     <resource-directory name="xsl" type="application/xslt+xml"/>
     
     <resource-directory name="dictionary" type="application/xml"/>
-    <resource-directory name="sitemap" type="application/xml"/>
+    <directory name="sitemap">
+    	<resource use="template" name="template" type="application/xslt+xml"/>
+    </directory>
     
     <directory name="static">
       <resource name="bill" path="bill.csv" type="text/csv">

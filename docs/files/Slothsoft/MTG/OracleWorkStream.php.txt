@@ -1,0 +1,60 @@
+<?php
+declare(strict_types = 1);
+namespace Slothsoft\MTG;
+
+use Slothsoft\Core\Lambda\Stream;
+
+class OracleWorkStream extends Stream
+{
+
+    protected $optionsList;
+
+    protected $oracle;
+
+    public function __construct(Oracle $oracle)
+    {
+        $this->oracle = $oracle;
+    }
+
+    public function initOptionsList(array $optionsList)
+    {
+        $this->optionsList = $optionsList;
+        $this->initWorkList([]);
+    }
+
+    protected function appendWorkOptions(array $options)
+    {
+        $options['oracle'] = $this->oracle;
+        $this->pool->submit(new OracleWork($options));
+    }
+
+    protected function parseStatus()
+    {
+        $this->status = self::STATUS_ERROR;
+        if ($work = $this->pool->fetchUnfetchedWork()) {
+            $this->appendMessage($work->getLog());
+            $optionsList = $work->getResult();
+            if (is_array($optionsList)) {
+                foreach ($optionsList as $options) {
+                    $this->appendWorkOptions($options);
+                }
+            }
+        }
+        if (count($this->messageStack)) {
+            $this->status = self::STATUS_CONTENT;
+            $this->currentMessage = array_shift($this->messageStack);
+        } else {
+            if ($this->pool->hasUnfetchedWork()) {
+                $this->status = self::STATUS_RETRY;
+            } else {
+                if (count($this->optionsList)) {
+                    $options = array_shift($this->optionsList);
+                    $this->appendWorkOptions($options);
+                    $this->status = self::STATUS_RETRY;
+                } else {
+                    $this->status = self::STATUS_DONE;
+                }
+            }
+        }
+    }
+}

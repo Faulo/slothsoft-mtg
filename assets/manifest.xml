@@ -49,136 +49,136 @@
     
     <fragment name="pages">
 	    <fragment name="index">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_index"/>
-	      <use-document ref="/api/shoutbox"/>
-	      <use-document ref="/static/news"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_index" name="_index"/>
+	      <use-document ref="/api/shoutbox" name="shoutbox"/>
+	      <use-document ref="/static/news" name="news"/>
 	    </fragment>
 	    <fragment name="player">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_player"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_player" name="_player"/>
 	    </fragment>
 	    <fragment name="deck">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_deck"/>
-	      <use-document ref="/data/deck"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_deck" name="_deck"/>
+	      <use-document ref="/data/deck" name="deck"/>
 	    </fragment>
 	    <fragment name="mcm">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_mcm"/>
-	      <use-document ref="/data/search"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_mcm" name="_mcm"/>
+	      <use-document ref="/data/search" name="search"/>
 	    </fragment>
 	    <fragment name="dci">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_dci"/>
-	      <use-document ref="/data/dci"/>
-	      <use-document ref="/api/dci.timeline.graph"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_dci" name="_dci"/>
+	      <use-document ref="/data/dci" name="dci"/>
+	      <use-document ref="/api/dci.timeline.graph" name="dci.timeline.graph"/>
 	    </fragment>
 	    <fragment name="dci.timeline">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_dci.timeline"/>
-	      <use-document ref="/api/dci.timeline.graph"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_dci.timeline" name="_dci.timeline"/>
+	      <use-document ref="/api/dci.timeline.graph" name="dci.timeline.graph"/>
 	    </fragment>
 	    <fragment name="deck-edit">
-	      <use-document ref="/data/deck.edit"/>
+	      <use-document ref="/data/deck.edit" name="deck.edit"/>
 	    </fragment>
 	    <fragment name="print">
-	      <use-template ref="/xsl/_print"/>
-	      <use-document ref="/data/print"/>
+	      <use-template ref="/xsl/_print" name="_print"/>
+	      <use-document ref="/data/print" name="print"/>
 	    </fragment>
 	    <fragment name="print-wizards">
-	      <use-template ref="/xsl/_print"/>
-	      <use-document ref="/data/print-wizards"/>
+	      <use-template ref="/xsl/_print" name="_print"/>
+	      <use-document ref="/data/print-wizards" name="print-wizards"/>
 	    </fragment>
 	    <fragment name="show">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_deck"/>
-	      <use-document ref="/data/show"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_deck" name="_deck"/>
+	      <use-document ref="/data/show" name="show"/>
 	    </fragment>
 	    <fragment name="decklist">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_decklist"/>
-	      <use-document ref="/data/show"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_decklist" name="_decklist"/>
+	      <use-document ref="/data/show" name="show"/>
 	    </fragment>
 	    <fragment name="manager">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_manager"/>
-	      <import ref="/api/Manager"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_manager" name="_manager"/>
+	      <import ref="/api/Manager" name="Manager"/>
 	    </fragment>
 	    <fragment name="bill">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_bill"/>
-	      <use-document ref="/data/bill"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_bill" name="_bill"/>
+	      <use-document ref="/data/bill" name="bill"/>
 	    </fragment>
 	    <fragment name="wizards">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_wizards"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_wizards" name="_wizards"/>
 	    </fragment>
 	    <fragment name="prerelease">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_prerelease"/>
-	      <use-document ref="/static/prerelease"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_prerelease" name="_prerelease"/>
+	      <use-document ref="/static/prerelease" name="prerelease"/>
 	    </fragment>
 	    <fragment name="tokens">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_tokens"/>
-	      <use-document ref="/static/custom-sets"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_tokens" name="_tokens"/>
+	      <use-document ref="/static/custom-sets" name="custom-sets"/>
 	    </fragment>
 	    <fragment name="reviews">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_reviews"/>
-	      <use-document ref="/data/oracle"/>
-	      <use-document ref="/data/reviews"/>
-	      <use-document ref="/static/reviews"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_reviews" name="_reviews"/>
+	      <use-document ref="/data/oracle" name="oracle"/>
+	      <use-document ref="/data/reviews" name="reviews"/>
+	      <use-document ref="/static/reviews" name="reviews"/>
 	    </fragment>
 	    <fragment name="booster">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_booster"/>
-	      <use-document ref="/data/booster"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_booster" name="_booster"/>
+	      <use-document ref="/data/booster" name="booster"/>
 	    </fragment>
 	    <fragment name="prices">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_prices"/>
-	      <use-document ref="/data/prices"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_prices" name="_prices"/>
+	      <use-document ref="/data/prices" name="prices"/>
 	    </fragment>
 	    <fragment name="search">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_search"/>
-	      <use-document ref="/data/oracle"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_search" name="_search"/>
+	      <use-document ref="/data/oracle" name="oracle"/>
 	    </fragment>
 	    <fragment name="events">
-	      <import ref="/api/default"/>
-	      <use-template ref="/xsl/_events"/>
-	      <use-document ref="/static/events"/>
+	      <import ref="/api/default" name="default"/>
+	      <use-template ref="/xsl/_events" name="_events"/>
+	      <use-document ref="/static/events" name="events"/>
 	    </fragment>
     </fragment>
     
     <fragment name="api">
 	    <fragment name="default">
-	      <use-document ref="//slothsoft@farah/sites"/>
-	      <link-stylesheet ref="/css/default"/>
-	      <import ref="//slothsoft@core/api/HTML5"/>
-	      <import ref="//slothsoft@core/api/XPath"/>
-	      <import ref="/api/ImageCache"/>
+	      <use-document ref="//slothsoft@farah/sites" name="sites"/>
+	      <link-stylesheet ref="/css/default" name="default"/>
+	      <import ref="//slothsoft@core/api/HTML5" name="HTML5"/>
+	      <import ref="//slothsoft@core/api/XPath" name="XPath"/>
+	      <import ref="/api/ImageCache" name="ImageCache"/>
 	    </fragment>
 	    <fragment name="dci.timeline.graph">
-	      <use-document ref="/data/dci"/>
-	      <use-document ref="/data/sets"/>
-	      <use-template ref="/xsl/_dci.timeline.graph"/>
+	      <use-document ref="/data/dci" name="dci"/>
+	      <use-document ref="/data/sets" name="sets"/>
+	      <use-template ref="/xsl/_dci.timeline.graph" name="_dci.timeline.graph"/>
 	    </fragment>
 	    <fragment name="ImageCache">
-	      <link-script ref="/js/ImageCache"/>
+	      <link-script ref="/js/ImageCache" name="ImageCache"/>
 	    </fragment>
 	    <fragment name="Manager">
-	      <import ref="//slothsoft@core/api/DOM"/>
-	      <link-script ref="/js/MTG"/>
-	      <link-script ref="/js/MTG.Manager"/>
-	      <link-script ref="/js/MTG.Deck"/>
+	      <import ref="//slothsoft@core/api/DOM" name="DOM"/>
+	      <link-script ref="/js/MTG" name="MTG"/>
+	      <link-script ref="/js/MTG.Manager" name="MTG.Manager"/>
+	      <link-script ref="/js/MTG.Deck" name="MTG.Deck"/>
 	    </fragment>
 	    
     	<fragment name="shoutbox">
 	      <param name="chat-database" value="mtg"/>
-	      <import ref="//chat/api/shoutbox"/>
+	      <import ref="//chat/api/shoutbox" name="shoutbox"/>
 	    </fragment>
     </fragment>
   </assets>

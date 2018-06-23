@@ -1,2 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<oracle><categories><type>Land</type><type>Planeswalker</type><type>Creature</type><type>Artifact</type><type>Enchantment</type><type>Sorcery</type><type>Instant</type><type>Token</type><type>Emblem</type><type>Plane</type><type>Scheme</type><type>Conspiracy</type><type>Vanguard</type><type>Phenomenon</type><type>Other</type><rarity>Common</rarity><rarity>Uncommon</rarity><rarity>Rare</rarity><rarity>Mythic Rare</rarity><color>White</color><color>Blue</color><color>Black</color><color>Red</color><color>Green</color><color>Colorless</color><set href="https://mtg.gamepedia.com/Set/../Core_2019" date="2018-07-20" date-year="2018" date-month="07" date-day="20" type="core set">Core 2019</set><set href="https://mtg.gamepedia.com/Set/../Dominaria" date="2018-04-27" date-year="2018" date-month="04" date-day="27" type="expansion set">Dominaria</set><set href="https://mtg.gamepedia.com/Set/../Rivals_of_Ixalan" date="2018-01-19" date-year="2018" date-month="01" date-day="19" type="expansion set">Rivals of Ixalan</set><set href="https://mtg.gamepedia.com/Set/../Ixalan" date="2017-09-29" date-year="2017" date-month="09" date-day="29" type="expansion set">Ixalan</set><set href="https://mtg.gamepedia.com/Set/../Hour_of_Devastation" date="2017-07-14" date-year="2017" date-month="07" date-day="14" type="expansion set">Hour of Devastation</set><set href="https://mtg.gamepedia.com/Set/../Amonkhet" date="2017-04-28" date-year="2017" date-month="04" date-day="28" type="expansion set">Amonkhet</set><set href="https://mtg.gamepedia.com/Set/../Aether_Revolt" date="2017-01-20" date-year="2017" date-month="01" date-day="20" type="expansion set">Aether Revolt</set><set href="https://mtg.gamepedia.com/Set/../Kaladesh" date="2016-09-30" date-year="2016" date-month="09" date-day="30" type="expansion set">Kaladesh</set><set href="https://mtg.gamepedia.com/Set/../Eldritch_Moon" date="2016-07-22" date-year="2016" date-month="07" date-day="22" type="expansion set">Eldritch Moon</set><set href="https://mtg.gamepedia.com/Set/../Shadows_over_Innistrad" date="2016-04-08" date-year="2016" date-month="04" date-day="08" type="expansion set">Shadows over Innistrad</set><set href="https://mtg.gamepedia.com/Set/../Oath_of_the_Gatewatch" date="2016-01-22" date-year="2016" date-month="01" date-day="22" type="expansion set">Oath of the Gatewatch</set><set href="https://mtg.gamepedia.com/Set/../Battle_for_Zendikar" date="2015-10-02" date-year="2015" date-month="10" date-day="02" type="expansion set">Battle for Zendikar</set><set href="https://mtg.gamepedia.com/Set/../Magic_Origins" date="2015-07-17" date-year="2015" date-month="07" date-day="17" type="core set">Magic Origins</set><set href="https://mtg.gamepedia.com/Set/../Dragons_of_Tarkir" date="2015-03-27" date-year="2015" date-month="03" date-day="27" type="expansion set">Dragons of Tarkir</set><set href="https://mtg.gamepedia.com/Set/../Fate_Reforged" date="2015-01-23" date-year="2015" date-month="01" date-day="23" type="expansion set">Fate Reforged</set><set href="https://mtg.gamepedia.com/Set/../Khans_of_Tarkir" date="2014-09-26" date-year="2014" date-month="09" date-day="26" type="expansion set">Khans of Tarkir</set><set href="https://mtg.gamepedia.com/Set/../Magic_2015" date="2014-07-18" date-year="2014" date-month="07" date-day="18" type="core set">Magic 2015 Core Set</set><set href="https://mtg.gamepedia.com/Set/../Journey_into_Nyx" date="2014-05-02" date-year="2014" date-month="05" date-day="02" type="expansion set">Journey into Nyx</set><set href="https://mtg.gamepedia.com/Set/../Born_of_the_Gods" date="2014-02-07" date-year="2014" date-month="02" date-day="07" type="expansion set">Born of the Gods</set><set href="https://mtg.gamepedia.com/Set/../Theros" date="2013-09-27" date-year="2013" date-month="09" date-day="27" type="expansion set">Theros</set><set href="https://mtg.gamepedia.com/Set/../Magic_2014" date="2013-07-19" date-year="2013" date-month="07" date-day="19" type="core set">Magic 2014 Core Set</set><set href="https://mtg.gamepedia.com/Set/../Dragon%27s_Maze" date="2013-05-03" date-year="2013" date-month="05" date-day="03" type="expansion set">Dragon's Maze</set><set href="https://mtg.gamepedia.com/Set/../Gatecrash" date="2013-02-01" date-year="2013" date-month="02" date-day="01" type="expansion set">Gatecrash</set><set href="https://mtg.gamepedia.com/Set/../Return_to_Ravnica" date="2012-10-05" date-year="2012" date-month="10" date-day="05" type="expansion set">Return to Ravnica</set><set href="https://mtg.gamepedia.com/Set/../Magic_2013" date="2012-07-13" date-year="2012" date-month="07" date-day="13" type="core set">Magic 2013</set><set href="https://mtg.gamepedia.com/Set/../Avacyn_Restored" date="2012-05-04" date-year="2012" date-month="05" date-day="04" type="expansion set">Avacyn Restored</set><set href="https://mtg.gamepedia.com/Set/../Dark_Ascension" date="2012-02-03" date-year="2012" date-month="02" date-day="03" type="expansion set">Dark Ascension</set><set href="https://mtg.gamepedia.com/Set/../Innistrad" date="2011-09-30" date-year="2011" date-month="09" date-day="30" type="expansion set">Innistrad</set><set href="https://mtg.gamepedia.com/Set/../Magic_2012" date="2011-07-15" date-year="2011" date-month="07" date-day="15" type="core set">Magic 2012</set><set href="https://mtg.gamepedia.com/Set/../New_Phyrexia" date="2011-05-13" date-year="2011" date-month="05" date-day="13" type="expansion set">New Phyrexia</set><set href="https://mtg.gamepedia.com/Set/../Mirrodin_Besieged" date="2011-02-04" date-year="2011" date-month="02" date-day="04" type="expansion set">Mirrodin Besieged</set><set href="https://mtg.gamepedia.com/Set/../Scars_of_Mirrodin" date="2010-10-01" date-year="2010" date-month="10" date-day="01" type="expansion set">Scars of Mirrodin</set><set href="https://mtg.gamepedia.com/Set/../Magic_2011" date="2010-07-16" date-year="2010" date-month="07" date-day="16" type="core set">Magic 2011</set><set href="https://mtg.gamepedia.com/Set/../Rise_of_the_Eldrazi" date="2010-04-23" date-year="2010" date-month="04" date-day="23" type="expansion set">Rise of the Eldrazi</set><set href="https://mtg.gamepedia.com/Set/../Worldwake" date="2010-02-05" date-year="2010" date-month="02" date-day="05" type="expansion set">Worldwake</set><set href="https://mtg.gamepedia.com/Set/../Zendikar" date="2009-10-02" date-year="2009" date-month="10" date-day="02" type="expansion set">Zendikar</set><set href="https://mtg.gamepedia.com/Set/../Magic_2010" date="2009-07-17" date-year="2009" date-month="07" date-day="17" type="core set">Magic 2010</set><set href="https://mtg.gamepedia.com/Set/../Alara_Reborn" date="2009-04-30" date-year="2009" date-month="04" date-day="30" type="expansion set">Alara Reborn</set><set href="https://mtg.gamepedia.com/Set/../Conflux" date="2009-02-06" date-year="2009" date-month="02" date-day="06" type="expansion set">Conflux</set><set href="https://mtg.gamepedia.com/Set/../Shards_of_Alara" date="2008-10-03" date-year="2008" date-month="10" date-day="03" type="expansion set">Shards of Alara</set><set href="https://mtg.gamepedia.com/Set/../Eventide" date="2008-07-25" date-year="2008" date-month="07" date-day="25" type="expansion set">Eventide</set><set href="https://mtg.gamepedia.com/Set/../Shadowmoor" date="2008-05-02" date-year="2008" date-month="05" date-day="02" type="expansion set">Shadowmoor</set><set href="https://mtg.gamepedia.com/Set/../Morningtide" date="2008-02-01" date-year="2008" date-month="02" date-day="01" type="expansion set">Morningtide</set><set href="https://mtg.gamepedia.com/Set/../Lorwyn" date="2007-10-12" date-year="2007" date-month="10" date-day="12" type="expansion set">Lorwyn</set><set href="https://mtg.gamepedia.com/Set/../10th_Edition" date="2007-07-13" date-year="2007" date-month="07" date-day="13" type="core set">Tenth Edition</set><set href="https://mtg.gamepedia.com/Set/../Future_Sight" date="2007-05-04" date-year="2007" date-month="05" date-day="04" type="expansion set">Future Sight</set><set href="https://mtg.gamepedia.com/Set/../Planar_Chaos" date="2007-02-02" date-year="2007" date-month="02" date-day="02" type="expansion set">Planar Chaos</set><set href="https://mtg.gamepedia.com/Set/../Time_Spiral" date="2006-10-06" date-year="2006" date-month="10" date-day="06" type="expansion set">Time Spiral</set><set href="https://mtg.gamepedia.com/Set/../Coldsnap" date="2006-07-21" date-year="2006" date-month="07" date-day="21" type="expansion set">Coldsnap</set><set href="https://mtg.gamepedia.com/Set/../Dissension" date="2006-05-05" date-year="2006" date-month="05" date-day="05" type="expansion set">Dissension</set><set href="https://mtg.gamepedia.com/Set/../Guildpact" date="2006-02-03" date-year="2006" date-month="02" date-day="03" type="expansion set">Guildpact</set><set href="https://mtg.gamepedia.com/Set/../Ravnica:_City_of_Guilds" date="2005-10-07" date-year="2005" date-month="10" date-day="07" type="expansion set">Ravnica: City of Guilds</set><set href="https://mtg.gamepedia.com/Set/../9th_Edition" date="2005-07-29" date-year="2005" date-month="07" date-day="29" type="core set">Tenth Edition</set><set href="https://mtg.gamepedia.com/Set/../Saviors_of_Kamigawa" date="2005-06-03" date-year="2005" date-month="06" date-day="03" type="expansion set">Saviors of Kamigawa</set><set href="https://mtg.gamepedia.com/Set/../Betrayers_of_Kamigawa" date="2005-02-04" date-year="2005" date-month="02" date-day="04" type="expansion set">Betrayers of Kamigawa</set><set href="https://mtg.gamepedia.com/Set/../Champions_of_Kamigawa" date="2004-10-01" date-year="2004" date-month="10" date-day="01" type="expansion set">Champions of Kamigawa</set><set href="https://mtg.gamepedia.com/Set/../Fifth_Dawn" date="2004-06-04" date-year="2004" date-month="06" date-day="04" type="expansion set">Fifth Dawn</set><set href="https://mtg.gamepedia.com/Set/../Darksteel" date="2004-02-06" date-year="2004" date-month="02" date-day="06" type="expansion set">Darksteel</set><set href="https://mtg.gamepedia.com/Set/../Mirrodin" date="2003-10-02" date-year="2003" date-month="10" date-day="02" type="expansion set">Mirrodin</set><set href="https://mtg.gamepedia.com/Set/../8th_Edition" date="2003-07-28" date-year="2003" date-month="07" date-day="28" type="core set">Eighth Edition</set><set href="https://mtg.gamepedia.com/Set/../Scourge" date="2003-05-26" date-year="2003" date-month="05" date-day="26" type="expansion set">Scourge</set><set href="https://mtg.gamepedia.com/Set/../Legions" date="2003-02-03" date-year="2003" date-month="02" date-day="03" type="expansion set">Legions</set><set href="https://mtg.gamepedia.com/Set/../Onslaught" date="2002-10-07" date-year="2002" date-month="10" date-day="07" type="expansion set">Onslaught</set><set href="https://mtg.gamepedia.com/Set/../Judgment" date="2002-05-27" date-year="2002" date-month="05" date-day="27" type="expansion set">Judgment</set><set href="https://mtg.gamepedia.com/Set/../Torment" date="2002-02-08" date-year="2002" date-month="02" date-day="08" type="expansion set">Torment</set><set href="https://mtg.gamepedia.com/Set/../Odyssey" date="2001-10-01" date-year="2001" date-month="10" date-day="01" type="expansion set">Odyssey</set><set href="https://mtg.gamepedia.com/Set/../Apocalypse" date="2001-06-04" date-year="2001" date-month="06" date-day="04" type="expansion set">Apocalypse</set><set href="https://mtg.gamepedia.com/Set/../7th_Edition" date="2001-04-11" date-year="2001" date-month="04" date-day="11" type="core set">Seventh Edition</set><set href="https://mtg.gamepedia.com/Set/../Planeshift" date="2001-02-05" date-year="2001" date-month="02" date-day="05" type="expansion set">Planeshift</set><set href="https://mtg.gamepedia.com/Set/../Invasion" date="2000-10-02" date-year="2000" date-month="10" date-day="02" type="expansion set">Invasion</set><set href="https://mtg.gamepedia.com/Set/../Prophecy" date="2000-06-05" date-year="2000" date-month="06" date-day="05" type="expansion set">Prophecy</set><set href="https://mtg.gamepedia.com/Set/../Nemesis" date="2000-02-14" date-year="2000" date-month="02" date-day="14" type="expansion set">Nemesis</set><set href="https://mtg.gamepedia.com/Set/../Mercadian_Masques" date="1999-10-04" date-year="1999" date-month="10" date-day="04" type="expansion set">Mercadian Masques</set><set href="https://mtg.gamepedia.com/Set/../Urza%27s_Destiny" date="1999-06-07" date-year="1999" date-month="06" date-day="07" type="expansion set">Urza's Destiny</set><set href="https://mtg.gamepedia.com/Set/../6th_Edition" date="1999-04-21" date-year="1999" date-month="04" date-day="21" type="core set">Classic Sixth Edition</set><set href="https://mtg.gamepedia.com/Set/../Urza%27s_Legacy" date="1999-02-15" date-year="1999" date-month="02" date-day="15" type="expansion set">Urza's Legacy</set><set href="https://mtg.gamepedia.com/Set/../Urza%27s_Saga" date="1998-10-12" date-year="1998" date-month="10" date-day="12" type="expansion set">Urza's Saga</set><set href="https://mtg.gamepedia.com/Set/../Exodus" date="1998-06-15" date-year="1998" date-month="06" date-day="15" type="expansion set">Exodus</set><set href="https://mtg.gamepedia.com/Set/../Stronghold" date="1998-03-02" date-year="1998" date-month="03" date-day="02" type="expansion set">Stronghold</set><set href="https://mtg.gamepedia.com/Set/../Tempest" date="1997-10-14" date-year="1997" date-month="10" date-day="14" type="expansion set">Tempest</set><set href="https://mtg.gamepedia.com/Set/../Weatherlight" date="1997-06-09" date-year="1997" date-month="06" date-day="09" type="expansion set">Weatherlight</set><set href="https://mtg.gamepedia.com/Set/../5th_Edition" date="1997-03-24" date-year="1997" date-month="03" date-day="24" type="core set">Fifth Edition</set><set href="https://mtg.gamepedia.com/Set/../Visions" date="1997-02-03" date-year="1997" date-month="02" date-day="03" type="expansion set">Visions</set><set href="https://mtg.gamepedia.com/Set/../Mirage" date="1996-10-08" date-year="1996" date-month="10" date-day="08" type="expansion set">Mirage</set><set href="https://mtg.gamepedia.com/Set/../Alliances" date="1996-06-10" date-year="1996" date-month="06" date-day="10" type="expansion set">Alliances</set><set href="https://mtg.gamepedia.com/Set/../Homelands" date="1995-10-14" date-year="1995" date-month="10" date-day="14" type="expansion set">Homelands</set><set href="https://mtg.gamepedia.com/Set/../Ice_Age" date="1995-06-01" date-year="1995" date-month="06" date-day="01" type="expansion set">Ice Age</set><set href="https://mtg.gamepedia.com/Set/../4th_Edition" date="1995-04-01" date-year="1995" date-month="04" date-day="01" type="core set">Fourth Edition</set><set href="https://mtg.gamepedia.com/Set/../Fallen_Empires" date="1994-11-15" date-year="1994" date-month="11" date-day="15" type="expansion set">Fallen Empires</set><set href="https://mtg.gamepedia.com/Set/../The_Dark" date="1994-08-08" date-year="1994" date-month="08" date-day="08" type="expansion set">The Dark</set><set href="https://mtg.gamepedia.com/Set/../Legends" date="1994-06-10" date-year="1994" date-month="06" date-day="10" type="expansion set">Legends</set><set href="https://mtg.gamepedia.com/Set/../Revised_Edition" date="1994-04-01" date-year="1994" date-month="04" date-day="01" type="core set">Revised Edition</set><set href="https://mtg.gamepedia.com/Set/../Antiquities" date="1994-03-04" date-year="1994" date-month="03" date-day="04" type="expansion set">Antiquities</set><set href="https://mtg.gamepedia.com/Set/../Arabian_Nights" date="1993-12-17" date-year="1993" date-month="12" date-day="17" type="expansion set">Arabian Nights</set><set href="https://mtg.gamepedia.com/Set/../Unlimited_Edition" date="1993-12-01" date-year="1993" date-month="12" date-day="01" type="core set">Unlimited Edition</set><set href="https://mtg.gamepedia.com/Set/../Beta" date="1993-10-01" date-year="1993" date-month="10" date-day="01" type="core set">Limited Edition Beta</set><set href="https://mtg.gamepedia.com/Set/../Alpha" date="1993-08-05" date-year="1993" date-month="08" date-day="05" type="core set">Limited Edition Alpha</set><legality>Standard</legality><legality>Modern</legality><legality>Commander</legality><legality>Vintage</legality></categories></oracle>
+<oracle>
+	<categories>
+		<type>Land</type>
+		<type>Planeswalker</type>
+		<type>Creature</type>
+		<type>Artifact</type>
+		<type>Enchantment</type>
+		<type>Sorcery</type>
+		<type>Instant</type>
+		<type>Token</type>
+		<type>Emblem</type>
+		<type>Plane</type>
+		<type>Scheme</type>
+		<type>Conspiracy</type>
+		<type>Vanguard</type>
+		<type>Phenomenon</type>
+		<type>Other</type>
+		<rarity>Common</rarity>
+		<rarity>Uncommon</rarity>
+		<rarity>Rare</rarity>
+		<rarity>Mythic Rare</rarity>
+		<color>White</color>
+		<color>Blue</color>
+		<color>Black</color>
+		<color>Red</color>
+		<color>Green</color>
+		<color>Colorless</color>
+		<set href="https://mtg.gamepedia.com/Set/../Core_2019" date="2018-07-20" date-year="2018" date-month="07"
+			date-day="20" type="core set">Core 2019</set>
+		<set href="https://mtg.gamepedia.com/Set/../Dominaria" date="2018-04-27" date-year="2018" date-month="04"
+			date-day="27" type="expansion set">Dominaria</set>
+		<set href="https://mtg.gamepedia.com/Set/../Rivals_of_Ixalan" date="2018-01-19" date-year="2018" date-month="01"
+			date-day="19" type="expansion set">Rivals of Ixalan</set>
+		<set href="https://mtg.gamepedia.com/Set/../Ixalan" date="2017-09-29" date-year="2017" date-month="09"
+			date-day="29" type="expansion set">Ixalan</set>
+		<set href="https://mtg.gamepedia.com/Set/../Hour_of_Devastation" date="2017-07-14" date-year="2017"
+			date-month="07" date-day="14" type="expansion set">Hour of Devastation</set>
+		<set href="https://mtg.gamepedia.com/Set/../Amonkhet" date="2017-04-28" date-year="2017" date-month="04"
+			date-day="28" type="expansion set">Amonkhet</set>
+		<set href="https://mtg.gamepedia.com/Set/../Aether_Revolt" date="2017-01-20" date-year="2017" date-month="01"
+			date-day="20" type="expansion set">Aether Revolt</set>
+		<set href="https://mtg.gamepedia.com/Set/../Kaladesh" date="2016-09-30" date-year="2016" date-month="09"
+			date-day="30" type="expansion set">Kaladesh</set>
+		<set href="https://mtg.gamepedia.com/Set/../Eldritch_Moon" date="2016-07-22" date-year="2016" date-month="07"
+			date-day="22" type="expansion set">Eldritch Moon</set>
+		<set href="https://mtg.gamepedia.com/Set/../Shadows_over_Innistrad" date="2016-04-08" date-year="2016"
+			date-month="04" date-day="08" type="expansion set">Shadows over Innistrad</set>
+		<set href="https://mtg.gamepedia.com/Set/../Oath_of_the_Gatewatch" date="2016-01-22" date-year="2016"
+			date-month="01" date-day="22" type="expansion set">Oath of the Gatewatch</set>
+		<set href="https://mtg.gamepedia.com/Set/../Battle_for_Zendikar" date="2015-10-02" date-year="2015"
+			date-month="10" date-day="02" type="expansion set">Battle for Zendikar</set>
+		<set href="https://mtg.gamepedia.com/Set/../Magic_Origins" date="2015-07-17" date-year="2015" date-month="07"
+			date-day="17" type="core set">Magic Origins</set>
+		<set href="https://mtg.gamepedia.com/Set/../Dragons_of_Tarkir" date="2015-03-27" date-year="2015" date-month="03"
+			date-day="27" type="expansion set">Dragons of Tarkir</set>
+		<set href="https://mtg.gamepedia.com/Set/../Fate_Reforged" date="2015-01-23" date-year="2015" date-month="01"
+			date-day="23" type="expansion set">Fate Reforged</set>
+		<set href="https://mtg.gamepedia.com/Set/../Khans_of_Tarkir" date="2014-09-26" date-year="2014" date-month="09"
+			date-day="26" type="expansion set">Khans of Tarkir</set>
+		<set href="https://mtg.gamepedia.com/Set/../Magic_2015" date="2014-07-18" date-year="2014" date-month="07"
+			date-day="18" type="core set">Magic 2015 Core Set</set>
+		<set href="https://mtg.gamepedia.com/Set/../Journey_into_Nyx" date="2014-05-02" date-year="2014" date-month="05"
+			date-day="02" type="expansion set">Journey into Nyx</set>
+		<set href="https://mtg.gamepedia.com/Set/../Born_of_the_Gods" date="2014-02-07" date-year="2014" date-month="02"
+			date-day="07" type="expansion set">Born of the Gods</set>
+		<set href="https://mtg.gamepedia.com/Set/../Theros" date="2013-09-27" date-year="2013" date-month="09"
+			date-day="27" type="expansion set">Theros</set>
+		<set href="https://mtg.gamepedia.com/Set/../Magic_2014" date="2013-07-19" date-year="2013" date-month="07"
+			date-day="19" type="core set">Magic 2014 Core Set</set>
+		<set href="https://mtg.gamepedia.com/Set/../Dragon%27s_Maze" date="2013-05-03" date-year="2013" date-month="05"
+			date-day="03" type="expansion set">Dragon's Maze</set>
+		<set href="https://mtg.gamepedia.com/Set/../Gatecrash" date="2013-02-01" date-year="2013" date-month="02"
+			date-day="01" type="expansion set">Gatecrash</set>
+		<set href="https://mtg.gamepedia.com/Set/../Return_to_Ravnica" date="2012-10-05" date-year="2012" date-month="10"
+			date-day="05" type="expansion set">Return to Ravnica</set>
+		<set href="https://mtg.gamepedia.com/Set/../Magic_2013" date="2012-07-13" date-year="2012" date-month="07"
+			date-day="13" type="core set">Magic 2013</set>
+		<set href="https://mtg.gamepedia.com/Set/../Avacyn_Restored" date="2012-05-04" date-year="2012" date-month="05"
+			date-day="04" type="expansion set">Avacyn Restored</set>
+		<set href="https://mtg.gamepedia.com/Set/../Dark_Ascension" date="2012-02-03" date-year="2012" date-month="02"
+			date-day="03" type="expansion set">Dark Ascension</set>
+		<set href="https://mtg.gamepedia.com/Set/../Innistrad" date="2011-09-30" date-year="2011" date-month="09"
+			date-day="30" type="expansion set">Innistrad</set>
+		<set href="https://mtg.gamepedia.com/Set/../Magic_2012" date="2011-07-15" date-year="2011" date-month="07"
+			date-day="15" type="core set">Magic 2012</set>
+		<set href="https://mtg.gamepedia.com/Set/../New_Phyrexia" date="2011-05-13" date-year="2011" date-month="05"
+			date-day="13" type="expansion set">New Phyrexia</set>
+		<set href="https://mtg.gamepedia.com/Set/../Mirrodin_Besieged" date="2011-02-04" date-year="2011" date-month="02"
+			date-day="04" type="expansion set">Mirrodin Besieged</set>
+		<set href="https://mtg.gamepedia.com/Set/../Scars_of_Mirrodin" date="2010-10-01" date-year="2010" date-month="10"
+			date-day="01" type="expansion set">Scars of Mirrodin</set>
+		<set href="https://mtg.gamepedia.com/Set/../Magic_2011" date="2010-07-16" date-year="2010" date-month="07"
+			date-day="16" type="core set">Magic 2011</set>
+		<set href="https://mtg.gamepedia.com/Set/../Rise_of_the_Eldrazi" date="2010-04-23" date-year="2010"
+			date-month="04" date-day="23" type="expansion set">Rise of the Eldrazi</set>
+		<set href="https://mtg.gamepedia.com/Set/../Worldwake" date="2010-02-05" date-year="2010" date-month="02"
+			date-day="05" type="expansion set">Worldwake</set>
+		<set href="https://mtg.gamepedia.com/Set/../Zendikar" date="2009-10-02" date-year="2009" date-month="10"
+			date-day="02" type="expansion set">Zendikar</set>
+		<set href="https://mtg.gamepedia.com/Set/../Magic_2010" date="2009-07-17" date-year="2009" date-month="07"
+			date-day="17" type="core set">Magic 2010</set>
+		<set href="https://mtg.gamepedia.com/Set/../Alara_Reborn" date="2009-04-30" date-year="2009" date-month="04"
+			date-day="30" type="expansion set">Alara Reborn</set>
+		<set href="https://mtg.gamepedia.com/Set/../Conflux" date="2009-02-06" date-year="2009" date-month="02"
+			date-day="06" type="expansion set">Conflux</set>
+		<set href="https://mtg.gamepedia.com/Set/../Shards_of_Alara" date="2008-10-03" date-year="2008" date-month="10"
+			date-day="03" type="expansion set">Shards of Alara</set>
+		<set href="https://mtg.gamepedia.com/Set/../Eventide" date="2008-07-25" date-year="2008" date-month="07"
+			date-day="25" type="expansion set">Eventide</set>
+		<set href="https://mtg.gamepedia.com/Set/../Shadowmoor" date="2008-05-02" date-year="2008" date-month="05"
+			date-day="02" type="expansion set">Shadowmoor</set>
+		<set href="https://mtg.gamepedia.com/Set/../Morningtide" date="2008-02-01" date-year="2008" date-month="02"
+			date-day="01" type="expansion set">Morningtide</set>
+		<set href="https://mtg.gamepedia.com/Set/../Lorwyn" date="2007-10-12" date-year="2007" date-month="10"
+			date-day="12" type="expansion set">Lorwyn</set>
+		<set href="https://mtg.gamepedia.com/Set/../10th_Edition" date="2007-07-13" date-year="2007" date-month="07"
+			date-day="13" type="core set">Tenth Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Future_Sight" date="2007-05-04" date-year="2007" date-month="05"
+			date-day="04" type="expansion set">Future Sight</set>
+		<set href="https://mtg.gamepedia.com/Set/../Planar_Chaos" date="2007-02-02" date-year="2007" date-month="02"
+			date-day="02" type="expansion set">Planar Chaos</set>
+		<set href="https://mtg.gamepedia.com/Set/../Time_Spiral" date="2006-10-06" date-year="2006" date-month="10"
+			date-day="06" type="expansion set">Time Spiral</set>
+		<set href="https://mtg.gamepedia.com/Set/../Coldsnap" date="2006-07-21" date-year="2006" date-month="07"
+			date-day="21" type="expansion set">Coldsnap</set>
+		<set href="https://mtg.gamepedia.com/Set/../Dissension" date="2006-05-05" date-year="2006" date-month="05"
+			date-day="05" type="expansion set">Dissension</set>
+		<set href="https://mtg.gamepedia.com/Set/../Guildpact" date="2006-02-03" date-year="2006" date-month="02"
+			date-day="03" type="expansion set">Guildpact</set>
+		<set href="https://mtg.gamepedia.com/Set/../Ravnica:_City_of_Guilds" date="2005-10-07" date-year="2005"
+			date-month="10" date-day="07" type="expansion set">Ravnica: City of Guilds</set>
+		<set href="https://mtg.gamepedia.com/Set/../9th_Edition" date="2005-07-29" date-year="2005" date-month="07"
+			date-day="29" type="core set">Tenth Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Saviors_of_Kamigawa" date="2005-06-03" date-year="2005"
+			date-month="06" date-day="03" type="expansion set">Saviors of Kamigawa</set>
+		<set href="https://mtg.gamepedia.com/Set/../Betrayers_of_Kamigawa" date="2005-02-04" date-year="2005"
+			date-month="02" date-day="04" type="expansion set">Betrayers of Kamigawa</set>
+		<set href="https://mtg.gamepedia.com/Set/../Champions_of_Kamigawa" date="2004-10-01" date-year="2004"
+			date-month="10" date-day="01" type="expansion set">Champions of Kamigawa</set>
+		<set href="https://mtg.gamepedia.com/Set/../Fifth_Dawn" date="2004-06-04" date-year="2004" date-month="06"
+			date-day="04" type="expansion set">Fifth Dawn</set>
+		<set href="https://mtg.gamepedia.com/Set/../Darksteel" date="2004-02-06" date-year="2004" date-month="02"
+			date-day="06" type="expansion set">Darksteel</set>
+		<set href="https://mtg.gamepedia.com/Set/../Mirrodin" date="2003-10-02" date-year="2003" date-month="10"
+			date-day="02" type="expansion set">Mirrodin</set>
+		<set href="https://mtg.gamepedia.com/Set/../8th_Edition" date="2003-07-28" date-year="2003" date-month="07"
+			date-day="28" type="core set">Eighth Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Scourge" date="2003-05-26" date-year="2003" date-month="05"
+			date-day="26" type="expansion set">Scourge</set>
+		<set href="https://mtg.gamepedia.com/Set/../Legions" date="2003-02-03" date-year="2003" date-month="02"
+			date-day="03" type="expansion set">Legions</set>
+		<set href="https://mtg.gamepedia.com/Set/../Onslaught" date="2002-10-07" date-year="2002" date-month="10"
+			date-day="07" type="expansion set">Onslaught</set>
+		<set href="https://mtg.gamepedia.com/Set/../Judgment" date="2002-05-27" date-year="2002" date-month="05"
+			date-day="27" type="expansion set">Judgment</set>
+		<set href="https://mtg.gamepedia.com/Set/../Torment" date="2002-02-08" date-year="2002" date-month="02"
+			date-day="08" type="expansion set">Torment</set>
+		<set href="https://mtg.gamepedia.com/Set/../Odyssey" date="2001-10-01" date-year="2001" date-month="10"
+			date-day="01" type="expansion set">Odyssey</set>
+		<set href="https://mtg.gamepedia.com/Set/../Apocalypse" date="2001-06-04" date-year="2001" date-month="06"
+			date-day="04" type="expansion set">Apocalypse</set>
+		<set href="https://mtg.gamepedia.com/Set/../7th_Edition" date="2001-04-11" date-year="2001" date-month="04"
+			date-day="11" type="core set">Seventh Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Planeshift" date="2001-02-05" date-year="2001" date-month="02"
+			date-day="05" type="expansion set">Planeshift</set>
+		<set href="https://mtg.gamepedia.com/Set/../Invasion" date="2000-10-02" date-year="2000" date-month="10"
+			date-day="02" type="expansion set">Invasion</set>
+		<set href="https://mtg.gamepedia.com/Set/../Prophecy" date="2000-06-05" date-year="2000" date-month="06"
+			date-day="05" type="expansion set">Prophecy</set>
+		<set href="https://mtg.gamepedia.com/Set/../Nemesis" date="2000-02-14" date-year="2000" date-month="02"
+			date-day="14" type="expansion set">Nemesis</set>
+		<set href="https://mtg.gamepedia.com/Set/../Mercadian_Masques" date="1999-10-04" date-year="1999" date-month="10"
+			date-day="04" type="expansion set">Mercadian Masques</set>
+		<set href="https://mtg.gamepedia.com/Set/../Urza%27s_Destiny" date="1999-06-07" date-year="1999" date-month="06"
+			date-day="07" type="expansion set">Urza's Destiny</set>
+		<set href="https://mtg.gamepedia.com/Set/../6th_Edition" date="1999-04-21" date-year="1999" date-month="04"
+			date-day="21" type="core set">Classic Sixth Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Urza%27s_Legacy" date="1999-02-15" date-year="1999" date-month="02"
+			date-day="15" type="expansion set">Urza's Legacy</set>
+		<set href="https://mtg.gamepedia.com/Set/../Urza%27s_Saga" date="1998-10-12" date-year="1998" date-month="10"
+			date-day="12" type="expansion set">Urza's Saga</set>
+		<set href="https://mtg.gamepedia.com/Set/../Exodus" date="1998-06-15" date-year="1998" date-month="06"
+			date-day="15" type="expansion set">Exodus</set>
+		<set href="https://mtg.gamepedia.com/Set/../Stronghold" date="1998-03-02" date-year="1998" date-month="03"
+			date-day="02" type="expansion set">Stronghold</set>
+		<set href="https://mtg.gamepedia.com/Set/../Tempest" date="1997-10-14" date-year="1997" date-month="10"
+			date-day="14" type="expansion set">Tempest</set>
+		<set href="https://mtg.gamepedia.com/Set/../Weatherlight" date="1997-06-09" date-year="1997" date-month="06"
+			date-day="09" type="expansion set">Weatherlight</set>
+		<set href="https://mtg.gamepedia.com/Set/../5th_Edition" date="1997-03-24" date-year="1997" date-month="03"
+			date-day="24" type="core set">Fifth Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Visions" date="1997-02-03" date-year="1997" date-month="02"
+			date-day="03" type="expansion set">Visions</set>
+		<set href="https://mtg.gamepedia.com/Set/../Mirage" date="1996-10-08" date-year="1996" date-month="10"
+			date-day="08" type="expansion set">Mirage</set>
+		<set href="https://mtg.gamepedia.com/Set/../Alliances" date="1996-06-10" date-year="1996" date-month="06"
+			date-day="10" type="expansion set">Alliances</set>
+		<set href="https://mtg.gamepedia.com/Set/../Homelands" date="1995-10-14" date-year="1995" date-month="10"
+			date-day="14" type="expansion set">Homelands</set>
+		<set href="https://mtg.gamepedia.com/Set/../Ice_Age" date="1995-06-01" date-year="1995" date-month="06"
+			date-day="01" type="expansion set">Ice Age</set>
+		<set href="https://mtg.gamepedia.com/Set/../4th_Edition" date="1995-04-01" date-year="1995" date-month="04"
+			date-day="01" type="core set">Fourth Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Fallen_Empires" date="1994-11-15" date-year="1994" date-month="11"
+			date-day="15" type="expansion set">Fallen Empires</set>
+		<set href="https://mtg.gamepedia.com/Set/../The_Dark" date="1994-08-08" date-year="1994" date-month="08"
+			date-day="08" type="expansion set">The Dark</set>
+		<set href="https://mtg.gamepedia.com/Set/../Legends" date="1994-06-10" date-year="1994" date-month="06"
+			date-day="10" type="expansion set">Legends</set>
+		<set href="https://mtg.gamepedia.com/Set/../Revised_Edition" date="1994-04-01" date-year="1994" date-month="04"
+			date-day="01" type="core set">Revised Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Antiquities" date="1994-03-04" date-year="1994" date-month="03"
+			date-day="04" type="expansion set">Antiquities</set>
+		<set href="https://mtg.gamepedia.com/Set/../Arabian_Nights" date="1993-12-17" date-year="1993" date-month="12"
+			date-day="17" type="expansion set">Arabian Nights</set>
+		<set href="https://mtg.gamepedia.com/Set/../Unlimited_Edition" date="1993-12-01" date-year="1993" date-month="12"
+			date-day="01" type="core set">Unlimited Edition</set>
+		<set href="https://mtg.gamepedia.com/Set/../Beta" date="1993-10-01" date-year="1993" date-month="10" date-day="01"
+			type="core set">Limited Edition Beta</set>
+		<set href="https://mtg.gamepedia.com/Set/../Alpha" date="1993-08-05" date-year="1993" date-month="08"
+			date-day="05" type="core set">Limited Edition Alpha</set>
+		<legality>Standard</legality>
+		<legality>Modern</legality>
+		<legality>Commander</legality>
+		<legality>Vintage</legality>
+	</categories>
+</oracle>

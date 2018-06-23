@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-	xmlns="http://www.w3.org/1999/xhtml"
+<xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	
-	<xsl:variable name="host">http://accounts.wizards.com</xsl:variable>
-	
+
+	<xsl:variable name="host">
+		http://accounts.wizards.com
+	</xsl:variable>
+
 	<xsl:template match="/data">
 		<html>
 			<head>
@@ -81,13 +82,13 @@ function debug(message) {
 				]]></script>
 			</head>
 			<body>
-				<iframe style="display: none;" id="samlWidget" src="/getResource.php/mtg/samlWidget"/>
+				<iframe style="display: none;" id="samlWidget" src="/getResource.php/mtg/samlWidget" />
 				<form onsubmit="login(this.username, this.password, 'true', 'playlocation+name'); return false">
 					<label>
-						<input name="username" placeholder="username" required="required"/>
+						<input name="username" placeholder="username" required="required" />
 					</label>
 					<label>
-						<input name="password" placeholder="password" required="required"/>
+						<input name="password" placeholder="password" required="required" />
 					</label>
 				</form>
 			</body>

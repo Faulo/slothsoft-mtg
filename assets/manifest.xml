@@ -41,13 +41,22 @@
 		<fragment name="print" />
 		<fragment name="print-wizards" />
 		<fragment name="show" />
-		<fragment name="oracle" />
+<!-- 		<fragment name="oracle" /> -->
 		<fragment name="reviews" />
 		<fragment name="prices" />
 		<fragment name="sets" />
+		
+		<custom-asset name="oracle" executable-builder="Slothsoft\MTG\Assets\OracleBuilder"/>
+		<custom-asset name="work" executable-builder="Slothsoft\MTG\Assets\WorkBuilder"/>
 	</fragment>
 
-	<fragment name="pages">
+	<fragment name="html">
+		<fragment name="search">
+			<import ref="/api/default" />
+			<use-template ref="/xsl/_search" />
+			<use-document ref="/data/oracle" />
+		</fragment>
+		
 		<fragment name="index">
 			<import ref="/api/default" name="default" />
 			<use-template ref="/xsl/_index" name="_index" />
@@ -141,11 +150,6 @@
 			<use-template ref="/xsl/_prices" name="_prices" />
 			<use-document ref="/data/prices" name="prices" />
 		</fragment>
-		<fragment name="search">
-			<import ref="/api/default" name="default" />
-			<use-template ref="/xsl/_search" name="_search" />
-			<use-document ref="/data/oracle" name="oracle" />
-		</fragment>
 		<fragment name="events">
 			<import ref="/api/default" name="default" />
 			<use-template ref="/xsl/_events" name="_events" />
@@ -175,7 +179,6 @@
 			<link-script ref="/js/MTG.Manager" name="MTG.Manager" />
 			<link-script ref="/js/MTG.Deck" name="MTG.Deck" />
 		</fragment>
-
 		<fragment name="shoutbox">
 			<param name="chat-database" value="mtg" />
 			<import ref="//chat/api/shoutbox" name="shoutbox" />

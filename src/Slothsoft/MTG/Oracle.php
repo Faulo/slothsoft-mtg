@@ -12,17 +12,15 @@ use Serializable;
 class Oracle implements Serializable
 {
 
-    protected $doc;
+    private $doc;
 
-    protected $dom;
+    private $dbName;
 
-    protected $dbName;
+    private $idTableName = 'oracle-ids';
 
-    protected $idTableName = 'oracle-ids';
+    private $xmlTableName = 'oracle-xml';
 
-    protected $xmlTableName = 'oracle-xml';
-
-    protected $customTableName = 'oracle-custom';
+    private $customTableName = 'oracle-custom';
 
     private $idTable;
 
@@ -40,12 +38,11 @@ class Oracle implements Serializable
         'Promo set for Gatherer'
     ];
 
-    public function __construct($dbName, DOMDocument $doc)
+    public function __construct(string $dbName, ?DOMDocument $doc = null)
     {
         $this->dbName = $dbName;
         
         $this->doc = $doc;
-        $this->dom = new DOMHelper();
         
         $this->idTable = null;
         $this->xmlTable = null;
@@ -275,7 +272,7 @@ class Oracle implements Serializable
         $xmlTable = $this->getXMLTable();
         $xml = $xmlTable->getXMLListByNameList($nameList);
         $xml = implode('', $xml);
-        $fragment = $this->dom->parse($xml, $dataDoc);
+        $fragment = $this->dom()->parse($xml, $dataDoc);
         if (is_array($stockList)) {
             foreach ($fragment->childNodes as $cardNode) {
                 if ($cardNode->nodeType === XML_ELEMENT_NODE) {
@@ -303,7 +300,7 @@ class Oracle implements Serializable
             $name
         ])) {
             $xml = implode('', $xml);
-            if ($fragment = $this->dom->parse($xml, $dataDoc)) {
+            if ($fragment = $this->dom()->parse($xml, $dataDoc)) {
                 $ret = $fragment->removeChild($fragment->firstChild);
             }
         }
@@ -323,7 +320,7 @@ class Oracle implements Serializable
         $xmlTable = $this->getXMLTable();
         $xml = $xmlTable->getXMLListByNameList($nameList);
         $xml = implode('', $xml);
-        $fragment = $this->dom->parse($xml, $dataDoc);
+        $fragment = $this->dom()->parse($xml, $dataDoc);
         while ($fragment->hasChildNodes()) {
             $node = $fragment->removeChild($fragment->firstChild);
             $ret[$node->getAttribute('name')] = $node;
@@ -376,17 +373,18 @@ class Oracle implements Serializable
         // $name = str_replace(' & ', ' // ', $name);
         return $name;
     }
+    
+    private function dom() : DOMHelper {
+        return new DOMHelper();
+    }
 
     public function serialize()
     {
-        return serialize([
-            'db' => $this->dbName
-        ]);
+        return $this->dbName;
     }
 
     public function unserialize($data)
     {
-        $data = unserialize($data);
-        $this->__construct($data['db'], new DOMDocument());
+        $this->__construct($data);
     }
 }

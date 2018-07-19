@@ -1,0 +1,12 @@
+<?php
+namespace Slothsoft\MTG\Oracle\Work;
+
+
+class Start extends AbstractOracleWork
+{
+    protected function work(): void
+    {
+        $this->log('Initializing...');
+    }
+}
+

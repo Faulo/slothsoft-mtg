@@ -19,7 +19,7 @@ abstract class OracleTable implements Serializable
         $this->dbName = $dbName;
         $this->tableName = $tableName;
         $this->dbmsTable = Manager::getTable($dbName, $tableName);
-        // $this->init();
+        $this->init();
     }
 
     public function init()

@@ -80,57 +80,43 @@
 	</xsl:template>
 
 	<xsl:template name="sites.head">
-		<head>
-			<title>
-				<xsl:for-each select="$rootPage/ancestor-or-self::*[@title]">
-					<xsl:sort select="position()" order="descending" />
-					<xsl:if test="position() &gt; 1">
-						<xsl:text> - </xsl:text>
-					</xsl:if>
-					<span data-dict=".">
-						<xsl:value-of select="@title" />
-					</span>
-				</xsl:for-each>
-			</title>
-			<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
-			<template id="imageCache-info">
-				<div class="imageCache-info">
-					<u>Image Cache</u>
-					<div>
-						<code>
-							<span data-imageCache-info="finishedRequests">-</span>
-							/
-							<span data-imageCache-info="totalRequests">-</span>
-						</code>
-					</div>
-					<!--<div>Image lookups: <code data-imageCache-info="imageLookups">-</code></div> -->
-					<div>
-						<small>
-							<xsl:text>new: </xsl:text>
-							<code data-imageCache-info="newImages">-</code>
-						</small>
-					</div>
-					<div>
-						<small>
-							<xsl:text>unchanged: </xsl:text>
-							<code data-imageCache-info="unchangedImages">-</code>
-						</small>
-					</div>
-					<div>
-						<small>
-							<xsl:text>deleted: </xsl:text>
-							<code data-imageCache-info="deletedImages">-</code>
-						</small>
-					</div>
-					<div>
-						<small>
-							<xsl:text>errors: </xsl:text>
-							<code data-imageCache-info="errors">-</code>
-						</small>
-					</div>
+		<template id="imageCache-info">
+			<div class="imageCache-info">
+				<u>Image Cache</u>
+				<div>
+					<code>
+						<span data-imageCache-info="finishedRequests">-</span>
+						/
+						<span data-imageCache-info="totalRequests">-</span>
+					</code>
 				</div>
-			</template>
-		</head>
+				<!--<div>Image lookups: <code data-imageCache-info="imageLookups">-</code></div> -->
+				<div>
+					<small>
+						<xsl:text>new: </xsl:text>
+						<code data-imageCache-info="newImages">-</code>
+					</small>
+				</div>
+				<div>
+					<small>
+						<xsl:text>unchanged: </xsl:text>
+						<code data-imageCache-info="unchangedImages">-</code>
+					</small>
+				</div>
+				<div>
+					<small>
+						<xsl:text>deleted: </xsl:text>
+						<code data-imageCache-info="deletedImages">-</code>
+					</small>
+				</div>
+				<div>
+					<small>
+						<xsl:text>errors: </xsl:text>
+						<code data-imageCache-info="errors">-</code>
+					</small>
+				</div>
+			</div>
+		</template>
 	</xsl:template>
 
 	<xsl:template name="sites.navi">

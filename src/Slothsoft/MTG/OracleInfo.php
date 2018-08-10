@@ -21,7 +21,7 @@ class OracleInfo
 
     const URL_LEGALITY = 'http://gatherer.wizards.com/Pages/Card/Printings.aspx?multiverseid=%s';
 
-    const URL_TEMPLATE_ORACLE = 'http://dende/getTemplate.php/mtg/card-gatherer';
+    const URL_TEMPLATE_ORACLE = 'farah://slothsoft@mtg/xsl/card-gatherer';
 
     const URL_SET = 'http://magiccards.info/%s/en.html';
 
@@ -705,6 +705,8 @@ class OracleInfo
                     foreach ($cardNode->childNodes as $node) {
                         $ret[$node->tagName] = $node->textContent;
                     }
+                } else {
+                    trigger_error('Could not transform Oracle URL: ' . $url);
                 }
             } else {
                 trigger_error('Could not load Oracle URL: ' . $url);
@@ -718,7 +720,10 @@ class OracleInfo
         if (self::$_oracleXSLT === null) {
             self::$_oracleXSLT = new XSLTProcessor();
             self::$_oracleXSLT->registerPHPFunctions();
-            self::$_oracleXSLT->importStylesheet(self::domHelper()->load(self::URL_TEMPLATE_ORACLE));
+            $success = self::$_oracleXSLT->importStylesheet(self::domHelper()->load(self::URL_TEMPLATE_ORACLE));
+            if (!$success) {
+                throw new Exception('Failed to load template: ' . self::URL_TEMPLATE_ORACLE);
+            }
         }
     }
 

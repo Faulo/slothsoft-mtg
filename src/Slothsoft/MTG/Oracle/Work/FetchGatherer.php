@@ -2,6 +2,7 @@
 namespace Slothsoft\MTG\Oracle\Work;
 
 use Slothsoft\MTG\Oracle\GathererDownloader;
+use Exception;
 
 class FetchGatherer extends AbstractOracleWork
 {
@@ -15,30 +16,36 @@ class FetchGatherer extends AbstractOracleWork
         $this->log(sprintf('Fetching "%s"...', $setName));
         
         $cardList = [];
-        foreach ($downloader->getCardsBySet($setName) as $cardId => $card) {
-            $type = $card->getTypeName();
-            if (in_array($type, [
-                'Token',
-                'Emblem',
-                'Plane',
-                'Scheme',
-                'Vanguard',
-                'Phenomenon'
-            ])) {
-                continue;
+        foreach ($downloader->getCardIdsBySetName($setName) as $cardId) {
+            try {
+                $card = $downloader->getCardById($cardId);
+                
+                $type = $card->getTypeName();
+                if (in_array($type, [
+                    'Token',
+                    'Emblem',
+                    'Plane',
+                    'Scheme',
+                    'Vanguard',
+                    'Phenomenon'
+                ])) {
+                    continue;
+                }
+                if ($type === 'Other') {
+                    $this->log(sprintf('Will not import non-card #%s: %s (%s)', $cardId, $card->getName(), $card->getType()), true);
+                    continue;
+                }
+                
+                $number = $card->getSetName() . '-' . $card->getSetNumber();
+                
+                if (isset($cardList[$number])) {
+                    continue;
+                }
+                
+                $cardList[$number] = $card;
+            } catch(Exception $e) {
+                $this->log($e->getMessage(), true);
             }
-            if ($type === 'Other') {
-                $this->log(sprintf('Will not import non-card #%s: %s (%s)', $cardId, $card->getName(), $card->getType()), true);
-                continue;
-            }
-            
-            $number = $card->getSetName() . '-' . $card->getSetNumber();
-            
-            if (isset($cardList[$number])) {
-                continue;
-            }
-            
-            $cardList[$number] = $card;
         }
         ksort($cardList, SORT_NATURAL);
         

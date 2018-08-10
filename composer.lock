@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58b37cff94b6c9a0484cad6fad09f63d",
+    "content-hash": "7c6cb65934b66d24192d76cf8182947c",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -467,17 +467,17 @@
         },
         {
             "name": "slothsoft/blob",
-            "version": "dev-develop",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-blob",
-                "reference": "b444a93c62482a426503abf2f84884d05ce79694",
+                "reference": "d6515ed51ad57580a71f098a715f59fe7978c3a0",
                 "shasum": null
             },
             "require": {
                 "php": "^7.2",
-                "slothsoft/core": "dev-develop",
-                "slothsoft/w3c": "dev-develop"
+                "slothsoft/core": "^1.0",
+                "slothsoft/w3c": "^1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.5"
@@ -516,18 +516,18 @@
         },
         {
             "name": "slothsoft/chat",
-            "version": "dev-develop",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-chat",
-                "reference": "7163c68dca0a91b912aafce945fff573da673655",
+                "reference": "5c0a8d0aa3e7cc01ee006a0ba8a939b494eec0d9",
                 "shasum": null
             },
             "require": {
                 "php": "^7.2",
-                "slothsoft/core": "dev-develop",
-                "slothsoft/farah": "dev-develop",
-                "slothsoft/sse": "dev-develop"
+                "slothsoft/core": "^1.0",
+                "slothsoft/farah": "^1.0",
+                "slothsoft/sse": "^1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.5"
@@ -567,18 +567,18 @@
         },
         {
             "name": "slothsoft/core",
-            "version": "dev-develop",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-core",
-                "reference": "fb866c9ce8634523fa10c48707db55bdc7f6c033",
+                "reference": "ea9948c4580f0b39e31998bf39b1c5b62fce8b16",
                 "shasum": null
             },
             "require": {
                 "guzzlehttp/psr7": "^1.4",
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
-                "slothsoft/w3c": "dev-develop"
+                "slothsoft/w3c": "^1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.5"
@@ -617,11 +617,11 @@
         },
         {
             "name": "slothsoft/farah",
-            "version": "dev-develop",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-farah",
-                "reference": "3c29854e0388ef0c9027972ec0b085dc7e43af8c",
+                "reference": "6ea7743f64f4a61a8673c428c35c5b67044adbab",
                 "shasum": null
             },
             "require": {
@@ -634,8 +634,8 @@
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0",
                 "psr/log": "^1.0",
-                "slothsoft/blob": "dev-develop",
-                "slothsoft/core": "dev-develop"
+                "slothsoft/blob": "^1.0",
+                "slothsoft/core": "^1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.5"
@@ -683,18 +683,18 @@
         },
         {
             "name": "slothsoft/sse",
-            "version": "dev-develop",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-sse",
-                "reference": "4839f5bc1c6f4873c3b247d2995f6422ed8a8227",
+                "reference": "d7a524d9ff7582ec3b11936a480f0e05e121e3cb",
                 "shasum": null
             },
             "require": {
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
-                "slothsoft/core": "dev-develop",
-                "slothsoft/farah": "dev-develop"
+                "slothsoft/core": "^1.0",
+                "slothsoft/farah": "^1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.5"
@@ -734,11 +734,11 @@
         },
         {
             "name": "slothsoft/w3c",
-            "version": "dev-develop",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-w3c",
-                "reference": "7e99fd45d055a22bfb7ca8953d0afe53263f2bf2",
+                "reference": "dbb26add0a11f3dc1e3ac6a034c8ce3de8622ad5",
                 "shasum": null
             },
             "require": {
@@ -2240,14 +2240,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "slothsoft/chat": 20,
-        "slothsoft/core": 20,
-        "slothsoft/farah": 20,
-        "slothsoft/w3c": 20
-    },
-    "prefer-stable": true,
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.2"

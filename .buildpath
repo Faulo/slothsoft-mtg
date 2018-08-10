@@ -50,7 +50,7 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-farah"/>
+	
 	<buildpathentry kind="src" path="vendor/guzzlehttp/promises/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -92,7 +92,7 @@
 			<attribute name="composer" value="source"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-core"/>
+	
 	<buildpathentry kind="src" path="vendor/phpdocumentor/type-resolver/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -128,7 +128,7 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-w3c"/>
+	
 	<buildpathentry kind="src" path="vendor/phpunit/phpunit-mock-objects/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -149,7 +149,7 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-chat"/>
+	
 	<buildpathentry kind="src" path="vendor/guzzlehttp/psr7/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -210,4 +210,4 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-</buildpath>
+<buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-chat"/><buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-core"/><buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-farah"/><buildpathentry combineaccessrules="false" kind="prj" path="/slothsoft-w3c"/></buildpath>

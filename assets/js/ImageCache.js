@@ -9,7 +9,7 @@ function ImageCache(name) {
 		this.lookupResults = {};
 		
 		this.worker = new SharedWorker(
-			"/getScript.php/mtg/ImageCache.Worker",
+			"/slothsoft@mtg/js/ImageCache.Worker",
 			"ImageCache",
 			{ type : "classic" }
 		);

@@ -86,7 +86,7 @@
 				<div>
 					<code>
 						<span data-imageCache-info="finishedRequests">-</span>
-						/
+						<xsl:text>/</xsl:text>
 						<span data-imageCache-info="totalRequests">-</span>
 					</code>
 				</div>
@@ -616,7 +616,7 @@
 		<xsl:param name="key" />
 		<xsl:param name="color" />
 		<label>
-			<img src="/slothsoft@mtg/images/color.{$color}" alt="{$color}" />
+			<img data-src="/slothsoft@mtg/images/color.{$color}" alt="{$color}" />
 			<input type="checkbox" name="{$key}[cost][]" value="{$color}">
 				<xsl:if test="contains($search/@query-cost, $color)">
 					<xsl:attribute name="checked">checked</xsl:attribute>

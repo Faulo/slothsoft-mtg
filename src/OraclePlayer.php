@@ -110,14 +110,14 @@ class OraclePlayer {
             $managedStockList = [];
             foreach ($this->managedDeckList as $deck) {
                 $cardList = $deck->getStockNameList();
-                foreach ($cardList as $name => $card) {
+                foreach (arra_keys($cardList) as $name) {
                     if (! isset($managedStockList[$name])) {
                         $managedStockList[$name] = 0;
                     }
                     $managedStockList[$name] += $deck->getStock($name);
                 }
                 $cardList = $deck->getSideboardNameList();
-                foreach ($cardList as $name => $card) {
+                foreach (arra_keys($cardList) as $name) {
                     if (! isset($managedStockList[$name])) {
                         $managedStockList[$name] = 0;
                     }

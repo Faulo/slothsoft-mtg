@@ -46,6 +46,7 @@ class OracleCardImage {
     public function getFile($recreate = false, $url = null) {
         $ret = null;
         $fileDir = $this->imageDir;
+        $match = null;
         switch (true) {
             case preg_match('/^(\d+)$/', $this->setNo, $match):
                 $fileName = sprintf('%s.%03d.png', $this->setAbbr, $match[1]);

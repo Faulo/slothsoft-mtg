@@ -132,7 +132,7 @@ class OracleDeck {
         if ($importData = $request->getInputValue('import-data')) {
             $importList = explode(PHP_EOL, $importData);
             foreach ($importList as $line) {
-                $search = [];
+                $match = [];
                 if (preg_match('/^(-?\d+)(.+)/', $line, $match)) {
                     $stock = (int) $match[1];
                     $query = trim($match[2]);
@@ -360,7 +360,7 @@ class OracleDeck {
                 $sortList[$name] = $node->getAttribute('sort');
             }
             asort($sortList);
-            foreach ($sortList as $name => $sort) {
+            foreach (arra_keys($sortList) as $name) {
                 $node = $nodeList[$name];
                 $node->setAttribute('stock', $this->getStock($name));
                 $retFragment->appendChild($node);
@@ -382,7 +382,7 @@ class OracleDeck {
                 $sortList[$name] = $node->getAttribute('sort');
             }
             asort($sortList);
-            foreach ($sortList as $name => $sort) {
+            foreach (arra_keys($sortList) as $name) {
                 $node = $nodeList[$name];
                 $node->setAttribute('stock', $this->getSideboard($name));
                 $retFragment->appendChild($node);
@@ -478,9 +478,5 @@ class OracleDeck {
         $this->ownerPlayer->save();
     }
 
-    public function upgrade() {
-        foreach ($this->stockList as $name => $stock) {
-            // $this->addCard($name, $stock);
-        }
-    }
+    public function upgrade() {}
 }

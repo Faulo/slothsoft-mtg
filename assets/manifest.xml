@@ -46,7 +46,7 @@
 		<fragment name="prices"/>
 		<fragment name="sets"/>
 		
-		<custom-asset name="oracle" executable-builder="Slothsoft\MTG\Assets\OracleBuilder"/>
+		<custom-asset name="oracle" executable-builder="Slothsoft\MTG\Assets\OracleBuilder" parameter-filter="Slothsoft\MTG\Assets\OracleParameterFilter"/>
 		<custom-asset name="work" executable-builder="Slothsoft\MTG\Assets\WorkBuilder"/>
 	</fragment>
 

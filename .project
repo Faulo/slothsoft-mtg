@@ -30,11 +30,4 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.php.core.PHPNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>vendor/slothsoft</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

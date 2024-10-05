@@ -796,7 +796,7 @@ class OracleInfo {
     }
 
     public static function getCardImageName(array &$card) {
-        return sprintf('%s-%03d.%s', $card['expansion_abbr'], $card['expansion_index'], self::EXTENSION_CARDIMAGE);
+        return strtolower(sprintf('%s-%03d.%s', $card['expansion_abbr'], $card['expansion_index'], self::EXTENSION_CARDIMAGE));
     }
 
     public static function getImageURL(array &$card) {
@@ -812,18 +812,18 @@ class OracleInfo {
     }
 
     public static function getImagePath(array &$card) {
-        return sprintf('%s/images/set-%s/%s', ServerEnvironment::getDataDirectory(), $card['expansion_abbr'], self::getCardImageName($card));
+        return sprintf('%s/images/set-%s/%s', ServerEnvironment::getDataDirectory(), strtolower($card['expansion_abbr']), self::getCardImageName($card));
     }
 
     public static function getRarityURL(array &$card) {
-        return sprintf('/getData.php/mtg/image-rarity?expansion_abbr=%s&rarity=%s', $card['expansion_abbr'], $card['rarity']);
+        return sprintf('/getData.php/mtg/image-rarity?expansion_abbr=%s&rarity=%s', strtolower($card['expansion_abbr']), strtolower($card['rarity']));
     }
 
     public static function getRarityPath(array &$card) {
-        return sprintf('%s/images/set-%s/%s-%s.png', ServerEnvironment::getDataDirectory(), $card['expansion_abbr'], $card['expansion_abbr'], substr(strtolower($card['rarity']), 0, 1));
+        return sprintf('%s/images/set-%s/%s-%s.png', ServerEnvironment::getDataDirectory(), strtolower($card['expansion_abbr']), strtolower($card['expansion_abbr']), substr(strtolower($card['rarity']), 0, 1));
     }
 
     public static function getColorPath(array &$card) {
-        return sprintf('%s/mtg/images/color.%s.png', ServerEnvironment::getRootDirectory(), $card['color']);
+        return sprintf('%s/mtg/images/color.%s.png', ServerEnvironment::getRootDirectory(), strtolower($card['color']));
     }
 }

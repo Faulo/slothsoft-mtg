@@ -3,6 +3,8 @@
 	<resource-directory name="css" type="text/css"/>
 	<resource-directory name="js" type="application/javascript"/>
 	<resource-directory name="xsl" type="application/xslt+xml"/>
+	
+	<resource-directory name="images" type="image/png"/>
 
 	<resource-directory name="dictionary" type="application/xml"/>
 	<directory name="sitemap">

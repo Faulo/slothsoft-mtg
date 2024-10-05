@@ -7,15 +7,11 @@
 	<resource-directory name="images" type="image/png"/>
 
 	<resource-directory name="dictionary" type="application/xml"/>
-	<directory name="sitemap">
-		<resource use="template" name="template" type="application/xslt+xml"/>
-	</directory>
 
 	<directory name="static">
 		<resource name="bill" path="bill.csv" type="text/csv">
 			<options del="&#9;" output="thead"/>
 		</resource>
-		<resource name="sites.players" path="sites.players.xml" type="application/xml"/>
 		<resource name="news" path="news.xhtml" type="application/xhtml+xml"/>
 		<resource name="samlWidget" path="samlWidget.xhtml" type="application/xhtml+xml"/>
 		<resource name="prerelease" path="prerelease.xml" type="application/xml"/>
@@ -58,7 +54,7 @@
 			<use-template ref="/xsl/_search"/>
 			<use-document ref="/data/oracle"/>
 		</fragment>
-		
+		<!-- 
 		<fragment name="index">
 			<import ref="/api/default"/>
 			<use-template ref="/xsl/_index"/>
@@ -157,6 +153,7 @@
 			<use-template ref="/xsl/_events"/>
 			<use-document ref="/static/events" name="events"/>
 		</fragment>
+		 -->
 	</fragment>
 
 	<fragment name="api">
@@ -166,11 +163,6 @@
 			<import ref="//slothsoft@core/api/HTML5"/>
 			<import ref="//slothsoft@core/api/XPath"/>
 			<import ref="/api/ImageCache"/>
-		</fragment>
-		<fragment name="dci.timeline.graph">
-			<use-document ref="/data/dci" name="dci"/>
-			<use-document ref="/data/sets" name="sets"/>
-			<use-template ref="/xsl/_dci.timeline.graph"/>
 		</fragment>
 		<fragment name="ImageCache">
 			<link-script ref="/js/ImageCache"/>

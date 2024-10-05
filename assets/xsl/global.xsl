@@ -450,7 +450,7 @@
 		<xsl:param name="card" select="." />
 		<xsl:param name="open" select="false()" />
 		<xsl:for-each select="$card">
-			<img alt="{@name}&#10;{@type}&#10;{@description}" data-src="{@href-image}">
+			<img alt="{@name}&#10;{@type}&#10;{@description}" data-src="/slothsoft@{substring-after(@href-image, '/getData.php/')}">
 				<!-- data-src="/getData.php/mtg/image-card?name={mtg:encode-uri(@name)}" <xsl:if test="$open or true()"> <xsl:attribute 
 					name="src"><xsl:value-of select="@href-image"/></xsl:attribute> </xsl:if> -->
 				<!-- <xsl:attribute name="data-src"><xsl:value-of select="@href-image"/></xsl:attribute> <xsl:attribute name="onmouseenter">if 
@@ -500,7 +500,7 @@
 		<xsl:for-each select="$card">
 			<nav class="clicked-show">
 				<span class="image">
-					<img data-src="{@href-rarity}" alt="{substring(@rarity, 1, 1)}" title="{set} - {@rarity}" />
+					<img data-src="/slothsoft@{substring-after(@href-rarity, '/getData.php/')}" alt="{substring(@rarity, 1, 1)}" title="{set} - {@rarity}" />
 				</span>
 				<xsl:choose>
 					<xsl:when test="@href-set">

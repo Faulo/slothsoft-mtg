@@ -47,6 +47,8 @@
 		<custom-asset name="oracle" executable-builder="Slothsoft\MTG\Assets\OracleBuilder" parameter-filter="Slothsoft\MTG\Assets\OracleParameterFilter"/>
 		<custom-asset name="work" executable-builder="Slothsoft\MTG\Assets\WorkBuilder"/>
 	</fragment>
+	
+	<custom-asset name="image-card" executable-builder="Slothsoft\MTG\Assets\CardImageBuilder" parameter-filter="Slothsoft\MTG\Assets\CardImageParameterFilter"/>
 
 	<fragment name="html">
 		<fragment name="search">

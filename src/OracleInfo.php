@@ -8,6 +8,7 @@ use Slothsoft\Core\Storage;
 use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
 use Exception;
+use SplFileInfo;
 use XSLTProcessor;
 
 class OracleInfo {
@@ -511,6 +512,7 @@ class OracleInfo {
         if (strlen($costText) === 1) {
             $costText = sprintf('{%s}', $costText);
         }
+        $matchList = null;
         if (preg_match_all('/{([^}]+)}/', $costText, $matchList)) {
             foreach ($matchList[1] as $match) {
                 $match = explode('/', $match);
@@ -542,6 +544,7 @@ class OracleInfo {
     public static function getCardCMC(array &$card) {
         $ret = 0;
         if (isset($card['cost'])) {
+            $matchList = null;
             if (preg_match_all('/{([^}]+)}/', $card['cost'], $matchList)) {
                 foreach ($matchList[1] as $match) {
                     if (preg_match('/^\d+$/', $match)) {
@@ -644,6 +647,7 @@ class OracleInfo {
             '”',
             '“'
         ], '', $name);
+        $match = null;
         if (preg_match('/^(.+)\((.+\/.+)\)/', $name, $match)) {
             $name = $match[1];
         }
@@ -809,7 +813,13 @@ class OracleInfo {
     }
 
     public static function getImagePath(array &$card) {
-        return sprintf('%smod/mtg/res/images/set-%s/%s', ServerEnvironment::getRootDirectory(), $card['expansion_abbr'], self::getCardImageName($card));
+        return sprintf('%s/images/set-%s/%s', ServerEnvironment::getDataDirectory(), $card['expansion_abbr'], self::getCardImageName($card));
+    }
+
+    public static function getImageFile(array &$card): SplFileInfo {
+        $path = self::getImagePath($card);
+
+        return new SplFileInfo($path);
     }
 
     public static function getRarityURL(array &$card) {

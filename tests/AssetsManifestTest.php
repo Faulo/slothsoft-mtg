@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+namespace Slothsoft\MTG\Tests;
 
 use Slothsoft\Farah\ModuleTests\AbstractXmlManifestTest;
 
@@ -9,5 +10,5 @@ class AssetsManifestTest extends AbstractXmlManifestTest
     {
         return dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets';
     }
-    
+
 }

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+namespace Slothsoft\MTG\Tests;
 
 use Slothsoft\Farah\Configuration\AssetConfigurationField;
 use Slothsoft\Farah\ModuleTests\AbstractSitemapTest;

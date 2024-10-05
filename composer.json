@@ -19,12 +19,12 @@
 		"phpunit/phpunit" : "^6.5"
 	},
 	"autoload" : {
-		"psr-0" : {
-			"Slothsoft\\MTG\\" : "src/"
-		},
 		"files" : [
 			"src/registerModule.php"
-		]
+		],
+		"psr-4" : {
+			"Slothsoft\\MTG\\" : "src/"
+		}
 	},
 	"keywords" : [
 		"slothsoft",
@@ -32,9 +32,9 @@
 		"docs"
 	],
 	"autoload-dev" : {
-		"classmap" : [
-			"tests/"
-		]
+		"psr-4" : {
+			"Slothsoft\\MTG\\Tests\\" : "tests"
+		}
 	},
 	"homepage" : "http://farah.slothsoft.net/modules/mtg"
 }

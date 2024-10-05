@@ -821,6 +821,6 @@ class OracleInfo {
     }
 
     public static function getColorPath(array &$card) {
-        return sprintf('%smod/mtg/res/images/color.%s.png', ServerEnvironment::getRootDirectory(), $card['color']);
+        return sprintf('%s/mtg/images/color.%s.png', ServerEnvironment::getRootDirectory(), $card['color']);
     }
 }

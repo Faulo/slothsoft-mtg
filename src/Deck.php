@@ -108,7 +108,7 @@ class Deck {
         if ($importData = $request->getInputValue('import-data')) {
             $importList = explode(PHP_EOL, $importData);
             foreach ($importList as $line) {
-                $search = [];
+                $match = [];
                 if (preg_match('/(\d+)(.+)/', $line, $match)) {
                     $stock = (int) $match[1];
                     $query = trim($match[2]);
@@ -351,7 +351,7 @@ class Deck {
 
     public function upgrade() {
         $cardList = $this->getCardList();
-        foreach ($cardList as $name => $card) {
+        foreach (array_keys($cardList) as $name) {
             $this->addCard($name, $this->getStock($name));
         }
     }

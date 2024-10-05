@@ -81,13 +81,13 @@ class Player {
         if ($this->repositoryDeck) {
             $repositoryStockList = [];
             $cardList = $this->repositoryDeck->getCardList();
-            foreach ($cardList as $name => $card) {
+            foreach (arra_keys($cardList) as $name) {
                 $repositoryStockList[$name] = $this->repositoryDeck->getStock($name);
             }
             $managedStockList = [];
             foreach ($this->managedDeckList as $deck) {
                 $cardList = $deck->getCardList();
-                foreach ($cardList as $name => $card) {
+                foreach (arra_keys($cardList) as $name) {
                     if (! isset($managedStockList[$name])) {
                         $managedStockList[$name] = 0;
                     }
@@ -114,17 +114,17 @@ class Player {
         if ($this->repositoryDeck and $this->unusedDeck) {
             $repositoryStockList = [];
             $cardList = $this->unusedDeck->getCardList();
-            foreach ($cardList as $name => $card) {
+            foreach (arra_keys($cardList) as $name) {
                 $repositoryStockList[$name] = 0;
             }
             $cardList = $this->repositoryDeck->getCardList();
             // my_dump(count($cardList));
-            foreach ($cardList as $name => $card) {
+            foreach (arra_keys($cardList) as $name) {
                 $repositoryStockList[$name] = $this->repositoryDeck->getStock($name);
             }
             foreach ($this->managedDeckList as $deck) {
                 $cardList = $deck->getCardList();
-                foreach ($cardList as $name => $card) {
+                foreach (arra_keys($cardList) as $name) {
                     if (! isset($repositoryStockList[$name])) {
                         $repositoryStockList[$name] = 0;
                     }

@@ -29,15 +29,15 @@ class Card {
     }
 
     public function getSetName(): string {
-        return $data['expansion_name'] ?? '';
+        return $this->data['expansion_name'] ?? '';
     }
 
     public function getSetAbbr(): string {
-        return $data['expansion_abbr'] ?? '';
+        return $this->data['expansion_abbr'] ?? '';
     }
 
     public function getSetNumber(): string {
-        return $data['expansion_number'] ?? '';
+        return $this->data['expansion_number'] ?? '';
     }
 }
 

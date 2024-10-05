@@ -67,7 +67,6 @@ class GathererDownloader {
     }
 
     private function getCardDataById(int $oracleId): array {
-        static $setNumberMap = [];
         static $setMappingList = [
             25498 => '6e',
             25492 => '6e',

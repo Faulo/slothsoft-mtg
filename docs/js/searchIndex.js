@@ -1,6 +1,26 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\CardImageBuilder",
+            "name": "CardImageBuilder",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-CardImageBuilder.html"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\CardImageBuilder\u003A\u003AbuildExecutableStrategies\u0028\u0029",
+            "name": "buildExecutableStrategies",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-CardImageBuilder.html#method_buildExecutableStrategies"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\CardImageParameterFilter",
+            "name": "CardImageParameterFilter",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-CardImageParameterFilter.html"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\CardImageParameterFilter\u003A\u003AcreateValueSanitizers\u0028\u0029",
+            "name": "createValueSanitizers",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-CardImageParameterFilter.html#method_createValueSanitizers"
+        },                {
             "fqsen": "\\Slothsoft\\MTG\\Assets\\OracleBuilder",
             "name": "OracleBuilder",
             "summary": "",
@@ -10,6 +30,36 @@ Search.appendIndex(
             "name": "buildExecutableStrategies",
             "summary": "",
             "url": "classes/Slothsoft-MTG-Assets-OracleBuilder.html#method_buildExecutableStrategies"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\OracleParameterFilter",
+            "name": "OracleParameterFilter",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-OracleParameterFilter.html"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\OracleParameterFilter\u003A\u003AcreateValueSanitizers\u0028\u0029",
+            "name": "createValueSanitizers",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-OracleParameterFilter.html#method_createValueSanitizers"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\RarityImageBuilder",
+            "name": "RarityImageBuilder",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-RarityImageBuilder.html"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\RarityImageBuilder\u003A\u003AbuildExecutableStrategies\u0028\u0029",
+            "name": "buildExecutableStrategies",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-RarityImageBuilder.html#method_buildExecutableStrategies"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\RarityImageParameterFilter",
+            "name": "RarityImageParameterFilter",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-RarityImageParameterFilter.html"
+        },                {
+            "fqsen": "\\Slothsoft\\MTG\\Assets\\RarityImageParameterFilter\u003A\u003AcreateValueSanitizers\u0028\u0029",
+            "name": "createValueSanitizers",
+            "summary": "",
+            "url": "classes/Slothsoft-MTG-Assets-RarityImageParameterFilter.html#method_createValueSanitizers"
         },                {
             "fqsen": "\\Slothsoft\\MTG\\Assets\\WorkBuilder",
             "name": "WorkBuilder",

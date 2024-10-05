@@ -189,11 +189,11 @@ class Oracle implements Serializable {
         unset($val);
         // my_dump([$stock, $query]);
         $retNode = $dataDoc->createElement('search');
-        $retNode->setAttribute('query', (strlen($query['name']) or is_array($inputQuery)) ? $query['name'] : $inputQuery);
+        $retNode->setAttribute('query', (strlen($query['name']) or is_array($inputQuery)) ? (string) $query['name'] : (string) $inputQuery);
         foreach ($query as $key => $val) {
-            $retNode->setAttribute('query-' . $key, $val);
+            $retNode->setAttribute('query-' . $key, (string) $val);
         }
-        $retNode->setAttribute('stock', $stock);
+        $retNode->setAttribute('stock', (string) $stock);
         // my_dump($query);
         /*
          * $cardList = implode('', $query) === $query['name']
@@ -261,7 +261,7 @@ class Oracle implements Serializable {
                 if ($cardNode->nodeType === XML_ELEMENT_NODE) {
                     $name = $cardNode->getAttribute('name');
                     $stock = isset($stockList[$name]) ? $stockList[$name] : 0;
-                    $cardNode->setAttribute('stock', $stock);
+                    $cardNode->setAttribute('stock', (string) $stock);
                     if ($stock > 0) {
                         $cardNode->setAttribute('owned', '');
                     }

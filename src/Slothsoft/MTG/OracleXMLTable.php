@@ -4,11 +4,9 @@ namespace Slothsoft\MTG;
 
 use Exception;
 
-class OracleXMLTable extends OracleTable
-{
+class OracleXMLTable extends OracleTable {
 
-    protected function install()
-    {
+    protected function install() {
         $sqlCols = [
             'id' => 'bigint UNSIGNED NOT NULL AUTO_INCREMENT',
             'name' => 'varchar(150) NOT NULL',
@@ -26,8 +24,7 @@ class OracleXMLTable extends OracleTable
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function searchCardByName($name)
-    {
+    public function searchCardByName($name) {
         $ret = [];
         if (strlen($name)) {
             $name = explode(' ', $name);
@@ -51,8 +48,7 @@ class OracleXMLTable extends OracleTable
         return $ret;
     }
 
-    public function searchNameByName($name)
-    {
+    public function searchNameByName($name) {
         $ret = [];
         if (strlen($name)) {
             $name = explode(' ', $name);
@@ -70,8 +66,7 @@ class OracleXMLTable extends OracleTable
         return $ret;
     }
 
-    public function getCardListByNameList(array $nameList)
-    {
+    public function getCardListByNameList(array $nameList) {
         $ret = [];
         $resList = $this->dbmsTable->select([
             'name',
@@ -85,15 +80,13 @@ class OracleXMLTable extends OracleTable
         return $ret;
     }
 
-    public function getXMLListByNameList(array $nameList)
-    {
+    public function getXMLListByNameList(array $nameList) {
         return $this->dbmsTable->select('xml', [
             'name' => $nameList
         ]);
     }
 
-    public function createRow(array $data)
-    {
+    public function createRow(array $data) {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
         } catch (Exception $e) {
@@ -102,8 +95,7 @@ class OracleXMLTable extends OracleTable
         return $ret;
     }
 
-    public function createCard($name, $xml)
-    {
+    public function createCard($name, $xml) {
         $data = [];
         $data['name'] = $name;
         $data['xml'] = $xml;

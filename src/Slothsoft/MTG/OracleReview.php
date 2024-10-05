@@ -4,8 +4,7 @@ namespace Slothsoft\MTG;
 
 use DOMDocument;
 
-class OracleReview
-{
+class OracleReview {
 
     protected $file;
 
@@ -16,13 +15,12 @@ class OracleReview
     protected $name;
 
     // protected $dataChanged = false;
-    public function __construct($reviewFile, Oracle $oracle)
-    {
+    public function __construct($reviewFile, Oracle $oracle) {
         $this->file = $reviewFile;
         $this->oracle = $oracle;
         $this->data = is_readable($this->file) ? json_decode(file_get_contents($this->file), true) : null;
         $this->name = pathinfo($this->file, PATHINFO_FILENAME);
-        
+
         if (! $this->data) {
             $this->data = [];
             // $this->updateCard('Kaladesh', 'Mind Rot', 2, '?!');
@@ -31,8 +29,7 @@ class OracleReview
         }
     }
 
-    public function updateData(array $setList)
-    {
+    public function updateData(array $setList) {
         $ret = 0;
         foreach ($setList as $setName => $cardList) {
             foreach ($cardList as $cardName => $card) {
@@ -44,8 +41,7 @@ class OracleReview
         return $ret;
     }
 
-    public function updateCard($setName, $cardName, $rating, $comment)
-    {
+    public function updateCard($setName, $cardName, $rating, $comment) {
         $ret = false;
         $rating = (int) $rating;
         $comment = (string) $comment;
@@ -69,49 +65,45 @@ class OracleReview
         return $ret;
     }
 
-    public function save()
-    {
+    public function save() {
         return (bool) file_put_contents($this->file, json_encode($this->data));
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getSetList()
-    {
+    public function getSetList() {
         return array_keys($this->data);
     }
 
-    public function asNode(DOMDocument $dataDoc = null)
-    {
+    public function asNode(DOMDocument $dataDoc = null) {
         $returnDocument = $dataDoc === null;
-        
+
         if ($returnDocument) {
             $dataDoc = new DOMDocument();
         }
-        
+
         $arr = [];
         $arr['name'] = $this->name;
-        
+
         $retNode = $dataDoc->createElement('review');
         foreach ($arr as $key => $val) {
             $retNode->setAttribute($key, $val);
         }
-        
+
         foreach ($this->data as $setName => $cardList) {
             $arr = [];
             $arr['name'] = $setName;
-            
+
             $setNode = $dataDoc->createElement('set');
             foreach ($arr as $key => $val) {
                 $setNode->setAttribute($key, $val);
             }
-            
+
             foreach ($cardList as $cardName => $arr) {
                 $arr['name'] = $cardName;
-                
+
                 $cardNode = $dataDoc->createElement('card');
                 foreach ($arr as $key => $val) {
                     $cardNode->setAttribute($key, $val);
@@ -120,7 +112,7 @@ class OracleReview
             }
             $retNode->appendChild($setNode);
         }
-        
+
         if ($returnDocument) {
             $dataDoc->appendChild($retNode);
             $retNode = $dataDoc;

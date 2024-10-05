@@ -9,10 +9,9 @@ use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStra
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ProxyResultBuilder;
 
-class OracleBuilder implements ExecutableBuilderStrategyInterface
-{
-    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
-    {
+class OracleBuilder implements ExecutableBuilderStrategyInterface {
+
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         $url = $context->createUrl()->withPath('/static/oracle');
         $proxy = Module::resolveToExecutable($url);
         $resultBuilder = new ProxyResultBuilder($proxy);

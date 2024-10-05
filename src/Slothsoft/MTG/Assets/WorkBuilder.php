@@ -19,25 +19,28 @@ use Slothsoft\MTG\Oracle\Work\PreparePrices;
 use Slothsoft\MTG\Oracle\Work\PrepareXml;
 use Slothsoft\MTG\Oracle\Work\Start;
 
-class WorkBuilder implements ExecutableBuilderStrategyInterface
-{
-    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
-    {
-        $delegate = function() : ChunkWriterInterface {
+class WorkBuilder implements ExecutableBuilderStrategyInterface {
+
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
+        $delegate = function (): ChunkWriterInterface {
             $oracle = new Oracle('mtg');
-            
+
             $manager = new OracleWorkManager(8, $oracle);
-            
-            return $manager
-                ->thenDo(Start::class)
+
+            return $manager->thenDo(Start::class)
                 ->thenWait()
-                ->thenDo(PrepareCustom::class, ['imageDir' => 'todo', 'setDir' => 'todo'])
+                ->thenDo(PrepareCustom::class, [
+                'imageDir' => 'todo',
+                'setDir' => 'todo'
+            ])
                 ->thenDo(PrepareGatherer::class)
                 ->thenWait()
                 ->thenDo(PreparePrices::class)
                 ->thenWait()
                 ->thenDo(PrepareXml::class)
-                ->thenDo(PrepareImages::class, ['imageDir' => 'todo'])
+                ->thenDo(PrepareImages::class, [
+                'imageDir' => 'todo'
+            ])
                 ->thenWait()
                 ->thenDo(End::class);
         };

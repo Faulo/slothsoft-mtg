@@ -5,8 +5,7 @@ namespace Slothsoft\MTG;
 use Slothsoft\Core\IO\HTTPFile;
 use Exception;
 
-class OracleCardImage
-{
+class OracleCardImage {
 
     protected $oracle;
 
@@ -20,14 +19,13 @@ class OracleCardImage
 
     private $_convertFunction;
 
-    public function __construct(Oracle $oracle, $imageDir, $oracleId, $setAbbr, $setNo)
-    {
+    public function __construct(Oracle $oracle, $imageDir, $oracleId, $setAbbr, $setNo) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
         $this->oracleId = trim($oracleId);
         $this->setAbbr = strtolower(trim($setAbbr));
         $this->setNo = strtolower(trim($setNo));
-        
+
         if (! $this->imageDir or ! strlen($this->oracleId) or ! strlen($this->setAbbr) or ! strlen($this->setNo)) {
             throw new Exception('INVALID ARGUMENTS');
         }
@@ -41,13 +39,11 @@ class OracleCardImage
         ];
     }
 
-    public function getURL()
-    {
+    public function getURL() {
         return sprintf('/getData.php/mtg/image?id=%s&set=%s&no=%s', $this->oracleId, $this->setAbbr, $this->setNo);
     }
 
-    public function getFile($recreate = false, $url = null)
-    {
+    public function getFile($recreate = false, $url = null) {
         $ret = null;
         $fileDir = $this->imageDir;
         switch (true) {
@@ -62,7 +58,7 @@ class OracleCardImage
                 break;
         }
         $filePath = $fileDir . $fileName;
-        
+
         if ($recreate or ! file_exists($filePath)) {
             if ($url === null) {
                 $url = sprintf('http://magiccards.info/scans/en/%s/%s.jpg', $this->setAbbr, $this->setNo);

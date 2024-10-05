@@ -7,28 +7,22 @@ use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\MTG\OracleInfo;
 use Exception;
 
-class GathererDownloader
-{
-    private static function getSetCardsUrl(string $setName, int $setPage) : string {
-        return sprintf(
-            'http://gatherer.wizards.com/Pages/Search/Default.aspx?output=checklist&action=advanced&special=true&set=["%s"]&page=%d',
-            urlencode($setName),
-            $setPage
-        );
+class GathererDownloader {
+
+    private static function getSetCardsUrl(string $setName, int $setPage): string {
+        return sprintf('http://gatherer.wizards.com/Pages/Search/Default.aspx?output=checklist&action=advanced&special=true&set=["%s"]&page=%d', urlencode($setName), $setPage);
     }
-    private static function getCardDetailsUrl(int $oracleId) : string {
-        return sprintf(
-            'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%s',
-            $oracleId
-        );
+
+    private static function getCardDetailsUrl(int $oracleId): string {
+        return sprintf('http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%s', $oracleId);
     }
-    
-    public function getCardIdsBySetName(string $setName) : iterable {
+
+    public function getCardIdsBySetName(string $setName): iterable {
         $ret = [];
         for ($setPage = 0; $setPage < 10; $setPage ++) {
             $setURI = self::getSetCardsUrl($setName, $setPage);
             $newCards = false;
-            
+
             if ($xpath = Storage::loadExternalXPath($setURI, Seconds::DAY)) {
                 $nodeList = $xpath->evaluate('//html:tr[@class = "cardItem"]');
                 foreach ($nodeList as $node) {
@@ -52,12 +46,11 @@ class GathererDownloader
         }
         return array_values($ret);
     }
-    
-    private function getIdVariations(int $oracleId) : iterable
-    {
+
+    private function getIdVariations(int $oracleId): iterable {
         $ret = [];
         $ret[] = $oracleId;
-        
+
         $url = self::getCardDetailsUrl($oracleId);
         if ($xpath = Storage::loadExternalXPath($url, Seconds::YEAR)) {
             $nodeList = $xpath->evaluate('//*[@class="variationLink"]');
@@ -65,15 +58,15 @@ class GathererDownloader
                 $ret[] = (int) $node->getAttribute('id');
             }
         }
-        
+
         return array_unique($ret);
     }
-    
-    public function getCardById(int $oracleId) : Card {
+
+    public function getCardById(int $oracleId): Card {
         return new Card($this->getCardDataById($oracleId));
     }
-    private function getCardDataById(int $oracleId) : array
-    {
+
+    private function getCardDataById(int $oracleId): array {
         static $setNumberMap = [];
         static $setMappingList = [
             25498 => '6e',
@@ -151,25 +144,25 @@ class GathererDownloader
             5607,
             5601
         ];
-        
+
         $ret = [];
-        
+
         if (in_array($oracleId, $idBlackList)) {
             throw new Exception(sprintf('Oracle ID "%d" is blacklisted.', $oracleId));
         }
-        
+
         $ret['oracle_id'] = $oracleId;
-        
+
         if ($data = OracleInfo::getOracleCardData($ret)) {
             $ret += $data;
         } else {
             throw new Exception(sprintf('OracleInfo::getOracleCardData ERROR: %s', $oracleId));
         }
-        
+
         if (isset($setMappingList[$oracleId])) {
             $ret['expansion_abbr'] = $setMappingList[$oracleId];
         }
-        
+
         $ret['type'] = str_replace([
             'Summon —',
             'Eaturecray —',
@@ -184,62 +177,63 @@ class GathererDownloader
         ], 'Instant', $ret['type']);
         $ret['rarity'] = str_replace('Basic Land', 'Land', $ret['rarity']);
         $ret['image'] = OracleInfo::getOracleImageURL($ret);
-        
-//         if (OracleInfo::isCardToken($ret)) {
-//             throw new Exception(sprintf('INVALID CARD TYPE: %s', print_r($ret, true)));
-//         }
+
+        // if (OracleInfo::isCardToken($ret)) {
+        // throw new Exception(sprintf('INVALID CARD TYPE: %s', print_r($ret, true)));
+        // }
         if (! strlen($ret['name']) or ! strlen($ret['expansion_name']) or ! strlen($ret['expansion_abbr'])) {
             throw new Exception(sprintf('CARD NAME NOT FOUND: %s', OracleInfo::getOracleURL($ret)));
         }
-        
-//         $abbr = $ret['expansion_abbr'];
-//         if (! isset($setNumberMap[$abbr])) {
-//             $setNumberMap[$abbr] = $this->getCardNamesBySetAbbr($abbr);
-//         }
-        
-//         if (count($setNumberMap[$abbr])) {
-//             $no = $ret['expansion_number'];
-//             $ret['expansion_number'] = sprintf('x-%s', $ret['oracle_id']);
-//             $nameKey = OracleInfo::getNameKey($ret['name']);
-//             if (isset($setNumberMap[$abbr][$no]) and $setNumberMap[$abbr][$no] === $nameKey) {
-//                 $ret['expansion_number'] = $no;
-//                 $ret['image'] = OracleInfo::getSetImageURL($ret);
-//             } else {
-//                 foreach ($setNumberMap[$abbr] as $i => $key) {
-//                     if ($key === $nameKey) {
-//                         $ret['expansion_number'] = $i;
-//                         $ret['image'] = OracleInfo::getSetImageURL($ret);
-//                         unset($setNumberMap[$abbr][$i]);
-//                         break;
-//                     }
-//                 }
-//             }
-//         }
-        
+
+        // $abbr = $ret['expansion_abbr'];
+        // if (! isset($setNumberMap[$abbr])) {
+        // $setNumberMap[$abbr] = $this->getCardNamesBySetAbbr($abbr);
+        // }
+
+        // if (count($setNumberMap[$abbr])) {
+        // $no = $ret['expansion_number'];
+        // $ret['expansion_number'] = sprintf('x-%s', $ret['oracle_id']);
+        // $nameKey = OracleInfo::getNameKey($ret['name']);
+        // if (isset($setNumberMap[$abbr][$no]) and $setNumberMap[$abbr][$no] === $nameKey) {
+        // $ret['expansion_number'] = $no;
+        // $ret['image'] = OracleInfo::getSetImageURL($ret);
+        // } else {
+        // foreach ($setNumberMap[$abbr] as $i => $key) {
+        // if ($key === $nameKey) {
+        // $ret['expansion_number'] = $i;
+        // $ret['image'] = OracleInfo::getSetImageURL($ret);
+        // unset($setNumberMap[$abbr][$i]);
+        // break;
+        // }
+        // }
+        // }
+        // }
+
         if (! strlen($ret['expansion_number'])) {
             throw new Exception(sprintf('CARD NUMBER NOT FOUND: %s [%s] #%s', $ret['name'], OracleInfo::getNameKey($ret['name']), $oracleId), true);
         }
-        
+
         $legality = OracleInfo::getCardLegality($ret);
         if ($legality !== null) {
             $ret['legality'] = implode(PHP_EOL, $legality);
         }
         $ret['cmc'] = OracleInfo::getCardCMC($ret);
         $ret['colors'] = OracleInfo::getCardColors($ret);
-        
+
         return $ret;
     }
-    
+
     private const XPATH_SET_LIST = '//tr[@class = "even" or @class="odd"]';
-    
+
     private const XPATH_SET_CARDNUMBER = 'normalize-space(td[1])';
-    
+
     private const XPATH_SET_CARDNAME = 'normalize-space(td[2])';
-    
-    private function getCardNamesBySetAbbr(string $setAbbr) : array
-    {
+
+    private function getCardNamesBySetAbbr(string $setAbbr): array {
         $ret = [];
-        $data = ['expansion_abbr' => $setAbbr];
+        $data = [
+            'expansion_abbr' => $setAbbr
+        ];
         $url = OracleInfo::getSetURL($data);
         if ($xpath = Storage::loadExternalXPath($url, Seconds::YEAR)) {
             $nodeList = $xpath->evaluate(self::XPATH_SET_LIST);

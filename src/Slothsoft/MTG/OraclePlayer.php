@@ -7,8 +7,7 @@ use Slothsoft\Core\Storage;
 use DOMDocument;
 use Exception;
 
-class OraclePlayer
-{
+class OraclePlayer {
 
     protected $key;
 
@@ -34,8 +33,7 @@ class OraclePlayer
 
     protected $deckStockChanged = false;
 
-    public function __construct($playerFile, Oracle $oracle)
-    {
+    public function __construct($playerFile, Oracle $oracle) {
         $this->file = $playerFile;
         $this->oracle = $oracle;
         $this->data = json_decode(file_get_contents($this->file), true);
@@ -97,13 +95,12 @@ class OraclePlayer
             }
         }
         unset($deckData);
-        
+
         $this->initRepository();
         $this->initUnused();
     }
 
-    public function initRepository()
-    {
+    public function initRepository() {
         if ($this->repositoryDeck) {
             $repositoryStockList = [];
             $cardList = $this->repositoryDeck->getStockNameList();
@@ -143,8 +140,7 @@ class OraclePlayer
         }
     }
 
-    public function initUnused()
-    {
+    public function initUnused() {
         if ($this->repositoryDeck and $this->unusedDeck) {
             $repositoryStockList = [];
             $cardList = $this->unusedDeck->getStockNameList();
@@ -176,8 +172,7 @@ class OraclePlayer
         }
     }
 
-    public function createDeck($deckNo)
-    {
+    public function createDeck($deckNo) {
         // {"name":"Deck #4","key":"c68c9d99f3131a1f25ef4dfe830456e7","type":"managed","stockList":[]}
         $deckData = [];
         $deckData['name'] = 'New Deck';
@@ -192,8 +187,7 @@ class OraclePlayer
         return $deckNo;
     }
 
-    public function removeDeck($deckNo)
-    {
+    public function removeDeck($deckNo) {
         if (isset($this->deckList[$deckNo])) {
             $this->deckMetaChanged = true;
             unset($this->deckList[$deckNo]);
@@ -201,12 +195,11 @@ class OraclePlayer
         return $deckNo;
     }
 
-    public function moveDeck($deckNo, $offset)
-    {
+    public function moveDeck($deckNo, $offset) {
         $retNo = $deckNo;
         if (isset($this->deckList[$deckNo])) {
             $this->deckMetaChanged = true;
-            
+
             $deck = $this->deckList[$deckNo];
             $oldPos = 0;
             foreach ($this->deckList as $tmpNo => $tmpDeck) {
@@ -245,13 +238,11 @@ class OraclePlayer
         return $retNo;
     }
 
-    public function getDeck($deckNo)
-    {
+    public function getDeck($deckNo) {
         return isset($this->deckList[$deckNo]) ? $this->deckList[$deckNo] : null;
     }
 
-    public function getDeckByKey($deckKey)
-    {
+    public function getDeckByKey($deckKey) {
         foreach ($this->deckList as $deck) {
             if ($deck->getKey() === $deckKey) {
                 return $deck;
@@ -260,8 +251,7 @@ class OraclePlayer
         return null;
     }
 
-    public function save()
-    {
+    public function save() {
         if (! $this->deckMetaChanged) {
             foreach ($this->deckList as $deck) {
                 if ($deck->hasMetaChanged()) {
@@ -276,19 +266,18 @@ class OraclePlayer
             if (headers_sent()) {
                 throw new Exception('will not save "' . $this->file . '", an error occured?! oAO');
             }
-            
+
             $data = $this->asObject();
             $data = json_encode($data);
             file_put_contents($this->file, $data);
-            
+
             if ($this->deckMetaChanged) {
                 Storage::loadExternalDocument('http://slothsoft.net/getData.php/mtg/cron.0.sites');
             }
         }
     }
 
-    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc)
-    {
+    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
         $retNodes = [];
         // unused ???
         if ($request->getInputValue('deck-add') and $data = $request->getInputJSON()) {
@@ -349,33 +338,27 @@ class OraclePlayer
         return $retNodes;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getFirstname()
-    {
+    public function getFirstname() {
         return isset($this->data['firstname']) ? $this->data['firstname'] : '';
     }
 
-    public function getLastname()
-    {
+    public function getLastname() {
         return isset($this->data['lastname']) ? $this->data['lastname'] : '';
     }
 
-    public function getDCI()
-    {
+    public function getDCI() {
         return isset($this->data['dci']) ? $this->data['dci'] : '';
     }
 
-    public function getKey()
-    {
+    public function getKey() {
         return $this->key;
     }
 
-    public function getDeckKey(OracleDeck $deck)
-    {
+    public function getDeckKey(OracleDeck $deck) {
         $ret = null;
         foreach ($this->deckList as $no => $tmpDeck) {
             if ($tmpDeck === $deck) {
@@ -386,10 +369,9 @@ class OraclePlayer
         return $ret;
     }
 
-    public function asObject()
-    {
+    public function asObject() {
         $ret = [];
-        
+
         // $ret['name'] = $this->getName();
         $ret['firstname'] = $this->getFirstname();
         $ret['lastname'] = $this->getLastname();
@@ -399,24 +381,23 @@ class OraclePlayer
         foreach ($this->deckList as $no => $deck) {
             $ret['deckList'][$no] = $deck->asObject();
         }
-        
+
         return $ret;
     }
 
-    public function asNode(DOMDocument $dataDoc = null)
-    {
+    public function asNode(DOMDocument $dataDoc = null) {
         $returnDocument = $dataDoc === null;
-        
+
         if ($returnDocument) {
             $dataDoc = new DOMDocument();
         }
-        
+
         $retNode = $dataDoc->createElement('player');
-        
+
         $arr = [];
         $arr['name'] = $this->name;
         $arr['key'] = $this->key;
-        
+
         foreach ($arr as $key => $val) {
             $retNode->setAttribute($key, $val);
         }
@@ -425,7 +406,7 @@ class OraclePlayer
             $node->setAttribute('no', $no);
             $retNode->appendChild($node);
         }
-        
+
         if ($returnDocument) {
             $dataDoc->appendChild($retNode);
             $retNode = $dataDoc;

@@ -4,11 +4,9 @@ namespace Slothsoft\MTG;
 
 use Exception;
 
-class OracleCustomTable extends OracleTable
-{
+class OracleCustomTable extends OracleTable {
 
-    protected function install()
-    {
+    protected function install() {
         /*
          * $mapping = [];
          * $mapping['oracle_id'] = 'ID';
@@ -47,48 +45,41 @@ class OracleCustomTable extends OracleTable
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
 
-    public function getNameListBySetName($setName)
-    {
+    public function getNameListBySetName($setName) {
         return $this->dbmsTable->select('name', [
             'expansion_name' => $setName
         ], 'ORDER BY expansion_index');
     }
 
-    public function getIdListByName($name)
-    {
+    public function getIdListByName($name) {
         return $this->dbmsTable->select('id', [
             'name' => $name
         ]);
     }
 
-    public function getCardList()
-    {
+    public function getCardList() {
         return $this->dbmsTable->select(true, null, 'ORDER BY expansion_abbr, expansion_index');
     }
 
-    public function getCardListBySetName($setName)
-    {
+    public function getCardListBySetName($setName) {
         return $this->dbmsTable->select(true, [
             'expansion_name' => $setName
         ], 'ORDER BY expansion_index');
     }
 
-    public function getCardListBySetAbbr($setAbbr)
-    {
+    public function getCardListBySetAbbr($setAbbr) {
         return $this->dbmsTable->select(true, [
             'expansion_abbr' => $setAbbr
         ], 'ORDER BY expansion_index');
     }
 
-    public function getCardListByNameList(array $nameList)
-    {
+    public function getCardListByNameList(array $nameList) {
         return $this->dbmsTable->select(true, [
             'name' => $nameList
         ]);
     }
 
-    public function createRow(array $data)
-    {
+    public function createRow(array $data) {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
         } catch (Exception $e) {
@@ -97,8 +88,7 @@ class OracleCustomTable extends OracleTable
         return $ret;
     }
 
-    public function updateRowByName(array $data, $name)
-    {
+    public function updateRowByName(array $data, $name) {
         try {
             $ret = (bool) $this->dbmsTable->update($data, $this->getIdListByName($name));
         } catch (Exception $e) {
@@ -107,8 +97,7 @@ class OracleCustomTable extends OracleTable
         return $ret;
     }
 
-    public function deleteCardsBySetAbbr($setAbbr)
-    {
+    public function deleteCardsBySetAbbr($setAbbr) {
         return $this->dbmsTable->delete($this->dbmsTable->select('id', [
             'expansion_abbr' => $setAbbr
         ]));

@@ -2,8 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-class RSAKeyPair
-{
+class RSAKeyPair {
 
     public $encryptionExponent;
 
@@ -19,31 +18,28 @@ class RSAKeyPair
 
     public $barrett;
 
-    public function __construct($encryptionExponent, $decryptionExponent, $modulus)
-    {
+    public function __construct($encryptionExponent, $decryptionExponent, $modulus) {
         $this->encryptionExponent = BigInt::createFromHex($encryptionExponent);
         $this->decryptionExponent = BigInt::createFromHex($decryptionExponent);
         $this->modulus = BigInt::createFromHex($modulus);
-        
+
         $this->digitSize = 2 * $this->modulus->getHighIndex() + 2;
         $this->chunkSize = $this->digitSize - 11;
-        
+
         $this->radix = 16;
         // $this->barrett = new BarrettMu($this->modulus);
     }
 
-    public function encryptUser($user, $password, $hash)
-    {
+    public function encryptUser($user, $password, $hash) {
         $ret = sprintf('%s\\%s\\%s', $hash, base64_encode($user), base64_encode($password));
         return $this->encryptString($ret);
     }
 
-    public function encryptString($input)
-    {
+    public function encryptString($input) {
         $ret = [];
         for ($i = 0, $inputLength = strlen($input); $i < $inputLength; $i += $this->chunkSize) {
             $msgLength = ($i + $this->chunkSize) > $inputLength ? $inputLength % $this->chunkSize : $this->chunkSize;
-            
+
             $b = [];
             for ($x = 0; $x < $msgLength; $x ++) {
                 $b[$x] = $input[$i + $msgLength - 1 - $x];
@@ -55,7 +51,7 @@ class RSAKeyPair
             }
             $b[$this->digitSize - 2] = 2;
             $b[$this->digitSize - 1] = 0;
-            
+
             $block = BigInt::createFromDec(0);
             for ($j = 0, $k = 0; $k < $this->digitSize; $j ++) {
                 $block->digits[$j] = $b[$k ++];

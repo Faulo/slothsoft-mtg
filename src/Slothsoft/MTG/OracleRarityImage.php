@@ -5,8 +5,7 @@ namespace Slothsoft\MTG;
 use Slothsoft\Core\IO\HTTPFile;
 use Exception;
 
-class OracleRarityImage
-{
+class OracleRarityImage {
 
     protected $mappingList = [
         'al' => '1E',
@@ -74,13 +73,12 @@ class OracleRarityImage
 
     private $_convertFunction;
 
-    public function __construct(Oracle $oracle, $imageDir, $setAbbr, $rarity)
-    {
+    public function __construct(Oracle $oracle, $imageDir, $setAbbr, $rarity) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
         $this->setAbbr = strtolower(trim($setAbbr));
         $this->rarity = trim($rarity);
-        
+
         if (! $this->imageDir or ! strlen($this->setAbbr) or ! strlen($this->rarity)) {
             throw new Exception('INVALID ARGUMENTS');
         }
@@ -95,13 +93,11 @@ class OracleRarityImage
         $this->_convertFunction = null;
     }
 
-    public function getURL()
-    {
+    public function getURL() {
         return sprintf('/getData.php/mtg/image?set=%s&rarity=%s', $this->setAbbr, $this->rarity);
     }
 
-    public function getFile()
-    {
+    public function getFile() {
         $ret = null;
         $fileDir = $this->imageDir;
         $fileName = sprintf('%s.%s.png', $this->setAbbr, $this->rarity);
@@ -112,7 +108,7 @@ class OracleRarityImage
         } else {
             $setAbbr = isset($this->mappingList[$this->setAbbr]) ? $this->mappingList[$this->setAbbr] : $this->setAbbr;
             $url = sprintf('http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=%s&size=large&rarity=%s', $setAbbr, $this->rarity);
-            
+
             if ($file = HTTPFile::createFromURL($url, $fileName)) {
                 $ret = $file;
                 $file->copyTo($fileDir, $fileName, $this->_convertFunction);

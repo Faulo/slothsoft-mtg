@@ -4,8 +4,7 @@ namespace Slothsoft\MTG;
 
 use DOMDocument;
 
-class MKMShop
-{
+class MKMShop {
 
     protected $ownerMKM;
 
@@ -17,19 +16,16 @@ class MKMShop
 
     protected $boosterList = [];
 
-    public function __construct(MKM $mkm, array $data)
-    {
+    public function __construct(MKM $mkm, array $data) {
         $this->ownerMKM = $mkm;
         $this->setData($data);
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->data['name'];
     }
 
-    public function addBooster(array $data)
-    {
+    public function addBooster(array $data) {
         $booster = new MKMBooster($this, $data);
         if ($oldBooster = $this->getBoosterByName($data['name'])) {
             if ($booster->getPrice() >= $oldBooster->getPrice()) {
@@ -40,8 +36,7 @@ class MKMShop
         return $booster;
     }
 
-    public function getBoosterByName($name)
-    {
+    public function getBoosterByName($name) {
         foreach ($this->boosterList as $booster) {
             if ($booster->getName() === $name) {
                 return $booster;
@@ -50,8 +45,7 @@ class MKMShop
         return null;
     }
 
-    public function setData(array $data)
-    {
+    public function setData(array $data) {
         foreach ($this->data as $key => &$val) {
             if (isset($data[$key])) {
                 settype($data[$key], gettype($val));
@@ -61,8 +55,7 @@ class MKMShop
         unset($val);
     }
 
-    public function asNode(DOMDocument $doc)
-    {
+    public function asNode(DOMDocument $doc) {
         $retNode = $doc->createElement('shop');
         foreach ($this->data as $key => $val) {
             $retNode->setAttribute($key, $val);

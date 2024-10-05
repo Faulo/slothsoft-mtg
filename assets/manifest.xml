@@ -49,6 +49,7 @@
 	</fragment>
 	
 	<custom-asset name="image-card" executable-builder="Slothsoft\MTG\Assets\CardImageBuilder" parameter-filter="Slothsoft\MTG\Assets\CardImageParameterFilter"/>
+	<custom-asset name="image-rarity" executable-builder="Slothsoft\MTG\Assets\RarityImageBuilder" parameter-filter="Slothsoft\MTG\Assets\RarityImageParameterFilter"/>
 
 	<fragment name="html">
 		<fragment name="search">

@@ -12,23 +12,26 @@ use Slothsoft\MTG\OracleInfo;
 use Exception;
 use SplFileInfo;
 
-class CardImageBuilder implements ExecutableBuilderStrategyInterface {
+class RarityImageBuilder implements ExecutableBuilderStrategyInterface {
 
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
-        if ($name = $args->get('name')) {
+        $card = [];
+        $card['expansion_name'] = $args->get('expansion_name');
+        $card['expansion_abbr'] = $args->get('expansion_abbr');
+        $card['rarity'] = $args->get('rarity');
+
+        if ($card['expansion_name']) {
             $oracle = new Oracle('mtg');
             $idTable = $oracle->getIdTable();
-            $card = $idTable->getCardByName($name);
-            if (! $card) {
-                throw new Exception(sprintf('Card with name "%s" not found!', $name));
+            $setList = $idTable->getSetList();
+            $card['expansion_abbr'] = array_search($card['expansion_name'], $setList);
+
+            if (! $card['expansion_abbr']) {
+                throw new Exception("Unknown expansion: $card[expansion_name]");
             }
-        } else {
-            $card = [];
-            $card['expansion_abbr'] = $args->get('expansion_abbr');
-            $card['expansion_index'] = $args->get('expansion_index');
         }
 
-        $path = OracleInfo::getImagePath($card);
+        $path = OracleInfo::getRarityPath($card);
 
         $file = new SplFileInfo($path);
 

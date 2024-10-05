@@ -816,18 +816,12 @@ class OracleInfo {
         return sprintf('%s/images/set-%s/%s', ServerEnvironment::getDataDirectory(), $card['expansion_abbr'], self::getCardImageName($card));
     }
 
-    public static function getImageFile(array &$card): SplFileInfo {
-        $path = self::getImagePath($card);
-
-        return new SplFileInfo($path);
-    }
-
     public static function getRarityURL(array &$card) {
         return sprintf('/getData.php/mtg/image-rarity?expansion_abbr=%s&rarity=%s', $card['expansion_abbr'], $card['rarity']);
     }
 
     public static function getRarityPath(array &$card) {
-        return sprintf('%smod/mtg/res/images/set-%s/%s-%s.png', ServerEnvironment::getRootDirectory(), $card['expansion_abbr'], $card['expansion_abbr'], substr(strtolower($card['rarity']), 0, 1));
+        return sprintf('%s/images/set-%s/%s-%s.png', ServerEnvironment::getDataDirectory(), $card['expansion_abbr'], $card['expansion_abbr'], substr(strtolower($card['rarity']), 0, 1));
     }
 
     public static function getColorPath(array &$card) {

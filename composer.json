@@ -12,7 +12,7 @@
 		"php" : "^7.4",
 		"slothsoft/chat" : "^1.0",
 		"slothsoft/core" : "^1.0",
-		"slothsoft/farah" : "^1.0",
+		"slothsoft/farah" : "^1.14",
 		"slothsoft/w3c" : "^1.0"
 	},
 	"require-dev" : {

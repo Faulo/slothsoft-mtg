@@ -1,7 +1,7 @@
 
 importScripts(
-	"/slothsoft@core/js/IndexedDatabase",
-	"/slothsoft@core/js/ImageDatabase"
+	"/slothsoft@farah/js-core/IndexedDatabase",
+	"/slothsoft@farah/js-core/ImageDatabase"
 );
 
 const MESSAGE_ERROR = 0;

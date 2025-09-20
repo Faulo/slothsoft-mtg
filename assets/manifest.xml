@@ -163,15 +163,14 @@
 		<fragment name="default">
 			<use-document ref="//slothsoft@farah/sites" name="sites"/>
 			<link-stylesheet ref="/css/default"/>
-			<import ref="//slothsoft@core/api/HTML5"/>
-			<import ref="//slothsoft@core/api/XPath"/>
+			<import ref="//slothsoft@farah/api/XPath"/>
 			<import ref="/api/ImageCache"/>
 		</fragment>
 		<fragment name="ImageCache">
 			<link-script ref="/js/ImageCache"/>
 		</fragment>
 		<fragment name="Manager">
-			<import ref="//slothsoft@core/api/DOM"/>
+			<import ref="//slothsoft@farah/api/DOM"/>
 			<link-script ref="/js/MTG"/>
 			<link-script ref="/js/MTG.Manager"/>
 			<link-script ref="/js/MTG.Deck"/>

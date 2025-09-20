@@ -33,7 +33,7 @@
 	],
 	"autoload-dev" : {
 		"psr-4" : {
-			"Slothsoft\\MTG\\Tests\\" : "tests"
+			"Slothsoft\\MTG\\" : "tests"
 		}
 	},
 	"homepage" : "http://farah.slothsoft.net/modules/mtg"

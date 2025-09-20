@@ -11,57 +11,57 @@ use Exception;
 use XSLTProcessor;
 
 class OracleInfo {
-
+    
     const EXTENSION_CARDIMAGE = 'png';
-
+    
     const URL_ORACLE = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%s';
-
+    
     const URL_ORACLE_IMAGE = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=%s&type=card';
-
+    
     const URL_LEGALITY = 'http://gatherer.wizards.com/Pages/Card/Printings.aspx?multiverseid=%s';
-
+    
     const URL_TEMPLATE_ORACLE = 'farah://slothsoft@mtg/xsl/card-gatherer';
-
+    
     const URL_SET = 'http://magiccards.info/%s/en.html';
-
+    
     const URL_SET_IMAGE = 'http://magiccards.info/scans/en/%s/%s.jpg';
-
+    
     const URL_SET_TOKENS = 'http://magiccards.info/extras.html';
-
+    
     const URL_PRICE = 'https://www.magiccardmarket.eu/Cards/%s';
-
+    
     const URL_MARKET_SET_INDEX = 'https://www.magiccardmarket.eu/Products/Singles';
-
+    
     const URL_MARKET_SET_LIST = 'https://www.magiccardmarket.eu/Products/Singles/%s';
-
+    
     const URL_MARKET = 'https://www.mkmapi.eu/ws/v1.1/products/%s/1/1/true';
-
+    
     const URL_LEGALITY_MODERN = 'http://magic.wizards.com/en/gameinfo/gameplay/formats/modern';
-
+    
     const URL_LEGALITY_COMMANDER = 'http://magic.wizards.com/en/gameinfo/gameplay/formats/commander';
-
+    
     const URL_LEGALITY_VINTAGE = 'https://mtg.gamepedia.com/Set';
-
+    
     const URL_GALLERY_HOST = 'http://magic.wizards.com';
-
+    
     const URL_GALLERY_INDEX = '/en/search-magic-ajax?f1=section&f2=18156&sort=DESC&search=&l=en';
-
+    
     const URL_GALLERY_EXAMPLE = '/en/articles/archive/card-image-gallery/aether-revolt';
-
+    
     // const URL_IMAGE = '/getData.php/mtg/image?id=%s&set=%s&no=%s';
     // const URL_RARITY = '/getData.php/mtg/image?set=%s&rarity=%s'; //'http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=%s&size=large&rarity=%s';
     const COLOR_W = 'White';
-
+    
     const COLOR_U = 'Blue';
-
+    
     const COLOR_B = 'Black';
-
+    
     const COLOR_R = 'Red';
-
+    
     const COLOR_G = 'Green';
-
+    
     const COLOR_NO = 'Colorless';
-
+    
     private static $_typeList = [
         'Land',
         'Planeswalker',
@@ -80,14 +80,14 @@ class OracleInfo {
         'Phenomenon',
         'Other'
     ];
-
+    
     private static $_rarityList = [
         'Common',
         'Uncommon',
         'Rare',
         'Mythic Rare'
     ];
-
+    
     private static $_colorList = [
         'White',
         'Blue',
@@ -96,7 +96,7 @@ class OracleInfo {
         'Green',
         'Colorless'
     ];
-
+    
     private static $_legalityList = [
         'Standard',
         'Modern',
@@ -105,39 +105,39 @@ class OracleInfo {
         'Vintage'
         // 'Un-Sets',
     ];
-
+    
     private static $_legalityStandardList = [
         'Ixalan',
-
+        
         'Hour of Devastation',
         'Amonkhet',
         'Welcome Deck 2017',
         'Aether Revolt',
         'Kaladesh',
-
+        
         'Eldritch Moon',
         'Shadows over Innistrad',
         'Welcome Deck 2016',
         'Oath of the Gatewatch',
         'Battle for Zendikar'
-
+        
         // 'Magic Origins',
         // 'Dragons of Tarkir',
-
+        
         // 'Fate Reforged',
         // 'Khans of Tarkir',
     ];
-
+    
     private static $_legalityModernList = null;
-
+    
     private static $_legalityVintageList = null;
-
+    
     private static $_setList = null;
-
+    
     private static $_oracleImageGallery = null;
-
+    
     private static $_oracleXSLT = null;
-
+    
     private static $_setTranslations = [
         // MKM
         'Battle Royale' => 'Battle Royale Box Set',
@@ -159,7 +159,7 @@ class OracleInfo {
         'Revised' => 'Revised Edition',
         'Ugin\'s Fate Promos' => 'Ugin\'s Fate promos',
         'Unlimited' => 'Unlimited Edition',
-
+        
         // Magicinfo (?)
         '10th Edition' => 'Tenth Edition',
         '9th Edition' => 'Tenth Edition',
@@ -171,7 +171,7 @@ class OracleInfo {
         'Alpha (Limited Edition)' => 'Limited Edition Alpha',
         'Beta (Limited Edition)' => 'Limited Edition Beta'
     ];
-
+    
     private static $_setMapping = [
         'mps_akh' => 'mpsakh',
         'mps_kld' => 'mpskld',
@@ -204,7 +204,7 @@ class OracleInfo {
         'lrw' => 'lw',
         'h09' => 'pds',
         'p2' => 'po2',
-
+        
         'csp' => 'cs',
         'dde' => 'pvc',
         'ddc' => 'dvd',
@@ -230,16 +230,16 @@ class OracleInfo {
         'unh' => 'uh',
         'uz' => 'us'
     ];
-
+    
     private static $_dom;
-
+    
     private static function domHelper() {
         if (! self::$_dom) {
             self::$_dom = new DOMHelper();
         }
         return self::$_dom;
     }
-
+    
     public static function getTypeFragment(DOMDocument $dataDoc) {
         static $retFragment = null;
         if (! $retFragment) {
@@ -251,7 +251,7 @@ class OracleInfo {
         }
         return $dataDoc->importNode($retFragment, true);
     }
-
+    
     public static function getRarityFragment(DOMDocument $dataDoc) {
         static $retFragment = null;
         if (! $retFragment) {
@@ -263,7 +263,7 @@ class OracleInfo {
         }
         return $dataDoc->importNode($retFragment, true);
     }
-
+    
     public static function getColorFragment(DOMDocument $dataDoc) {
         static $retFragment = null;
         if (! $retFragment) {
@@ -275,7 +275,7 @@ class OracleInfo {
         }
         return $dataDoc->importNode($retFragment, true);
     }
-
+    
     public static function getSetFragment(DOMDocument $dataDoc) {
         static $retFragment = null;
         if (! $retFragment) {
@@ -289,7 +289,7 @@ class OracleInfo {
         }
         return $dataDoc->importNode($retFragment, true);
     }
-
+    
     public static function getLegalityFragment(DOMDocument $dataDoc) {
         static $retFragment = null;
         if (! $retFragment) {
@@ -302,7 +302,7 @@ class OracleInfo {
         }
         return $dataDoc->importNode($retFragment, true);
     }
-
+    
     // Legality...
     public static function getCardLegality(array &$card) {
         $ret = [];
@@ -328,25 +328,25 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     public static function isStandardLegal(array &$card) {
         return in_array($card['expansion_name'], self::$_legalityStandardList);
     }
-
+    
     public static function getStandardLegalList() {
         return self::$_legalityStandardList;
     }
-
+    
     public static function isModernLegal(array &$card) {
         self::_initLegalityModernList();
         return in_array($card['expansion_name'], self::$_legalityModernList);
     }
-
+    
     public static function getModernLegalList() {
         self::_initLegalityModernList();
         return self::$_legalityModernList;
     }
-
+    
     protected static function _initLegalityModernList() {
         if (self::$_legalityModernList === null) {
             self::$_legalityModernList = self::$_legalityStandardList;
@@ -363,12 +363,12 @@ class OracleInfo {
             }
         }
     }
-
+    
     public static function getVintageLegalList() {
         self::_initLegalityVintageList();
         return self::$_legalityVintageList;
     }
-
+    
     protected static function _initLegalityVintageList() {
         if (self::$_legalityVintageList === null) {
             self::$_legalityVintageList = [];
@@ -378,12 +378,12 @@ class OracleInfo {
             }
         }
     }
-
+    
     public static function getSetList() {
         self::_initSetList();
         return self::$_setList;
     }
-
+    
     protected static function _initSetList() {
         if (self::$_setList === null) {
             $_setXPathTable = '//h2[.//*[@id="List_of_Magic_expansions_and_sets"]]/following::table[1]';
@@ -440,19 +440,19 @@ class OracleInfo {
             self::$_setList = array_reverse($setList);
         }
     }
-
+    
     public static function isCommanderLegal(array &$card) {
         return true;
     }
-
+    
     public static function isVintageLegal(array &$card) {
         return true;
     }
-
+    
     public static function translateSetName($setName) {
         return isset(self::$_setTranslations[$setName]) ? self::$_setTranslations[$setName] : $setName;
     }
-
+    
     // Type...
     public static function getCardTypeName(array &$card) {
         $type = strpos($card['type'], 'Token') === false ? $card['type'] : 'Token';
@@ -463,7 +463,7 @@ class OracleInfo {
         }
         return $name;
     }
-
+    
     public static function getCardTypeIndex(array &$card) {
         $type = strpos($card['type'], 'Token') === false ? $card['type'] : 'Token';
         foreach (self::$_typeList as $i => $name) {
@@ -473,11 +473,11 @@ class OracleInfo {
         }
         return $i;
     }
-
+    
     public static function isCardToken(array &$card) {
         return self::getCardTypeIndex($card) > 6;
     }
-
+    
     // Rarity...
     public static function getCardRarityName(array &$card) {
         $ret = 0;
@@ -489,7 +489,7 @@ class OracleInfo {
         }
         return self::$_rarityList[$ret];
     }
-
+    
     public static function getCardRarityIndex(array &$card) {
         $ret = 0;
         foreach (self::$_rarityList as $i => $name) {
@@ -500,7 +500,7 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     public static function getCardColorList(array &$card) {
         $retList = [];
         foreach (self::$_colorList as $color) {
@@ -539,7 +539,7 @@ class OracleInfo {
         }
         return $retList;
     }
-
+    
     public static function getCardCMC(array &$card) {
         $ret = 0;
         if (isset($card['cost'])) {
@@ -558,7 +558,7 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     public static function getCardColors(array &$card) {
         $ret = self::getCardColorList($card);
         unset($ret['Colorless']);
@@ -568,7 +568,7 @@ class OracleInfo {
         unset($val);
         return array_sum($ret);
     }
-
+    
     public static function getColorIndex($colorName) {
         foreach (self::$_colorList as $i => $name) {
             if ($colorName === $name) {
@@ -577,7 +577,7 @@ class OracleInfo {
         }
         return $i;
     }
-
+    
     public static function getColorKey($colorName) {
         $ret = null;
         switch ($colorName) {
@@ -602,7 +602,7 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     public static function getColorName($colorKey) {
         $ret = null;
         switch ($colorKey) {
@@ -627,7 +627,7 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     public static function getMarketOAuth() {
         $authority = MKM::getDefaultAuthority();
         return [
@@ -637,7 +637,7 @@ class OracleInfo {
             'accessSecret' => $authority->accessSecret
         ];
     }
-
+    
     public static function getNameKey($name) {
         $name = strtolower($name);
         $name = str_replace([
@@ -657,11 +657,11 @@ class OracleInfo {
         $name = trim($name);
         return $name;
     }
-
+    
     public static function getOracleURL(array &$card) {
         return $card['oracle_id'] > 0 ? sprintf(self::URL_ORACLE, $card['oracle_id']) : null;
     }
-
+    
     public static function getOracleCardData(array &$card) {
         self::_initOracleXSLT();
         $ret = null;
@@ -682,7 +682,7 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     protected static function _initOracleXSLT() {
         if (self::$_oracleXSLT === null) {
             self::$_oracleXSLT = new XSLTProcessor();
@@ -693,7 +693,7 @@ class OracleInfo {
             }
         }
     }
-
+    
     public static function getOracleImageURL(array &$card) {
         self::_initOracleImageGallery();
         $ret = null;
@@ -709,7 +709,7 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     protected static function _initOracleImageGallery() {
         if (self::$_oracleImageGallery === null) {
             self::$_oracleImageGallery = [];
@@ -743,11 +743,11 @@ class OracleInfo {
             }
         }
     }
-
+    
     public static function getLegalityURL(array &$card) {
         return sprintf(self::URL_LEGALITY, $card['oracle_id']);
     }
-
+    
     public static function getSetURL(array &$card) {
         $abbr = $card['expansion_abbr'];
         if (isset(self::$_setMapping[$abbr])) {
@@ -755,7 +755,7 @@ class OracleInfo {
         }
         return sprintf(self::URL_SET, $abbr);
     }
-
+    
     public static function getSetImageURL(array &$card) {
         $abbr = $card['expansion_abbr'];
         if (isset(self::$_setMapping[$abbr])) {
@@ -764,11 +764,11 @@ class OracleInfo {
         $no = $card['expansion_number'];
         return sprintf(self::URL_SET_IMAGE, $abbr, $no);
     }
-
+    
     public static function getPriceURL(array &$card) {
         return $card['oracle_id'] > 0 ? sprintf(self::URL_PRICE, rawurlencode($card['name'])) : null;
     }
-
+    
     public static function getMarketURL(array &$card) {
         $name = $card['name'];
         $name = str_replace([
@@ -779,7 +779,7 @@ class OracleInfo {
         $name = rawurlencode($name);
         return sprintf(self::URL_MARKET, $name);
     }
-
+    
     public static function getMarketSetURLList() {
         $ret = [];
         if ($xpath = Storage::loadExternalXPath(self::URL_MARKET_SET_INDEX, Seconds::WEEK)) {
@@ -794,11 +794,11 @@ class OracleInfo {
         }
         return $ret;
     }
-
+    
     public static function getCardImageName(array &$card) {
         return strtolower(sprintf('%s-%03d.%s', $card['expansion_abbr'], $card['expansion_index'], self::EXTENSION_CARDIMAGE));
     }
-
+    
     public static function getImageURL(array &$card) {
         // return sprintf(self::URL_IMAGE, $card['oracle_id'], $card['expansion_abbr'], $card['expansion_number']);
         /*
@@ -810,19 +810,19 @@ class OracleInfo {
          */
         return sprintf('/getData.php/mtg/image-card?name=%s', rawurlencode($card['name']));
     }
-
+    
     public static function getImagePath(array &$card) {
         return sprintf('%s/images/set-%s/%s', ServerEnvironment::getDataDirectory(), strtolower($card['expansion_abbr']), self::getCardImageName($card));
     }
-
+    
     public static function getRarityURL(array &$card) {
         return sprintf('/getData.php/mtg/image-rarity?expansion_abbr=%s&rarity=%s', strtolower($card['expansion_abbr']), strtolower($card['rarity']));
     }
-
+    
     public static function getRarityPath(array &$card) {
         return sprintf('%s/images/set-%s/%s-%s.png', ServerEnvironment::getDataDirectory(), strtolower($card['expansion_abbr']), strtolower($card['expansion_abbr']), substr(strtolower($card['rarity']), 0, 1));
     }
-
+    
     public static function getColorPath(array &$card) {
         return sprintf('%s/mtg/images/color.%s.png', ServerEnvironment::getRootDirectory(), strtolower($card['color']));
     }

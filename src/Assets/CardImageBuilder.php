@@ -13,7 +13,7 @@ use Exception;
 use SplFileInfo;
 
 class CardImageBuilder implements ExecutableBuilderStrategyInterface {
-
+    
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if ($name = $args->get('name')) {
             $oracle = new Oracle('mtg');
@@ -27,13 +27,13 @@ class CardImageBuilder implements ExecutableBuilderStrategyInterface {
             $card['expansion_abbr'] = $args->get('expansion_abbr');
             $card['expansion_index'] = $args->get('expansion_index');
         }
-
+        
         $path = OracleInfo::getImagePath($card);
-
+        
         $file = new SplFileInfo($path);
-
+        
         $resultBuilder = new FileInfoResultBuilder($file);
-
+        
         return new ExecutableStrategies($resultBuilder);
     }
 }

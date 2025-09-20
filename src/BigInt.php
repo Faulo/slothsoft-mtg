@@ -3,34 +3,34 @@ declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
 class BigInt {
-
+    
     const DIGIT_SIZE = 4;
-
+    
     public static function createFromHex($hex) {
         $hex = (string) $hex;
-
+        
         for ($i = strlen($hex), $j = 0; $i > 0; $i -= self::DIGIT_SIZE, $j ++) {
             $digits[$j] = hexdec(substr($hex, max($i - self::DIGIT_SIZE, 0), min($i, self::DIGIT_SIZE)));
         }
         return self::createFromDigits($digits);
     }
-
+    
     public static function createFromDec($dec = 0) {
         return new BigInt([
             $dec
         ]);
     }
-
+    
     public static function createFromDigits(array $digits = []) {
         return new BigInt($digits);
     }
-
+    
     public $digits;
-
+    
     protected function __construct(array $digits) {
         $this->digits = $digits;
     }
-
+    
     public function getHighIndex() {
         $ret = count($this->digits) - 1;
         while ($ret > 0 and ! $this->digits[$ret]) {
@@ -38,7 +38,7 @@ class BigInt {
         }
         return $ret;
     }
-
+    
     public function toHex() {
         $ret = '';
         for ($i = $this->getHighIndex(); $i > - 1; $i --) {
@@ -46,25 +46,25 @@ class BigInt {
         }
         return $ret;
     }
-
+    
     public function shiftRight($i) {
         $ret = clone $this;
         return $ret;
     }
-
+    
     public function multiplyMod(BigInt $input, BigInt $modulus) {
         $ret = clone $input;
-
+        
         return $ret;
     }
-
+    
     public function powMod(BigInt $modulus, BigInt $encryptionExponent) {
         return $this;
-
+        
         $ret = self::createFromDec(1);
-
+        
         $a = $this;
-
+        
         while ($encryptionExponent->getHighIndex() or $encryptionExponent->digits[0]) {
             if (($encryptionExponent->digits[0] & 1) !== 0) {
                 $ret = $a->multiplyMod($ret, $modulus);

@@ -15,11 +15,11 @@ use Slothsoft\MTG\Oracle;
 use DOMDocument;
 
 class OracleBuilder implements ExecutableBuilderStrategyInterface {
-
+    
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         $url = $context->createUrl()->withPath('/static/oracle');
         $query = $args->get('search-query');
-
+        
         if ($query === []) {
             $proxy = Module::resolveToExecutable($url);
             $resultBuilder = new ProxyResultBuilder($proxy);
@@ -36,7 +36,7 @@ class OracleBuilder implements ExecutableBuilderStrategyInterface {
             $writer = new DOMWriterFromDocumentDelegate($closure);
             $resultBuilder = new DOMWriterResultBuilder($writer, 'oracle.xml');
         }
-
+        
         return new ExecutableStrategies($resultBuilder);
     }
 }

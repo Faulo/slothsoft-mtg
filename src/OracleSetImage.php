@@ -7,24 +7,24 @@ use Slothsoft\Core\IO\HTTPFile;
 use Exception;
 
 class OracleSetImage {
-
+    
     protected $oracle;
-
+    
     protected $imageDir;
-
+    
     protected $setAbbr;
-
+    
     public function __construct(Oracle $oracle, $imageDir, $setAbbr) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
         $this->setAbbr = strtolower(trim($setAbbr));
-
+        
         if (! $this->imageDir or ! strlen($this->setAbbr)) {
             throw new Exception('INVALID ARGUMENTS');
         }
         $this->imageDir .= DIRECTORY_SEPARATOR;
     }
-
+    
     public function getFile($recreate = false) {
         $fileDir = $this->imageDir;
         $fileName = sprintf('set.%s.png', $this->setAbbr);

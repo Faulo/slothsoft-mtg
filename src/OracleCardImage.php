@@ -6,26 +6,26 @@ use Slothsoft\Core\IO\HTTPFile;
 use Exception;
 
 class OracleCardImage {
-
+    
     protected $oracle;
-
+    
     protected $imageDir;
-
+    
     protected $oracleId;
-
+    
     protected $setAbbr;
-
+    
     protected $setNo;
-
+    
     private $_convertFunction;
-
+    
     public function __construct(Oracle $oracle, $imageDir, $oracleId, $setAbbr, $setNo) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
         $this->oracleId = trim($oracleId);
         $this->setAbbr = strtolower(trim($setAbbr));
         $this->setNo = strtolower(trim($setNo));
-
+        
         if (! $this->imageDir or ! strlen($this->oracleId) or ! strlen($this->setAbbr) or ! strlen($this->setNo)) {
             throw new Exception('INVALID ARGUMENTS');
         }
@@ -38,11 +38,11 @@ class OracleCardImage {
             'convertFile'
         ];
     }
-
+    
     public function getURL() {
         return sprintf('/getData.php/mtg/image?id=%s&set=%s&no=%s', $this->oracleId, $this->setAbbr, $this->setNo);
     }
-
+    
     public function getFile($recreate = false, $url = null) {
         $ret = null;
         $fileDir = $this->imageDir;
@@ -59,7 +59,7 @@ class OracleCardImage {
                 break;
         }
         $filePath = $fileDir . $fileName;
-
+        
         if ($recreate or ! file_exists($filePath)) {
             if ($url === null) {
                 $url = sprintf('http://magiccards.info/scans/en/%s/%s.jpg', $this->setAbbr, $this->setNo);

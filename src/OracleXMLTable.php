@@ -5,7 +5,7 @@ namespace Slothsoft\MTG;
 use Exception;
 
 class OracleXMLTable extends OracleTable {
-
+    
     protected function install() {
         $sqlCols = [
             'id' => 'bigint UNSIGNED NOT NULL AUTO_INCREMENT',
@@ -23,7 +23,7 @@ class OracleXMLTable extends OracleTable {
         ];
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
-
+    
     public function searchCardByName($name) {
         $ret = [];
         if (strlen($name)) {
@@ -47,7 +47,7 @@ class OracleXMLTable extends OracleTable {
         }
         return $ret;
     }
-
+    
     public function searchNameByName($name) {
         $ret = [];
         if (strlen($name)) {
@@ -65,7 +65,7 @@ class OracleXMLTable extends OracleTable {
         }
         return $ret;
     }
-
+    
     public function getCardListByNameList(array $nameList) {
         $ret = [];
         $resList = $this->dbmsTable->select([
@@ -79,13 +79,13 @@ class OracleXMLTable extends OracleTable {
         }
         return $ret;
     }
-
+    
     public function getXMLListByNameList(array $nameList) {
         return $this->dbmsTable->select('xml', [
             'name' => $nameList
         ]);
     }
-
+    
     public function createRow(array $data) {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
@@ -94,7 +94,7 @@ class OracleXMLTable extends OracleTable {
         }
         return $ret;
     }
-
+    
     public function createCard($name, $xml) {
         $data = [];
         $data['name'] = $name;

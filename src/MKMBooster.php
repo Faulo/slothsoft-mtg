@@ -5,9 +5,9 @@ namespace Slothsoft\MTG;
 use DOMDocument;
 
 class MKMBooster {
-
+    
     protected $ownerShop;
-
+    
     protected $data = [
         'id' => 0,
         'name' => '',
@@ -18,20 +18,20 @@ class MKMBooster {
         'language' => '',
         'country' => ''
     ];
-
+    
     public function __construct(MKMShop $shop, array $data) {
         $this->ownerShop = $shop;
         $this->setData($data);
     }
-
+    
     public function getName() {
         return $this->data['name'];
     }
-
+    
     public function getPrice() {
         return $this->data['price'];
     }
-
+    
     public function setData(array $data) {
         foreach ($this->data as $key => &$val) {
             if (isset($data[$key])) {
@@ -41,7 +41,7 @@ class MKMBooster {
         }
         unset($val);
     }
-
+    
     public function asNode(DOMDocument $doc) {
         $retNode = $doc->createElement('booster');
         foreach ($this->data as $key => $val) {

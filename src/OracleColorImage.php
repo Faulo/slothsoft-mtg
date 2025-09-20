@@ -6,20 +6,20 @@ use Slothsoft\Core\IO\HTTPFile;
 use Exception;
 
 class OracleColorImage {
-
+    
     protected $oracle;
-
+    
     protected $imageDir;
-
+    
     protected $color;
-
+    
     private $_convertFunction;
-
+    
     public function __construct(Oracle $oracle, $imageDir, $color) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
         $this->color = trim(strtoupper($color));
-
+        
         if (! $this->imageDir or ! strlen($this->color)) {
             throw new Exception('INVALID ARGUMENTS');
         }
@@ -30,11 +30,11 @@ class OracleColorImage {
         ];
         $this->_convertFunction = null;
     }
-
+    
     public function getURL() {
         return sprintf('/getData.php/mtg/image?color=%s', $this->color);
     }
-
+    
     public function getFile() {
         $ret = null;
         $fileDir = $this->imageDir;

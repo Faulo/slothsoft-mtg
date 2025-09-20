@@ -8,31 +8,31 @@ use DOMDocument;
 use Exception;
 
 class Player {
-
+    
     public $key;
-
+    
     public $name;
-
+    
     public $doc;
-
+    
     public $file;
-
+    
     public $xpath;
-
+    
     public $deckList;
-
+    
     public $repositoryDeck;
-
+    
     public $unusedDeck;
-
+    
     public $wishlistDeck;
-
+    
     public $managedDeckList;
-
+    
     protected $oracle;
-
+    
     protected $saveLater = false;
-
+    
     public function __construct($playerFile, Oracle $oracle) {
         $dom = new DOMHelper();
         $this->file = $playerFile;
@@ -72,11 +72,11 @@ class Player {
                 $this->deckList[$deckNo] = $deck;
             }
         }
-
+        
         $this->initRepository();
         $this->initUnused();
     }
-
+    
     public function initRepository() {
         if ($this->repositoryDeck) {
             $repositoryStockList = [];
@@ -109,7 +109,7 @@ class Player {
             }
         }
     }
-
+    
     public function initUnused() {
         if ($this->repositoryDeck and $this->unusedDeck) {
             $repositoryStockList = [];
@@ -142,11 +142,11 @@ class Player {
             }
         }
     }
-
+    
     public function getDeck($deckNo) {
         return isset($this->deckList[$deckNo]) ? $this->deckList[$deckNo] : null;
     }
-
+    
     public function getDeckByKey($deckKey) {
         foreach ($this->deckList as $deck) {
             if ($deck->getKey() === $deckKey) {
@@ -155,7 +155,7 @@ class Player {
         }
         return null;
     }
-
+    
     public function save($now = false) {
         $this->saveLater = true;
         if ($now) {
@@ -166,7 +166,7 @@ class Player {
             }
         }
     }
-
+    
     public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
         $retNodes = [];
         if ($request->getInputValue('deck-add') and $data = $request->getInputJSON()) {
@@ -187,20 +187,20 @@ class Player {
         }
         return $retNodes;
     }
-
+    
     public function asObject() {
         $ret = [];
-
+        
         $ret['name'] = $this->name;
         $ret['key'] = $this->key;
         $ret['deckList'] = [];
         foreach ($this->deckList as $no => $deck) {
             $ret['deckList'][$no] = $deck->asObject();
         }
-
+        
         return $ret;
     }
-
+    
     public function asNode(DOMDocument $dataDoc, $loadDecks = true) {
         $retNode = $dataDoc->createElement('player');
         $arr = [];

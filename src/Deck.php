@@ -8,11 +8,11 @@ use DOMDocument;
 use DOMElement;
 
 class Deck {
-
+    
     public $ownerPlayer;
-
+    
     public $node;
-
+    
     public $superTypes = [
         'Land',
         'Planeswalker',
@@ -26,7 +26,7 @@ class Deck {
         'Token',
         'Other'
     ];
-
+    
     public $colorTypes = [
         'White',
         'Blue',
@@ -34,13 +34,13 @@ class Deck {
         'Red',
         'Green'
     ];
-
+    
     public $modeList;
-
+    
     public $stockList = [];
-
+    
     protected $oracle;
-
+    
     public function __construct(Player $player, DOMElement $deckNode, Oracle $oracle) {
         $this->ownerPlayer = $player;
         $this->node = $deckNode;
@@ -84,7 +84,7 @@ class Deck {
             }
         }
     }
-
+    
     public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
         $retNodes = [];
         if ($query = $request->getInputValue('search-query')) {
@@ -165,18 +165,18 @@ class Deck {
         }
         return $retNodes;
     }
-
+    
     public function asObject() {
         $ret = [];
-
+        
         $ret['name'] = $this->getName();
         $ret['key'] = $this->getKey();
         $ret['type'] = $this->getType();
         $ret['stockList'] = $this->stockList;
-
+        
         return $ret;
     }
-
+    
     public function asNode(DOMDocument $dataDoc = null, $loadDeck = true) {
         if ($dataDoc === null) {
             $dataDoc = $this->ownerPlayer->doc;
@@ -188,7 +188,7 @@ class Deck {
         }
         $retNode->setAttribute('player', $this->ownerPlayer->name);
         $retNode->setAttribute('key', $this->getKey());
-
+        
         if (! $retNode->getAttribute('name')) {
             $retNode->setAttribute('name', $this->getName());
         }
@@ -239,7 +239,7 @@ class Deck {
             $modeNode->setAttribute('name', $mode);
             $retNode->appendChild($modeNode);
         }
-
+        
         $nodeList = [];
         $tmpList = $xpath->evaluate('card', $retNode);
         foreach ($tmpList as $node) {
@@ -250,15 +250,15 @@ class Deck {
         }
         return $retNode;
     }
-
+    
     public function getKey() {
         return md5(md5($this->ownerPlayer->name) . md5($this->getName()));
     }
-
+    
     public function getType() {
         return $this->node->getAttribute('type');
     }
-
+    
     public function getTitle() {
         $name = $this->getName();
         $deckNode = $this->asNode();
@@ -266,7 +266,7 @@ class Deck {
         $count = $this->ownerPlayer->xpath->evaluate('count(.//card[@stock > 0])', $deckNode);
         return sprintf('%s (%d/%d cards)', $name, $count, $stock);
     }
-
+    
     public function getName() {
         $name = $this->node->getAttribute('name');
         // $name = str_replace(' ', ' ', $name);
@@ -275,14 +275,14 @@ class Deck {
         }
         return $name;
     }
-
+    
     public function setName($name) {
         if ($name !== $this->node->getAttribute('name')) {
             $this->node->setAttribute('name', $name);
             $this->save();
         }
     }
-
+    
     public function getCardList() {
         $ret = [];
         $xpath = $this->ownerPlayer->xpath;
@@ -292,28 +292,28 @@ class Deck {
         }
         return $ret;
     }
-
+    
     public function setStockList(array $stockList) {
         foreach ($stockList as $name => $stock) {
             $this->setStock($name, $stock);
         }
         $this->save();
     }
-
+    
     public function setStock($name, $count) {
         $this->stockList[$name] = (int) $count;
         $this->node->setAttribute('stock', json_encode($this->stockList));
     }
-
+    
     public function getStock($name) {
         return isset($this->stockList[$name]) ? $this->stockList[$name] : 0;
     }
-
+    
     public function hasCard($name) {
         $xpath = $this->ownerPlayer->xpath;
         return $xpath->evaluate(sprintf('boolean(card[@name = "%s"])', $name), $this->node);
     }
-
+    
     public function addCard($name, $stock = 1) {
         $ret = false;
         if ($card = $this->oracle->searchCardByName($name)) {
@@ -329,7 +329,7 @@ class Deck {
         }
         return $ret;
     }
-
+    
     public function removeCard($name) {
         $xpath = $this->ownerPlayer->xpath;
         $nodeList = [];
@@ -344,11 +344,11 @@ class Deck {
             $this->save();
         }
     }
-
+    
     public function save() {
         $this->ownerPlayer->save();
     }
-
+    
     public function upgrade() {
         $cardList = $this->getCardList();
         foreach (array_keys($cardList) as $name) {

@@ -1,8 +1,8 @@
 <?php
 declare(strict_types = 1);
-namespace Slothsoft\MTG;
+namespace Slothsoft\MTG\API;
 
-use Slothsoft\Farah\ModuleTests\AbstractXmlManifestTest;
+use Slothsoft\FarahTesting\Module\AbstractXmlManifestTest;
 
 class AssetsManifestTest extends AbstractXmlManifestTest {
     

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri name="farah://slothsoft@mtg/xsl/_bill" uri="assets/xsl/_bill.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_booster" uri="assets/xsl/_booster.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_dci" uri="assets/xsl/_dci.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_dci.timeline" uri="assets/xsl/_dci.timeline.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_dci.timeline.graph" uri="assets/xsl/_dci.timeline.graph.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_deck" uri="assets/xsl/_deck.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_decklist" uri="assets/xsl/_decklist.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_events" uri="assets/xsl/_events.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_index" uri="assets/xsl/_index.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_manager" uri="assets/xsl/_manager.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_mcm" uri="assets/xsl/_mcm.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_player" uri="assets/xsl/_player.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_prerelease" uri="assets/xsl/_prerelease.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_prices" uri="assets/xsl/_prices.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_print" uri="assets/xsl/_print.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_print-wizards" uri="assets/xsl/_print-wizards.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_reviews" uri="assets/xsl/_reviews.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_search" uri="assets/xsl/_search.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_tokens" uri="assets/xsl/_tokens.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/_wizards" uri="assets/xsl/_wizards.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/card-gatherer" uri="assets/xsl/card-gatherer.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/global" uri="assets/xsl/global.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/manager-deck" uri="assets/xsl/manager-deck.xsl"/>
+  <uri name="farah://slothsoft@mtg/xsl/sites" uri="assets/xsl/sites.xsl"/>
+</catalog>

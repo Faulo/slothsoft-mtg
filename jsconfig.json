@@ -9,9 +9,6 @@
       ],
       "/slothsoft@mtg/*": [
         "./assets/*"
-      ],
-      "/slothsoft@sse/*": [
-        "../slothsoft-sse/assets/*"
       ]
     }
   }

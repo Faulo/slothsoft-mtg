@@ -2,13 +2,13 @@
   "compilerOptions": {
     "paths": {
       "/slothsoft@chat/*": [
-        "../slothsoft-chat/assets/*"
+        "vendor/slothsoft/chat/assets/*"
       ],
       "/slothsoft@farah/*": [
-        "../slothsoft-farah/assets/*"
+        "vendor/slothsoft/farah/assets/*"
       ],
       "/slothsoft@mtg/*": [
-        "./assets/*"
+        "assets/*"
       ]
     }
   }

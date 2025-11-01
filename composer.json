@@ -10,7 +10,6 @@
 	"type" : "library",
 	"require" : {
 		"php" : "^7.4",
-		"slothsoft/chat" : "^1.0",
 		"slothsoft/core" : "^1.0",
 		"slothsoft/farah" : "^1.22.2",
 		"slothsoft/w3c" : "^1.0"

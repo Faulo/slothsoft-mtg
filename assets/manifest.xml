@@ -1,179 +1,97 @@
 <?xml version="1.0"?>
 <assets xmlns="http://schema.slothsoft.net/farah/module" version="1.1">
-	<resource-directory name="css" type="text/css"/>
-	<resource-directory name="js" type="application/javascript"/>
-	<resource-directory name="xsl" type="application/xslt+xml"/>
-	
-	<resource-directory name="images" type="image/png"/>
+	<resource-directory name="css" type="text/css" />
+	<resource-directory name="js" type="application/javascript" />
+	<resource-directory name="xsl" type="application/xslt+xml" />
 
-	<resource-directory name="dictionary" type="application/xml"/>
+	<resource-directory name="images" type="image/png" />
+
+	<resource-directory name="dictionary" type="application/xml" />
 
 	<directory name="static">
 		<resource name="bill" path="bill.csv" type="text/csv">
-			<options del="&#9;" output="thead"/>
+			<options del="&#9;" output="thead" />
 		</resource>
-		<resource name="news" path="news.xhtml" type="application/xhtml+xml"/>
-		<resource name="samlWidget" path="samlWidget.xhtml" type="application/xhtml+xml"/>
-		<resource name="prerelease" path="prerelease.xml" type="application/xml"/>
-		<resource-directory name="players" path="players" type="application/json"/>
-		<resource-directory name="dci-log" path="dci" type="application/xml"/>
-		<resource-directory name="misc" path="misc" type="*/*"/>
-		<resource-directory name="reviews" path="reviews" type="application/json"/>
-		<resource name="rules-comp" path="rules/MagicCompRules_20150717.txt" type="text/plain"/>
-		<resource name="rules-mtr" path="rules/mtg_mtr_17jul15_en_0.pdf" type="application/pdf"/>
-		<resource name="rules-ipg" path="rules/mtg_ipg_17jul15_en.pdf" type="application/pdf"/>
-		<resource name="custom-border" path="custom-cards/border.png" type="image/png"/>
-		<resource-directory name="custom-cards" path="custom-cards" type="image/png"/>
-		<resource-directory name="custom-sets" path="custom-sets" type="text/html"/>
-		<resource name="events" path="events.xml" type="application/xml"/>
-		<resource name="oracle" path="oracle.xml" type="application/xml"/>
+		<resource name="news" path="news.xhtml" type="application/xhtml+xml" />
+		<resource name="samlWidget" path="samlWidget.xhtml" type="application/xhtml+xml" />
+		<resource name="prerelease" path="prerelease.xml" type="application/xml" />
+		<resource-directory name="players" path="players" type="application/json" />
+		<resource-directory name="dci-log" path="dci" type="application/xml" />
+		<resource-directory name="misc" path="misc" type="*/*" />
+		<resource-directory name="reviews" path="reviews" type="application/json" />
+		<resource name="rules-comp" path="rules/MagicCompRules_20150717.txt" type="text/plain" />
+		<resource name="rules-mtr" path="rules/mtg_mtr_17jul15_en_0.pdf" type="application/pdf" />
+		<resource name="rules-ipg" path="rules/mtg_ipg_17jul15_en.pdf" type="application/pdf" />
+		<resource name="custom-border" path="custom-cards/border.png" type="image/png" />
+		<resource-directory name="custom-cards" path="custom-cards" type="image/png" />
+		<resource-directory name="custom-sets" path="custom-sets" type="text/html" />
+		<resource name="events" path="events.xml" type="application/xml" />
+		<resource name="oracle" path="oracle.xml" type="application/xml" />
 	</directory>
 
 	<fragment name="data">
-		<fragment name="bill"/>
-		<fragment name="booster"/>
-		<fragment name="deck"/>
-		<fragment name="deck.edit"/>
-		<fragment name="search"/>
-		<fragment name="dci"/>
-		<fragment name="print"/>
-		<fragment name="print-wizards"/>
-		<fragment name="show"/>
-<!-- 		<fragment name="oracle" /> -->
-		<fragment name="reviews"/>
-		<fragment name="prices"/>
-		<fragment name="sets"/>
-		
-		<custom-asset name="oracle" executable-builder="Slothsoft\MTG\Assets\OracleBuilder" parameter-filter="Slothsoft\MTG\Assets\OracleParameterFilter"/>
-		<custom-asset name="work" executable-builder="Slothsoft\MTG\Assets\WorkBuilder"/>
+		<fragment name="bill" />
+		<fragment name="booster" />
+		<fragment name="deck" />
+		<fragment name="deck.edit" />
+		<fragment name="search" />
+		<fragment name="dci" />
+		<fragment name="print" />
+		<fragment name="print-wizards" />
+		<fragment name="show" />
+		<!-- <fragment name="oracle" /> -->
+		<fragment name="reviews" />
+		<fragment name="prices" />
+		<fragment name="sets" />
+
+		<custom-asset name="oracle" executable-builder="Slothsoft\MTG\Assets\OracleBuilder" parameter-filter="Slothsoft\MTG\Assets\OracleParameterFilter" />
+		<custom-asset name="work" executable-builder="Slothsoft\MTG\Assets\WorkBuilder" />
 	</fragment>
-	
-	<custom-asset name="image-card" executable-builder="Slothsoft\MTG\Assets\CardImageBuilder" parameter-filter="Slothsoft\MTG\Assets\CardImageParameterFilter"/>
-	<custom-asset name="image-rarity" executable-builder="Slothsoft\MTG\Assets\RarityImageBuilder" parameter-filter="Slothsoft\MTG\Assets\RarityImageParameterFilter"/>
+
+	<custom-asset name="image-card" executable-builder="Slothsoft\MTG\Assets\CardImageBuilder" parameter-filter="Slothsoft\MTG\Assets\CardImageParameterFilter" />
+	<custom-asset name="image-rarity" executable-builder="Slothsoft\MTG\Assets\RarityImageBuilder" parameter-filter="Slothsoft\MTG\Assets\RarityImageParameterFilter" />
 
 	<fragment name="html">
 		<fragment name="search">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_search"/>
-			<use-document ref="/data/oracle"/>
+			<import ref="/api/default" />
+			<use-template ref="/xsl/_search" />
+			<use-document ref="/data/oracle" />
 		</fragment>
-		<!-- 
-		<fragment name="index">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_index"/>
-			<use-document ref="/api/shoutbox" name="shoutbox"/>
-			<use-document ref="/static/news" name="news"/>
-		</fragment>
-		<fragment name="player">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_player"/>
-		</fragment>
-		<fragment name="deck">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_deck"/>
-			<use-document ref="/data/deck" name="deck"/>
-		</fragment>
-		<fragment name="mcm">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_mcm"/>
-			<use-document ref="/data/search" name="search"/>
-		</fragment>
-		<fragment name="dci">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_dci"/>
-			<use-document ref="/data/dci" name="dci"/>
-			<use-document ref="/api/dci.timeline.graph" name="dci.timeline.graph"/>
-		</fragment>
-		<fragment name="dci.timeline">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_dci.timeline"/>
-			<use-document ref="/api/dci.timeline.graph" name="dci.timeline.graph"/>
-		</fragment>
-		<fragment name="deck-edit">
-			<use-document ref="/data/deck.edit" name="deck.edit"/>
-		</fragment>
-		<fragment name="print">
-			<use-template ref="/xsl/_print"/>
-			<use-document ref="/data/print" name="print"/>
-		</fragment>
-		<fragment name="print-wizards">
-			<use-template ref="/xsl/_print"/>
-			<use-document ref="/data/print-wizards" name="print-wizards"/>
-		</fragment>
-		<fragment name="show">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_deck"/>
-			<use-document ref="/data/show" name="show"/>
-		</fragment>
-		<fragment name="decklist">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_decklist"/>
-			<use-document ref="/data/show" name="show"/>
-		</fragment>
-		<fragment name="manager">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_manager"/>
-			<import ref="/api/Manager"/>
-		</fragment>
-		<fragment name="bill">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_bill"/>
-			<use-document ref="/data/bill" name="bill"/>
-		</fragment>
-		<fragment name="wizards">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_wizards"/>
-		</fragment>
-		<fragment name="prerelease">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_prerelease"/>
-			<use-document ref="/static/prerelease" name="prerelease"/>
-		</fragment>
-		<fragment name="tokens">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_tokens"/>
-			<use-document ref="/static/custom-sets" name="custom-sets"/>
-		</fragment>
-		<fragment name="reviews">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_reviews"/>
-			<use-document ref="/data/oracle" name="oracle"/>
-			<use-document ref="/data/reviews" name="reviews"/>
-			<use-document ref="/static/reviews" name="reviews"/>
-		</fragment>
-		<fragment name="booster">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_booster"/>
-			<use-document ref="/data/booster" name="booster"/>
-		</fragment>
-		<fragment name="prices">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_prices"/>
-			<use-document ref="/data/prices" name="prices"/>
-		</fragment>
-		<fragment name="events">
-			<import ref="/api/default"/>
-			<use-template ref="/xsl/_events"/>
-			<use-document ref="/static/events" name="events"/>
-		</fragment>
-		 -->
+		<!-- <fragment name="index"> <import ref="/api/default"/> <use-template ref="/xsl/_index"/> <use-document ref="/api/shoutbox" name="shoutbox"/> <use-document ref="/static/news" name="news"/> </fragment> 
+			<fragment name="player"> <import ref="/api/default"/> <use-template ref="/xsl/_player"/> </fragment> <fragment name="deck"> <import ref="/api/default"/> <use-template ref="/xsl/_deck"/> <use-document ref="/data/deck" 
+			name="deck"/> </fragment> <fragment name="mcm"> <import ref="/api/default"/> <use-template ref="/xsl/_mcm"/> <use-document ref="/data/search" name="search"/> </fragment> <fragment name="dci"> <import ref="/api/default"/> 
+			<use-template ref="/xsl/_dci"/> <use-document ref="/data/dci" name="dci"/> <use-document ref="/api/dci.timeline.graph" name="dci.timeline.graph"/> </fragment> <fragment name="dci.timeline"> <import ref="/api/default"/> 
+			<use-template ref="/xsl/_dci.timeline"/> <use-document ref="/api/dci.timeline.graph" name="dci.timeline.graph"/> </fragment> <fragment name="deck-edit"> <use-document ref="/data/deck.edit" name="deck.edit"/> 
+			</fragment> <fragment name="print"> <use-template ref="/xsl/_print"/> <use-document ref="/data/print" name="print"/> </fragment> <fragment name="print-wizards"> <use-template ref="/xsl/_print"/> <use-document 
+			ref="/data/print-wizards" name="print-wizards"/> </fragment> <fragment name="show"> <import ref="/api/default"/> <use-template ref="/xsl/_deck"/> <use-document ref="/data/show" name="show"/> </fragment> 
+			<fragment name="decklist"> <import ref="/api/default"/> <use-template ref="/xsl/_decklist"/> <use-document ref="/data/show" name="show"/> </fragment> <fragment name="manager"> <import ref="/api/default"/> 
+			<use-template ref="/xsl/_manager"/> <import ref="/api/Manager"/> </fragment> <fragment name="bill"> <import ref="/api/default"/> <use-template ref="/xsl/_bill"/> <use-document ref="/data/bill" name="bill"/> 
+			</fragment> <fragment name="wizards"> <import ref="/api/default"/> <use-template ref="/xsl/_wizards"/> </fragment> <fragment name="prerelease"> <import ref="/api/default"/> <use-template ref="/xsl/_prerelease"/> 
+			<use-document ref="/static/prerelease" name="prerelease"/> </fragment> <fragment name="tokens"> <import ref="/api/default"/> <use-template ref="/xsl/_tokens"/> <use-document ref="/static/custom-sets" name="custom-sets"/> 
+			</fragment> <fragment name="reviews"> <import ref="/api/default"/> <use-template ref="/xsl/_reviews"/> <use-document ref="/data/oracle" name="oracle"/> <use-document ref="/data/reviews" name="reviews"/> 
+			<use-document ref="/static/reviews" name="reviews"/> </fragment> <fragment name="booster"> <import ref="/api/default"/> <use-template ref="/xsl/_booster"/> <use-document ref="/data/booster" name="booster"/> 
+			</fragment> <fragment name="prices"> <import ref="/api/default"/> <use-template ref="/xsl/_prices"/> <use-document ref="/data/prices" name="prices"/> </fragment> <fragment name="events"> <import ref="/api/default"/> 
+			<use-template ref="/xsl/_events"/> <use-document ref="/static/events" name="events"/> </fragment> -->
 	</fragment>
 
 	<fragment name="api">
 		<fragment name="default">
-			<use-document ref="//slothsoft@farah/sites" name="sites"/>
-			<link-stylesheet ref="/css/default"/>
-			<import ref="//slothsoft@farah/api/XPath"/>
-			<import ref="/api/ImageCache"/>
-		</fragment>
-		<fragment name="ImageCache">
-			<link-script ref="/js/ImageCache"/>
+			<use-document ref="//slothsoft@farah/sites" name="sites" />
+			<link-stylesheet ref="/css/default" />
+			<link-module ref="/js/ImageCache" />
 		</fragment>
 		<fragment name="Manager">
-			<import ref="//slothsoft@farah/api/DOM"/>
-			<link-script ref="/js/MTG"/>
-			<link-script ref="/js/MTG.Manager"/>
-			<link-script ref="/js/MTG.Deck"/>
+			<import ref="//slothsoft@farah/api/DOM" />
+			<link-script ref="/js/MTG" />
+			<link-script ref="/js/MTG.Manager" />
+			<link-script ref="/js/MTG.Deck" />
 		</fragment>
+		<fragment name="search">
+			<import ref="/api/default" />
+			<use-template ref="/xsl/_search" />
+			<use-document ref="/static/oracle" />
+			<use-document ref="/api/search-query" />
+		</fragment>
+		<fragment name="search-query" />
 	</fragment>
 </assets>

@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri name="farah://slothsoft@mtg/dictionary/en-us" uri="assets/dictionary/en-us.xml"/>
+  <uri name="farah://slothsoft@mtg/static/events" uri="assets/static/events.xml"/>
+  <uri name="farah://slothsoft@mtg/static/oracle" uri="assets/static/oracle.xml"/>
+  <uri name="farah://slothsoft@mtg/static/prerelease" uri="assets/static/prerelease.xml"/>
   <uri name="farah://slothsoft@mtg/xsl/_bill" uri="assets/xsl/_bill.xsl"/>
   <uri name="farah://slothsoft@mtg/xsl/_booster" uri="assets/xsl/_booster.xsl"/>
   <uri name="farah://slothsoft@mtg/xsl/_dci" uri="assets/xsl/_dci.xsl"/>

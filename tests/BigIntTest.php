@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class BigIntTest extends TestCase {
+final class BigIntTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(BigInt::class), "Failed to load class 'Slothsoft\MTG\BigInt'!");

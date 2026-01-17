@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleCustomTableTest extends TestCase {
+final class OracleCustomTableTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleCustomTable::class), "Failed to load class 'Slothsoft\MTG\OracleCustomTable'!");

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class MKMBoosterTest extends TestCase {
+final class MKMBoosterTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(MKMBooster::class), "Failed to load class 'Slothsoft\MTG\MKMBooster'!");

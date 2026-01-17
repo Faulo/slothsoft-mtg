@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class SetTest extends TestCase {
+final class SetTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(Set::class), "Failed to load class 'Slothsoft\MTG\Oracle\Set'!");

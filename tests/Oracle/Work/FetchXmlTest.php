@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class FetchXmlTest extends TestCase {
+final class FetchXmlTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(FetchXml::class), "Failed to load class 'Slothsoft\MTG\Oracle\Work\FetchXml'!");

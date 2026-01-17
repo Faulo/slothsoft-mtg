@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleColorImageTest extends TestCase {
+final class OracleColorImageTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleColorImage::class), "Failed to load class 'Slothsoft\MTG\OracleColorImage'!");

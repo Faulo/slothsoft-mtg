@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class DeckTest extends TestCase {
+final class DeckTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(Deck::class), "Failed to load class 'Slothsoft\MTG\Deck'!");

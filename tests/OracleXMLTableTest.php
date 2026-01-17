@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleXMLTableTest extends TestCase {
+final class OracleXMLTableTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleXMLTable::class), "Failed to load class 'Slothsoft\MTG\OracleXMLTable'!");

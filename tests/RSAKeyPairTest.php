@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class RSAKeyPairTest extends TestCase {
+final class RSAKeyPairTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(RSAKeyPair::class), "Failed to load class 'Slothsoft\MTG\RSAKeyPair'!");

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class WorkBuilderTest extends TestCase {
+final class WorkBuilderTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(WorkBuilder::class), "Failed to load class 'Slothsoft\MTG\Assets\WorkBuilder'!");

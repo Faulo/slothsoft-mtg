@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class PreparePricesTest extends TestCase {
+final class PreparePricesTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(PreparePrices::class), "Failed to load class 'Slothsoft\MTG\Oracle\Work\PreparePrices'!");

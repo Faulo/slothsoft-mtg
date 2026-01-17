@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class PrepareXmlTest extends TestCase {
+final class PrepareXmlTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(PrepareXml::class), "Failed to load class 'Slothsoft\MTG\Oracle\Work\PrepareXml'!");

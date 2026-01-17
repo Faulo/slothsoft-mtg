@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleParameterFilterTest extends TestCase {
+final class OracleParameterFilterTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleParameterFilter::class), "Failed to load class 'Slothsoft\MTG\Assets\OracleParameterFilter'!");

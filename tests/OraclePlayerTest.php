@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OraclePlayerTest extends TestCase {
+final class OraclePlayerTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OraclePlayer::class), "Failed to load class 'Slothsoft\MTG\OraclePlayer'!");

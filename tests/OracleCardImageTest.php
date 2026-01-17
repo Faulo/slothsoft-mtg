@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleCardImageTest extends TestCase {
+final class OracleCardImageTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleCardImage::class), "Failed to load class 'Slothsoft\MTG\OracleCardImage'!");

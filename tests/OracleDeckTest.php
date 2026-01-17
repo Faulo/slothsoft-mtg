@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleDeckTest extends TestCase {
+final class OracleDeckTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleDeck::class), "Failed to load class 'Slothsoft\MTG\OracleDeck'!");

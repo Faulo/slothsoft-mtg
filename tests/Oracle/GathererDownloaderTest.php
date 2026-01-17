@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class GathererDownloaderTest extends TestCase {
+final class GathererDownloaderTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(GathererDownloader::class), "Failed to load class 'Slothsoft\MTG\Oracle\GathererDownloader'!");

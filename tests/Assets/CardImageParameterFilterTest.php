@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class CardImageParameterFilterTest extends TestCase {
+final class CardImageParameterFilterTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(CardImageParameterFilter::class), "Failed to load class 'Slothsoft\MTG\Assets\CardImageParameterFilter'!");

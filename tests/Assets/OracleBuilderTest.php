@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleBuilderTest extends TestCase {
+final class OracleBuilderTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleBuilder::class), "Failed to load class 'Slothsoft\MTG\Assets\OracleBuilder'!");

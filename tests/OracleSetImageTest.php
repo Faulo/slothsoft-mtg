@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class OracleSetImageTest extends TestCase {
+final class OracleSetImageTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(OracleSetImage::class), "Failed to load class 'Slothsoft\MTG\OracleSetImage'!");

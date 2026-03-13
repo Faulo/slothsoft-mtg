@@ -177,7 +177,7 @@ class Deck {
         return $ret;
     }
     
-    public function asNode(DOMDocument $dataDoc = null, $loadDeck = true) {
+    public function asNode(?DOMDocument $dataDoc = null, $loadDeck = true) {
         if ($dataDoc === null) {
             $dataDoc = $this->ownerPlayer->doc;
             $xpath = $this->ownerPlayer->xpath;

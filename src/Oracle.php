@@ -228,7 +228,7 @@ class Oracle implements Serializable {
         return $retNode;
     }
     
-    public function createCategoriesElement(DOMDocument $dataDoc = null) {
+    public function createCategoriesElement(?DOMDocument $dataDoc = null) {
         if (! $dataDoc) {
             $dataDoc = $this->doc;
         }
@@ -241,7 +241,7 @@ class Oracle implements Serializable {
         return $categoryNode;
     }
     
-    public function createCardFragment(DOMDocument $dataDoc = null, array $nameList = [], array $stockList = null) {
+    public function createCardFragment(?DOMDocument $dataDoc = null, array $nameList = [], ?array $stockList = null) {
         if (! $dataDoc) {
             $dataDoc = $this->doc;
         }
@@ -271,7 +271,7 @@ class Oracle implements Serializable {
         return $fragment->hasChildNodes() ? $fragment : null;
     }
     
-    public function createCardElement(DOMDocument $dataDoc = null, $name = '') {
+    public function createCardElement(?DOMDocument $dataDoc = null, $name = '') {
         if (! $dataDoc) {
             $dataDoc = $this->doc;
         }
@@ -289,7 +289,7 @@ class Oracle implements Serializable {
         return $ret;
     }
     
-    public function createCardElementList(DOMDocument $dataDoc = null, array $nameList = []) {
+    public function createCardElementList(?DOMDocument $dataDoc = null, array $nameList = []) {
         foreach ($nameList as &$name) {
             $name = $this->_sanitizeName($name);
         }

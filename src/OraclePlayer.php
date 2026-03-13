@@ -385,7 +385,7 @@ class OraclePlayer {
         return $ret;
     }
     
-    public function asNode(DOMDocument $dataDoc = null) {
+    public function asNode(?DOMDocument $dataDoc = null) {
         $returnDocument = $dataDoc === null;
         
         if ($returnDocument) {

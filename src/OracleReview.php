@@ -77,7 +77,7 @@ class OracleReview {
         return array_keys($this->data);
     }
     
-    public function asNode(DOMDocument $dataDoc = null) {
+    public function asNode(?DOMDocument $dataDoc = null) {
         $returnDocument = $dataDoc === null;
         
         if ($returnDocument) {

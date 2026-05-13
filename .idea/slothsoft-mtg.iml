@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/doctrine/instantiator/src/Doctrine/Instantiator" isTestSource="false" packagePrefix="Doctrine\Instantiator\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/doctrine/instantiator/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/guzzlehttp/psr7/src" isTestSource="false" packagePrefix="GuzzleHttp\Psr7\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/guzzlehttp/psr7/tests" isTestSource="true" packagePrefix="GuzzleHttp\Tests\Psr7\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-escaper/src" isTestSource="false" packagePrefix="Laminas\Escaper\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-escaper/test" isTestSource="true" packagePrefix="LaminasTest\Escaper\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-http/src" isTestSource="false" packagePrefix="Laminas\Http\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-http/test" isTestSource="true" packagePrefix="LaminasTest\Http\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-loader/src" isTestSource="false" packagePrefix="Laminas\Loader\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-loader/test" isTestSource="true" packagePrefix="LaminasTest\Loader\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-router/src" isTestSource="false" packagePrefix="Laminas\Router\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-router/test" isTestSource="true" packagePrefix="LaminasTest\Router\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-servicemanager/benchmarks" isTestSource="true" packagePrefix="LaminasBench\ServiceManager\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-servicemanager/src" isTestSource="false" packagePrefix="Laminas\ServiceManager\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-servicemanager/test" isTestSource="true" packagePrefix="LaminasTest\ServiceManager\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-stdlib/benchmark" isTestSource="true" packagePrefix="LaminasBench\Stdlib\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-stdlib/src" isTestSource="false" packagePrefix="Laminas\Stdlib\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-stdlib/test" isTestSource="true" packagePrefix="LaminasTest\Stdlib\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-uri/src" isTestSource="false" packagePrefix="Laminas\Uri\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-uri/test" isTestSource="true" packagePrefix="LaminasTest\Uri\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-validator/src" isTestSource="false" packagePrefix="Laminas\Validator\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/laminas/laminas-validator/test" isTestSource="true" packagePrefix="LaminasTest\Validator\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/matthiasmullie/minify/src" isTestSource="false" packagePrefix="MatthiasMullie\Minify\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/matthiasmullie/minify/tests" isTestSource="true" packagePrefix="MatthiasMullie\Minify\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/matthiasmullie/path-converter/src" isTestSource="false" packagePrefix="MatthiasMullie\PathConverter\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/myclabs/deep-copy/fixtures" isTestSource="true" packagePrefix="DeepCopy\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/myclabs/deep-copy/src/DeepCopy" isTestSource="false" packagePrefix="DeepCopy\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/myclabs/deep-copy/tests/DeepCopyTest" isTestSource="true" packagePrefix="DeepCopyTest\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/nikic/php-parser/lib/PhpParser" isTestSource="false" packagePrefix="PhpParser\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/nikic/php-parser/test/PhpParser" isTestSource="true" packagePrefix="PhpParser\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/php-ds/php-ds/src" isTestSource="false" packagePrefix="Ds\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/php-webdriver/webdriver/lib" isTestSource="false" packagePrefix="Facebook\WebDriver\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/php-webdriver/webdriver/tests/functional" isTestSource="true" packagePrefix="Facebook\WebDriver\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/php-webdriver/webdriver/tests/unit" isTestSource="true" packagePrefix="Facebook\WebDriver\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/psr/cache/src" isTestSource="false" packagePrefix="Psr\Cache\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/psr/container/src" isTestSource="false" packagePrefix="Psr\Container\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/psr/event-dispatcher/src" isTestSource="false" packagePrefix="Psr\EventDispatcher\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/psr/http-factory/src" isTestSource="false" packagePrefix="Psr\Http\Message\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/psr/http-message/src" isTestSource="false" packagePrefix="Psr\Http\Message\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/psr/log/Psr/Log" isTestSource="false" packagePrefix="Psr\Log\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/ralouphie/getallheaders/tests" isTestSource="true" packagePrefix="getallheaders\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/blob/src" isTestSource="false" packagePrefix="Slothsoft\Blob\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/blob/tests" isTestSource="true" packagePrefix="Slothsoft\Blob\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/core/src" isTestSource="false" packagePrefix="Slothsoft\Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/core/tests" isTestSource="true" packagePrefix="Slothsoft\Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/farah-testing/src" isTestSource="false" packagePrefix="Slothsoft\FarahTesting\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/farah-testing/tests" isTestSource="true" packagePrefix="Slothsoft\FarahTesting\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/farah/src" isTestSource="false" packagePrefix="Slothsoft\Farah\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/farah/src-pthreads" isTestSource="false" packagePrefix="Slothsoft\Farah\PThreads\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/farah/tests" isTestSource="true" packagePrefix="Slothsoft\Farah\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/w3c/src" isTestSource="false" packagePrefix="w3c\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/slothsoft/w3c/tests" isTestSource="true" packagePrefix="w3c\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/browser-kit/" isTestSource="false" packagePrefix="Symfony\Component\BrowserKit\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/dependency-injection/" isTestSource="false" packagePrefix="Symfony\Component\DependencyInjection\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/dom-crawler/" isTestSource="false" packagePrefix="Symfony\Component\DomCrawler\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/error-handler/" isTestSource="false" packagePrefix="Symfony\Component\ErrorHandler\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/event-dispatcher-contracts/" isTestSource="false" packagePrefix="Symfony\Contracts\EventDispatcher\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/event-dispatcher/" isTestSource="false" packagePrefix="Symfony\Component\EventDispatcher\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/http-client-contracts/" isTestSource="false" packagePrefix="Symfony\Contracts\HttpClient\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/http-client/" isTestSource="false" packagePrefix="Symfony\Component\HttpClient\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/http-foundation/" isTestSource="false" packagePrefix="Symfony\Component\HttpFoundation\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/http-kernel/" isTestSource="false" packagePrefix="Symfony\Component\HttpKernel\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/panther/src" isTestSource="false" packagePrefix="Symfony\Component\Panther\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/panther/tests" isTestSource="true" packagePrefix="Symfony\Component\Panther\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/polyfill-ctype/" isTestSource="false" packagePrefix="Symfony\Polyfill\Ctype\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/polyfill-mbstring/" isTestSource="false" packagePrefix="Symfony\Polyfill\Mbstring\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/polyfill-php73/" isTestSource="false" packagePrefix="Symfony\Polyfill\Php73\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/polyfill-php80/" isTestSource="false" packagePrefix="Symfony\Polyfill\Php80\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/polyfill-php81/" isTestSource="false" packagePrefix="Symfony\Polyfill\Php81\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/process/" isTestSource="false" packagePrefix="Symfony\Component\Process\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/service-contracts/" isTestSource="false" packagePrefix="Symfony\Contracts\Service\" />
+      <sourceFolder url="file://$MODULE_DIR$/.farah-vendor/symfony/var-dumper/" isTestSource="false" packagePrefix="Symfony\Component\VarDumper\" />
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="Slothsoft\MTG\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Slothsoft\MTG\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dbrekelmans/bdi" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-escaper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-loader" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-router" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-servicemanager" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-stdlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-uri" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/matthiasmullie/minify" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/matthiasmullie/path-converter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-ds/php-ds" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-webdriver/webdriver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-invoker" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/cli-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/complexity" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/environment" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/global-state" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/lines-of-code" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/resource-operations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/type" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slothsoft/blob" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slothsoft/core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slothsoft/farah" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slothsoft/farah-testing" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slothsoft/w3c" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dependency-injection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/error-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-foundation" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/panther" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php73" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

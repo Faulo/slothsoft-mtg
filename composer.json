@@ -1,40 +1,41 @@
 {
-	"name" : "slothsoft/mtg",
-	"description" : "A Farah module that contains the content of mtg.slothsoft.net.",
-	"license" : "MIT",
-	"authors" : [{
-			"name" : "Daniel Schulz",
-			"email" : "info.slothsoft@gmail.com"
-		}
-	],
-	"type" : "library",
-	"require" : {
-		"php" : "^7.4",
-		"slothsoft/core" : "^1.14.19",
-		"slothsoft/farah" : "^1.27.1",
-		"slothsoft/w3c" : "^1.3.0"
-	},
-	"require-dev" : {
-		"phpunit/phpunit" : "~9.6.34",
-		"slothsoft/farah-testing" : "^1.3.3"
-	},
-	"autoload" : {
-		"files" : [
-			"src/registerModule.php"
-		],
-		"psr-4" : {
-			"Slothsoft\\MTG\\" : "src/"
-		}
-	},
-	"keywords" : [
-		"slothsoft",
-		"farah-module",
-		"docs"
-	],
-	"autoload-dev" : {
-		"psr-4" : {
-			"Slothsoft\\MTG\\" : "tests"
-		}
-	},
-	"homepage" : "http://farah.slothsoft.net/modules/mtg"
+    "name": "slothsoft/mtg",
+    "description": "A Farah module that contains the content of mtg.slothsoft.net.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Schulz",
+            "email": "info.slothsoft@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+        "php": "^7.4",
+        "slothsoft/core": "^1.14.19",
+        "slothsoft/farah": "^1.27.1",
+        "slothsoft/w3c": "^1.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.6.34",
+        "slothsoft/farah-testing": "^1.3.3"
+    },
+    "autoload": {
+        "files": [
+            "src/registerModule.php"
+        ],
+        "psr-4": {
+            "Slothsoft\\MTG\\": "src/"
+        }
+    },
+    "keywords": [
+        "slothsoft",
+        "farah-module",
+        "docs"
+    ],
+    "autoload-dev": {
+        "psr-4": {
+            "Slothsoft\\MTG\\": "tests"
+        }
+    },
+    "homepage": "http://farah.slothsoft.net/modules/mtg"
 }

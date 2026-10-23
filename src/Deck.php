@@ -2,20 +2,21 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Farah\HTTPRequest;
-use DOMXPath;
 use DOMDocument;
-use DOMException;
-use Exception;
 use DOMElement;
+use DOMException;
+use DOMNode;
+use DOMXPath;
+use Exception;
+use Slothsoft\Farah\HTTPRequest;
 
 class Deck {
     
-    public $ownerPlayer;
+    public Player $ownerPlayer;
     
-    public $node;
+    public DOMElement $node;
     
-    public $superTypes = [
+    public array $superTypes = [
         'Land',
         'Planeswalker',
         // 'Legendary',
@@ -29,7 +30,7 @@ class Deck {
         'Other'
     ];
     
-    public $colorTypes = [
+    public array $colorTypes = [
         'White',
         'Blue',
         'Black',
@@ -37,11 +38,11 @@ class Deck {
         'Green'
     ];
     
-    public $modeList;
+    public array $modeList;
     
-    public $stockList = [];
+    public array $stockList = [];
     
-    protected $oracle;
+    protected Oracle $oracle;
     
     public function __construct(Player $player, DOMElement $deckNode, Oracle $oracle) {
         $this->ownerPlayer = $player;
@@ -91,7 +92,7 @@ class Deck {
      * @throws DOMException
      * @throws Exception
      */
-    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
+    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc): array {
         $retNodes = [];
         if ($query = $request->getInputValue('search-query')) {
             $retNodes[] = $this->oracle->createSearchElement($dataDoc, $query);
@@ -172,7 +173,7 @@ class Deck {
         return $retNodes;
     }
     
-    public function asObject() {
+    public function asObject(): array {
         $ret = [];
         
         $ret['name'] = $this->getName();
@@ -186,7 +187,7 @@ class Deck {
     /**
      * @throws DOMException
      */
-    public function asNode(?DOMDocument $dataDoc = null, $loadDeck = true) {
+    public function asNode(?DOMDocument $dataDoc = null, $loadDeck = true): DOMNode|false|DOMElement {
         if ($dataDoc === null) {
             $dataDoc = $this->ownerPlayer->doc;
             $xpath = $this->ownerPlayer->xpath;
@@ -260,18 +261,18 @@ class Deck {
         return $retNode;
     }
     
-    public function getKey() {
+    public function getKey(): string {
         return md5(md5($this->ownerPlayer->name) . md5($this->getName()));
     }
     
-    public function getType() {
+    public function getType(): string {
         return $this->node->getAttribute('type');
     }
     
     /**
      * @throws DOMException
      */
-    public function getTitle() {
+    public function getTitle(): string {
         $name = $this->getName();
         $deckNode = $this->asNode();
         $stock = $this->ownerPlayer->xpath->evaluate('sum(.//card/@stock)', $deckNode);
@@ -279,7 +280,7 @@ class Deck {
         return sprintf('%s (%d/%d cards)', $name, $count, $stock);
     }
     
-    public function getName() {
+    public function getName(): string {
         $name = $this->node->getAttribute('name');
         // $name = str_replace(' ', ' ', $name);
         if (! $name) {
@@ -291,14 +292,14 @@ class Deck {
     /**
      * @throws Exception
      */
-    public function setName($name) {
+    public function setName($name): void {
         if ($name !== $this->node->getAttribute('name')) {
             $this->node->setAttribute('name', $name);
             $this->save();
         }
     }
     
-    public function getCardList() {
+    public function getCardList(): array {
         $ret = [];
         $xpath = $this->ownerPlayer->xpath;
         $nodeList = $xpath->evaluate('card', $this->node);
@@ -311,23 +312,23 @@ class Deck {
     /**
      * @throws Exception
      */
-    public function setStockList(array $stockList) {
+    public function setStockList(array $stockList): void {
         foreach ($stockList as $name => $stock) {
             $this->setStock($name, $stock);
         }
         $this->save();
     }
     
-    public function setStock($name, $count) {
+    public function setStock($name, $count): void {
         $this->stockList[$name] = (int) $count;
         $this->node->setAttribute('stock', json_encode($this->stockList));
     }
     
-    public function getStock($name) {
+    public function getStock($name): int|string {
         return $this->stockList[$name] ?? 0;
     }
     
-    public function hasCard($name) {
+    public function hasCard($name): bool {
         $xpath = $this->ownerPlayer->xpath;
         return $xpath->evaluate(sprintf('boolean(card[@name = "%s"])', $name), $this->node);
     }
@@ -335,7 +336,7 @@ class Deck {
     /**
      * @throws Exception
      */
-    public function addCard($name, $stock = 1) {
+    public function addCard($name, $stock = 1): bool {
         $ret = false;
         if ($card = $this->oracle->searchCardByName($name)) {
             // my_dump([$this->getName(), $name]);die();
@@ -354,7 +355,7 @@ class Deck {
     /**
      * @throws Exception
      */
-    public function removeCard($name) {
+    public function removeCard($name): void {
         $xpath = $this->ownerPlayer->xpath;
         $nodeList = [];
         $tmpList = $xpath->evaluate(sprintf('card[@name = "%s"]', $name), $this->node);
@@ -372,14 +373,14 @@ class Deck {
     /**
      * @throws Exception
      */
-    public function save() {
+    public function save(): void {
         $this->ownerPlayer->save();
     }
     
     /**
      * @throws Exception
      */
-    public function upgrade() {
+    public function upgrade(): void {
         $cardList = $this->getCardList();
         foreach (array_keys($cardList) as $name) {
             $this->addCard($name, $this->getStock($name));

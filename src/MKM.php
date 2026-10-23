@@ -2,12 +2,13 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Core\Storage;
-use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
+use DOMElement;
 use DOMException;
 use Exception;
+use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\Configuration\ConfigurationField;
+use Slothsoft\Core\Storage;
 
 class MKM {
     
@@ -19,7 +20,7 @@ class MKM {
         return $field;
     }
     
-    public static function setDefaultAuthority(MKMAuthority $authority) {
+    public static function setDefaultAuthority(MKMAuthority $authority): void {
         self::defaultAuthority()->setValue($authority);
     }
     
@@ -33,18 +34,18 @@ class MKM {
     
     const URL_SHOP = '%s/Users/%s';
     
-    protected $storageTime;
+    protected int $storageTime;
     
-    protected $shopList = [];
+    protected array $shopList = [];
 
-    public $oracle;
+    public Oracle $oracle;
     
     public function __construct(Oracle $oracle) {
         $this->oracle = $oracle;
         $this->storageTime = Seconds::DAY;
     }
     
-    public function getShopByName($name) {
+    public function getShopByName($name): MKMShop {
         foreach ($this->shopList as $shop) {
             if ($shop->getName() === $name) {
                 return $shop;
@@ -57,7 +58,7 @@ class MKM {
         
     }
     
-    public function addShop(array $data) {
+    public function addShop(array $data): MKMShop {
         $shop = new MKMShop($this, $data);
         $this->shopList[] = $shop;
         return $shop;
@@ -67,7 +68,7 @@ class MKM {
      * @throws DOMException
      * @throws Exception
      */
-    public function createShoppingElement(DOMDocument $doc, array $req) {
+    public function createShoppingElement(DOMDocument $doc, array $req): false|DOMElement {
         $idTable = $this->oracle->getIdTable();
         $supplementalList = $idTable->getSetList();
         $vintageList = OracleInfo::getVintageLegalList();

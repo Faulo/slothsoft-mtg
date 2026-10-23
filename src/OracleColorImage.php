@@ -2,18 +2,18 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Core\IO\HTTPFile;
 use Exception;
+use Slothsoft\Core\IO\HTTPFile;
 
 class OracleColorImage {
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $imageDir;
+    protected string|false $imageDir;
     
-    protected $color;
+    protected string $color;
     
-    private $_convertFunction;
+    private ?array $_convertFunction = null;
     
     /**
      * @throws Exception
@@ -30,11 +30,11 @@ class OracleColorImage {
         $this->_convertFunction = null;
     }
     
-    public function getURL() {
+    public function getURL(): string {
         return sprintf('/getData.php/mtg/image?color=%s', $this->color);
     }
     
-    public function getFile() {
+    public function getFile(): ?HTTPFile {
         $ret = null;
         $fileDir = $this->imageDir;
         $fileName = sprintf('color.%s.png', $this->color);

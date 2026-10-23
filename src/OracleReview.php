@@ -3,20 +3,21 @@ declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
 use DOMDocument;
+use DOMElement;
 use DOMException;
 
 class OracleReview {
     
-    protected $file;
+    protected string $file;
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $data;
+    protected ?array $data = null;
     
-    protected $name;
+    protected string $name;
     
     // protected $dataChanged = false;
-    public function __construct($reviewFile, Oracle $oracle) {
+    public function __construct(string $reviewFile, Oracle $oracle) {
         $this->file = $reviewFile;
         $this->oracle = $oracle;
         $this->data = is_readable($this->file) ? json_decode(file_get_contents($this->file), true) : null;
@@ -30,7 +31,7 @@ class OracleReview {
         }
     }
     
-    public function updateData(array $setList) {
+    public function updateData(array $setList): int {
         $ret = 0;
         foreach ($setList as $setName => $cardList) {
             foreach ($cardList as $cardName => $card) {
@@ -42,7 +43,7 @@ class OracleReview {
         return $ret;
     }
     
-    public function updateCard($setName, $cardName, $rating, $comment) {
+    public function updateCard($setName, $cardName, $rating, $comment): bool {
         $ret = false;
         $rating = (int) $rating;
         $comment = (string) $comment;
@@ -66,22 +67,22 @@ class OracleReview {
         return $ret;
     }
     
-    public function save() {
+    public function save(): bool {
         return (bool) file_put_contents($this->file, json_encode($this->data));
     }
     
-    public function getName() {
+    public function getName(): array|string {
         return $this->name;
     }
     
-    public function getSetList() {
+    public function getSetList(): array {
         return array_keys($this->data);
     }
     
     /**
      * @throws DOMException
      */
-    public function asNode(?DOMDocument $dataDoc = null) {
+    public function asNode(?DOMDocument $dataDoc = null): false|DOMDocument|DOMElement|null {
         $returnDocument = $dataDoc === null;
         
         if ($returnDocument) {

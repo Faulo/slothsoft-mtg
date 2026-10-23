@@ -2,20 +2,20 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Core\IO\HTTPFile;
 use Exception;
+use Slothsoft\Core\IO\HTTPFile;
 
 class OracleCardImage {
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $imageDir;
+    protected string|false $imageDir;
     
-    protected $oracleId;
+    protected string $oracleId;
     
-    protected $setAbbr;
+    protected string $setAbbr;
     
-    protected $setNo;
+    protected string $setNo;
     
     private array $_convertFunction;
     
@@ -42,11 +42,11 @@ class OracleCardImage {
         ];
     }
     
-    public function getURL() {
+    public function getURL(): string {
         return sprintf('/getData.php/mtg/image?id=%s&set=%s&no=%s', $this->oracleId, $this->setAbbr, $this->setNo);
     }
     
-    public function getFile($recreate = false, $url = null) {
+    public function getFile($recreate = false, $url = null): ?HTTPFile {
         $ret = null;
         $fileDir = $this->imageDir;
         $match = null;

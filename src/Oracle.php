@@ -2,13 +2,16 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Core\DOMHelper;
-use Slothsoft\Core\Storage;
-use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
+use DOMDocumentFragment;
+use DOMElement;
 use DOMException;
+use DOMNode;
 use Exception;
 use Serializable;
+use Slothsoft\Core\Calendar\Seconds;
+use Slothsoft\Core\DOMHelper;
+use Slothsoft\Core\Storage;
 
 class Oracle implements Serializable {
     
@@ -55,7 +58,7 @@ class Oracle implements Serializable {
         // my_dump(array_diff(OracleInfo::getSetList(), $this->getOracleSetList()));
     }
     
-    public function initTables() {
+    public function initTables(): void {
         $table = $this->getIdTable();
         $table->init();
         $table = $this->getXMLTable();
@@ -64,21 +67,21 @@ class Oracle implements Serializable {
         $table->init();
     }
     
-    public function getIdTable() {
+    public function getIdTable(): ?OracleIdTable {
         if (! $this->idTable) {
             $this->idTable = new OracleIdTable($this->dbName, $this->idTableName);
         }
         return $this->idTable;
     }
     
-    public function getXMLTable() {
+    public function getXMLTable(): ?OracleXMLTable {
         if (! $this->xmlTable) {
             $this->xmlTable = new OracleXMLTable($this->dbName, $this->xmlTableName);
         }
         return $this->xmlTable;
     }
     
-    public function getCustomTable() {
+    public function getCustomTable(): ?OracleCustomTable {
         if (! $this->customTable) {
             $this->customTable = new OracleCustomTable($this->dbName, $this->customTableName);
         }
@@ -88,15 +91,15 @@ class Oracle implements Serializable {
     /**
      * @throws Exception
      */
-    public function getPlayer($playerFile) {
+    public function getPlayer($playerFile): OraclePlayer {
         return new OraclePlayer($playerFile, $this);
     }
     
-    public function getReview($reviewFile) {
+    public function getReview($reviewFile): OracleReview {
         return new OracleReview($reviewFile, $this);
     }
     
-    public function getCardImage($imageDir, $oracleId, $setAbbr, $setNo) {
+    public function getCardImage($imageDir, $oracleId, $setAbbr, $setNo): ?OracleCardImage {
         try {
             $ret = new OracleCardImage($this, $imageDir, $oracleId, $setAbbr, $setNo);
         } catch (Exception) {
@@ -105,7 +108,7 @@ class Oracle implements Serializable {
         return $ret;
     }
     
-    public function getRarityImage($imageDir, $setAbbr, $rarity) {
+    public function getRarityImage($imageDir, $setAbbr, $rarity): ?OracleRarityImage {
         try {
             $ret = new OracleRarityImage($this, $imageDir, $setAbbr, $rarity);
         } catch (Exception) {
@@ -114,7 +117,7 @@ class Oracle implements Serializable {
         return $ret;
     }
     
-    public function getSetImage($imageDir, $setAbbr) {
+    public function getSetImage($imageDir, $setAbbr): ?OracleSetImage {
         try {
             $ret = new OracleSetImage($this, $imageDir, $setAbbr);
         } catch (Exception) {
@@ -123,7 +126,7 @@ class Oracle implements Serializable {
         return $ret;
     }
     
-    public function getColorImage($imageDir, $color) {
+    public function getColorImage($imageDir, $color): ?OracleColorImage {
         try {
             $ret = new OracleColorImage($this, $imageDir, $color);
         } catch (Exception) {
@@ -132,7 +135,7 @@ class Oracle implements Serializable {
         return $ret;
     }
     
-    public function getSetList() {
+    public function getSetList(): array {
         $ret = [];
         if ($idTable = $this->getIdTable()) {
             $nameList = $idTable->getExpansionList();
@@ -148,7 +151,7 @@ class Oracle implements Serializable {
     /**
      * @throws Exception
      */
-    public function getOracleSetList($downloadFreshCopy = false) {
+    public function getOracleSetList($downloadFreshCopy = false): ?array {
         if ($this->_oracleSetList === null) {
             if ($xpath = Storage::loadExternalXPath($this->_oracleSetURL, $downloadFreshCopy ? 0 : Seconds::YEAR)) {
                 $this->_oracleSetList = [];
@@ -167,7 +170,7 @@ class Oracle implements Serializable {
     /**
      * @throws DOMException
      */
-    public function createSearchElement(DOMDocument $dataDoc, $inputQuery, $stock = 1) {
+    public function createSearchElement(DOMDocument $dataDoc, $inputQuery, $stock = 1): false|DOMElement {
         if (is_array($inputQuery)) {
             $query = $inputQuery;
         } else {
@@ -226,7 +229,7 @@ class Oracle implements Serializable {
     /**
      * @throws DOMException
      */
-    public function createSetElement(DOMDocument $dataDoc, $setName, array $stockList = []) {
+    public function createSetElement(DOMDocument $dataDoc, $setName, array $stockList = []): false|DOMElement {
         $retNode = $dataDoc->createElement('set');
         $retNode->setAttribute('name', $setName);
         
@@ -249,7 +252,7 @@ class Oracle implements Serializable {
      * @throws DOMException
      * @throws Exception
      */
-    public function createCategoriesElement(?DOMDocument $dataDoc = null) {
+    public function createCategoriesElement(?DOMDocument $dataDoc = null): false|DOMElement {
         if (! $dataDoc) {
             $dataDoc = $this->doc;
         }
@@ -262,7 +265,7 @@ class Oracle implements Serializable {
         return $categoryNode;
     }
     
-    public function createCardFragment(?DOMDocument $dataDoc = null, array $nameList = [], ?array $stockList = null) {
+    public function createCardFragment(?DOMDocument $dataDoc = null, array $nameList = [], ?array $stockList = null): ?DOMDocumentFragment {
         if (! $dataDoc) {
             $dataDoc = $this->doc;
         }
@@ -292,7 +295,7 @@ class Oracle implements Serializable {
         return $fragment->hasChildNodes() ? $fragment : null;
     }
     
-    public function createCardElement(?DOMDocument $dataDoc = null, $name = '') {
+    public function createCardElement(?DOMDocument $dataDoc = null, $name = ''): DOMNode|false|null {
         if (! $dataDoc) {
             $dataDoc = $this->doc;
         }
@@ -310,7 +313,7 @@ class Oracle implements Serializable {
         return $ret;
     }
     
-    public function createCardElementList(?DOMDocument $dataDoc = null, array $nameList = []) {
+    public function createCardElementList(?DOMDocument $dataDoc = null, array $nameList = []): array {
         foreach ($nameList as &$name) {
             $name = $this->_sanitizeName($name);
         }
@@ -334,7 +337,7 @@ class Oracle implements Serializable {
      * @throws DOMException
      * @throws Exception
      */
-    public function createChecklistElement(DOMDocument $dataDoc, array $stockList) {
+    public function createChecklistElement(DOMDocument $dataDoc, array $stockList): false|DOMElement {
         $checklistNode = $dataDoc->createElement('checklist');
         $setNameList = OracleInfo::getVintageLegalList();
         foreach ($setNameList as $setName) {
@@ -348,7 +351,7 @@ class Oracle implements Serializable {
     /**
      * @throws DOMException
      */
-    public function createPricelistElement(DOMDocument $dataDoc, array $stockList) {
+    public function createPricelistElement(DOMDocument $dataDoc, array $stockList): false|DOMElement {
         $retNode = $dataDoc->createElement('pricelist');
         
         // $idTable = $this->getIdTable();
@@ -375,7 +378,7 @@ class Oracle implements Serializable {
         return $retNode;
     }
     
-    protected function _sanitizeName($name) {
+    protected function _sanitizeName(string $name): string {
         // $name = str_replace(' & ', ' // ', $name);
         return $name;
     }

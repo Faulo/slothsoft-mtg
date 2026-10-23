@@ -2,12 +2,12 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Core\IO\HTTPFile;
 use Exception;
+use Slothsoft\Core\IO\HTTPFile;
 
 class OracleRarityImage {
     
-    protected $mappingList = [
+    protected array $mappingList = [
         'al' => '1E',
         'be' => '2E',
         'un' => '2U',
@@ -63,15 +63,15 @@ class OracleRarityImage {
         'di' => 'DIS'
     ];
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $imageDir;
+    protected string|false $imageDir;
     
-    protected $setAbbr;
+    protected string $setAbbr;
     
-    protected $rarity;
+    protected string $rarity;
     
-    private $_convertFunction;
+    private ?array $_convertFunction = null;
     
     /**
      * @throws Exception
@@ -92,11 +92,11 @@ class OracleRarityImage {
         $this->_convertFunction = null;
     }
     
-    public function getURL() {
+    public function getURL(): string {
         return sprintf('/getData.php/mtg/image?set=%s&rarity=%s', $this->setAbbr, $this->rarity);
     }
     
-    public function getFile() {
+    public function getFile(): ?HTTPFile {
         $ret = null;
         $fileDir = $this->imageDir;
         $fileName = sprintf('%s.%s.png', $this->setAbbr, $this->rarity);

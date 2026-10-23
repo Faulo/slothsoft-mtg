@@ -2,42 +2,44 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
+use DOMDocument;
+use DOMElement;
+use DOMException;
+use DOMXPath;
+use Exception;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Farah\HTTPRequest;
-use DOMDocument;
-use DOMException;
-use Exception;
 
 class Player {
     
-    public $key;
+    public string $key;
     
-    public $name;
+    public string $name;
     
-    public $doc;
+    public DOMDocument $doc;
     
-    public $file;
+    public string $file;
     
-    public $xpath;
+    public DOMXPath $xpath;
     
-    public $deckList;
+    public array $deckList;
     
-    public $repositoryDeck;
+    public ?Deck $repositoryDeck = null;
     
-    public $unusedDeck;
+    public ?Deck $unusedDeck = null;
     
-    public $wishlistDeck;
+    public ?Deck $wishlistDeck = null;
     
-    public $managedDeckList;
+    public array $managedDeckList;
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $saveLater = false;
+    protected bool $saveLater = false;
     
     /**
      * @throws Exception
      */
-    public function __construct($playerFile, Oracle $oracle) {
+    public function __construct(string $playerFile, Oracle $oracle) {
         $dom = new DOMHelper();
         $this->file = $playerFile;
         $this->oracle = $oracle;
@@ -81,7 +83,7 @@ class Player {
         $this->initUnused();
     }
     
-    public function initRepository() {
+    public function initRepository(): void {
         if ($this->repositoryDeck) {
             $repositoryStockList = [];
             $cardList = $this->repositoryDeck->getCardList();
@@ -117,7 +119,7 @@ class Player {
     /**
      * @throws Exception
      */
-    public function initUnused() {
+    public function initUnused(): void {
         if ($this->repositoryDeck and $this->unusedDeck) {
             $repositoryStockList = [];
             $cardList = $this->unusedDeck->getCardList();
@@ -150,11 +152,11 @@ class Player {
         }
     }
     
-    public function getDeck($deckNo) {
+    public function getDeck($deckNo): ?Deck {
         return $this->deckList[$deckNo] ?? null;
     }
     
-    public function getDeckByKey($deckKey) {
+    public function getDeckByKey($deckKey): ?Deck {
         foreach ($this->deckList as $deck) {
             if ($deck->getKey() === $deckKey) {
                 return $deck;
@@ -166,7 +168,7 @@ class Player {
     /**
      * @throws Exception
      */
-    public function save($now = false) {
+    public function save($now = false): void {
         $this->saveLater = true;
         if ($now) {
             if (headers_sent()) {
@@ -180,7 +182,7 @@ class Player {
     /**
      * @throws Exception
      */
-    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
+    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc): array {
         $retNodes = [];
         if ($request->getInputValue('deck-add') and $data = $request->getInputJSON()) {
             $cardName = $data['cardName'];
@@ -201,7 +203,7 @@ class Player {
         return $retNodes;
     }
     
-    public function asObject() {
+    public function asObject(): array {
         $ret = [];
         
         $ret['name'] = $this->name;
@@ -217,7 +219,7 @@ class Player {
     /**
      * @throws DOMException
      */
-    public function asNode(DOMDocument $dataDoc, $loadDecks = true) {
+    public function asNode(DOMDocument $dataDoc, $loadDecks = true): false|DOMElement {
         $retNode = $dataDoc->createElement('player');
         $arr = [];
         $arr['key'] = $this->key;

@@ -6,7 +6,7 @@ use Exception;
 
 class OracleXMLTable extends OracleTable {
     
-    protected function install() {
+    protected function install(): void {
         $sqlCols = [
             'id' => 'bigint UNSIGNED NOT NULL AUTO_INCREMENT',
             'name' => 'varchar(150) NOT NULL',
@@ -24,7 +24,7 @@ class OracleXMLTable extends OracleTable {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
     
-    public function searchCardByName($name) {
+    public function searchCardByName($name): array {
         $ret = [];
         if (strlen($name)) {
             $name = explode(' ', $name);
@@ -48,7 +48,7 @@ class OracleXMLTable extends OracleTable {
         return $ret;
     }
     
-    public function searchNameByName($name) {
+    public function searchNameByName($name): ?array {
         $ret = [];
         if (strlen($name)) {
             $name = explode(' ', $name);
@@ -66,7 +66,7 @@ class OracleXMLTable extends OracleTable {
         return $ret;
     }
     
-    public function getCardListByNameList(array $nameList) {
+    public function getCardListByNameList(array $nameList): array {
         $ret = [];
         $resList = $this->dbmsTable->select([
             'name',
@@ -80,13 +80,13 @@ class OracleXMLTable extends OracleTable {
         return $ret;
     }
     
-    public function getXMLListByNameList(array $nameList) {
+    public function getXMLListByNameList(array $nameList): ?array {
         return $this->dbmsTable->select('xml', [
             'name' => $nameList
         ]);
     }
     
-    public function createRow(array $data) {
+    public function createRow(array $data): ?bool {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
         } catch (Exception) {
@@ -95,7 +95,7 @@ class OracleXMLTable extends OracleTable {
         return $ret;
     }
     
-    public function createCard($name, $xml) {
+    public function createCard($name, $xml): ?bool {
         $data = [];
         $data['name'] = $name;
         $data['xml'] = $xml;

@@ -10,7 +10,7 @@ class OracleXSLT {
     /**
      * @throws DOMException
      */
-    public static function cardsByExpansion($expansion) {
+    public static function cardsByExpansion($expansion): DOMDocument {
         $query = [
             'expansion_name' => $expansion
         ];

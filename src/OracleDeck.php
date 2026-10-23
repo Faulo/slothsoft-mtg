@@ -2,20 +2,22 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Farah\HTTPRequest;
 use DOMDocument;
+use DOMDocumentFragment;
+use DOMElement;
 use DOMException;
 use Exception;
+use Slothsoft\Farah\HTTPRequest;
 
 class OracleDeck {
     
-    protected $data;
+    protected array $data;
     
-    protected $ownerPlayer;
+    protected OraclePlayer $ownerPlayer;
     
-    protected $modeList;
+    protected array $modeList;
     
-    protected $typeList = [
+    protected array $typeList = [
         'unmanaged',
         'managed',
         'repository',
@@ -23,15 +25,15 @@ class OracleDeck {
         'wishlist'
     ];
     
-    protected $stockList;
+    protected array $stockList;
     
-    protected $sideboard;
+    protected array $sideboard;
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $metaChanged = false;
+    protected bool $metaChanged = false;
     
-    protected $stockChanged = false;
+    protected bool $stockChanged = false;
     
     public function __construct(array $data, OraclePlayer $player, Oracle $oracle) {
         $this->data = $data;
@@ -80,7 +82,7 @@ class OracleDeck {
     /**
      * @throws DOMException
      */
-    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
+    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc): array {
         $retNodes = [];
         if ($query = $request->getInputValue('search-query')) {
             $retNodes[] = $this->oracle->createSearchElement($dataDoc, $query);
@@ -250,7 +252,7 @@ class OracleDeck {
         return $retNodes;
     }
     
-    public function asObject() {
+    public function asObject(): array {
         $ret = [];
         
         $ret['name'] = $this->getName();
@@ -265,7 +267,7 @@ class OracleDeck {
     /**
      * @throws DOMException
      */
-    public function asNode(?DOMDocument $dataDoc = null) {
+    public function asNode(?DOMDocument $dataDoc = null): false|DOMDocument|DOMElement|null {
         $returnDocument = $dataDoc === null;
         
         if ($returnDocument) {
@@ -317,29 +319,29 @@ class OracleDeck {
         return $retNode;
     }
     
-    public function getKey() {
+    public function getKey(): ?string {
         return $this->ownerPlayer->getDeckKey($this);
     }
     
-    public function getType() {
+    public function getType(): string {
         return $this->data['type'];
     }
     
-    public function setType($type) {
+    public function setType($type): void {
         if (in_array($type, $this->typeList) and $this->data['type'] !== $type) {
             $this->data['type'] = $type;
             $this->metaChanged = true;
         }
     }
     
-    public function getTitle() {
+    public function getTitle(): string {
         $name = $this->getName();
         $stock = array_sum($this->stockList);
         $count = count($this->stockList);
         return sprintf('%s (%d/%d cards)', $name, $count, $stock);
     }
     
-    public function getName() {
+    public function getName(): string {
         $name = $this->data['name'];
         // $name = str_replace(' ', ' ', $name);
         if (! $name) {
@@ -348,18 +350,18 @@ class OracleDeck {
         return $name;
     }
     
-    public function setName($name) {
+    public function setName($name): void {
         if ($name !== $this->data['name']) {
             $this->data['name'] = $name;
             $this->metaChanged = true;
         }
     }
     
-    public function getStockNameList() {
+    public function getStockNameList(): array {
         return array_keys($this->stockList);
     }
     
-    public function getStockFragment(DOMDocument $dataDoc) {
+    public function getStockFragment(DOMDocument $dataDoc): DOMDocumentFragment|false|null {
         $retFragment = null;
         if ($nodeList = $this->oracle->createCardElementList($dataDoc, $this->getStockNameList())) {
             $retFragment = $dataDoc->createDocumentFragment();
@@ -377,11 +379,11 @@ class OracleDeck {
         return $retFragment;
     }
     
-    public function getSideboardNameList() {
+    public function getSideboardNameList(): array {
         return array_keys($this->sideboard);
     }
     
-    public function getSideboardFragment(DOMDocument $dataDoc) {
+    public function getSideboardFragment(DOMDocument $dataDoc): DOMDocumentFragment|false|null {
         $retFragment = null;
         if ($nodeList = $this->oracle->createCardElementList($dataDoc, $this->getSideboardNameList())) {
             $retFragment = $dataDoc->createDocumentFragment();
@@ -399,13 +401,13 @@ class OracleDeck {
         return $retFragment;
     }
     
-    public function setStockList(array $stockList) {
+    public function setStockList(array $stockList): void {
         foreach ($stockList as $name => $stock) {
             $this->setStock($name, $stock);
         }
     }
     
-    public function setStock($name, $count) {
+    public function setStock($name, $count): void {
         $count = (int) $count;
         if (! isset($this->stockList[$name]) or $this->stockList[$name] !== $count) {
             $this->stockList[$name] = $count;
@@ -413,17 +415,17 @@ class OracleDeck {
         }
     }
     
-    public function getStock($name) {
+    public function getStock($name): int|string {
         return $this->stockList[$name] ?? 0;
     }
     
-    public function setSideboardList(array $stockList) {
+    public function setSideboardList(array $stockList): void {
         foreach ($stockList as $name => $stock) {
             $this->setSideboard($name, $stock);
         }
     }
     
-    public function setSideboard($name, $count) {
+    public function setSideboard($name, $count): void {
         $count = (int) $count;
         if (! isset($this->sideboard[$name]) or $this->sideboard[$name] !== $count) {
             $this->sideboard[$name] = $count;
@@ -431,11 +433,11 @@ class OracleDeck {
         }
     }
     
-    public function getSideboard($name) {
+    public function getSideboard($name): int|string {
         return $this->sideboard[$name] ?? 0;
     }
     
-    public function removeSideboard($name) {
+    public function removeSideboard($name): bool {
         $ret = false;
         if (isset($this->sideboard[$name])) {
             unset($this->sideboard[$name]);
@@ -445,11 +447,11 @@ class OracleDeck {
         return $ret;
     }
     
-    public function hasCard($name) {
+    public function hasCard($name): bool {
         return isset($this->stockList[$name]);
     }
     
-    public function addCard($name, $stock = 1) {
+    public function addCard($name, $stock = 1): bool {
         $ret = false;
         if ($cardNode = $this->oracle->createCardElement(null, $name)) {
             $name = $cardNode->getAttribute('name');
@@ -464,7 +466,7 @@ class OracleDeck {
         return $ret;
     }
     
-    public function removeCard($name) {
+    public function removeCard($name): bool {
         $ret = false;
         if (isset($this->stockList[$name])) {
             unset($this->stockList[$name]);
@@ -474,20 +476,20 @@ class OracleDeck {
         return $ret;
     }
     
-    public function hasMetaChanged() {
+    public function hasMetaChanged(): bool {
         return $this->metaChanged;
     }
     
-    public function hasStockChanged() {
+    public function hasStockChanged(): bool {
         return $this->stockChanged;
     }
     
     /**
      * @throws Exception
      */
-    public function save() {
+    public function save(): void {
         $this->ownerPlayer->save();
     }
     
-    public function upgrade() {}
+    public function upgrade(): void {}
 }

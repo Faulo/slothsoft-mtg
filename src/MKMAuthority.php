@@ -4,13 +4,13 @@ namespace Slothsoft\MTG;
 
 class MKMAuthority {
     
-    public $appToken;
+    public string $appToken;
     
-    public $appSecret;
+    public string $appSecret;
     
-    public $accessToken;
+    public string $accessToken;
     
-    public $accessSecret;
+    public string $accessSecret;
     
     public function __construct(string $appToken, string $appSecret, string $accessToken, string $accessSecret) {
         $this->appToken = $appToken;

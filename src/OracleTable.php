@@ -2,43 +2,44 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Core\DBMS\Manager;
 use Serializable;
+use Slothsoft\Core\DBMS\Manager;
+use Slothsoft\Core\DBMS\Table;
 
 abstract class OracleTable implements Serializable {
     
-    protected $dbName;
+    protected string $dbName;
     
-    protected $tableName;
+    protected string $tableName;
     
-    protected $dbmsTable;
+    protected Table $dbmsTable;
     
-    public function __construct($dbName, $tableName) {
+    public function __construct(string $dbName, string $tableName) {
         $this->dbName = $dbName;
         $this->tableName = $tableName;
         $this->dbmsTable = Manager::getTable($dbName, $tableName);
         $this->init();
     }
     
-    public function init() {
+    public function init(): void {
         if (! $this->exists()) {
             $this->install();
         }
     }
     
-    public function exists() {
+    public function exists(): ?bool {
         return $this->dbmsTable->tableExists();
     }
     
-    public function getDBName() {
+    public function getDBName(): string {
         return $this->dbName;
     }
     
-    public function getTableName() {
+    public function getTableName(): string {
         return $this->tableName;
     }
     
-    abstract protected function install();
+    abstract protected function install(): void;
     
     public function __serialize(): array {
         return [

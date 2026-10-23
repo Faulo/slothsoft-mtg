@@ -2,42 +2,43 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
-use Slothsoft\Farah\HTTPRequest;
-use Slothsoft\Core\Storage;
 use DOMDocument;
+use DOMElement;
 use DOMException;
 use Exception;
+use Slothsoft\Core\Storage;
+use Slothsoft\Farah\HTTPRequest;
 
 class OraclePlayer {
     
-    protected $key;
+    protected string $key;
     
-    protected $name;
+    protected string $name;
     
-    protected $data;
+    protected ?array $data = null;
     
-    protected $file;
+    protected string $file;
     
-    protected $deckList;
+    protected array $deckList;
     
-    protected $repositoryDeck;
+    protected ?OracleDeck $repositoryDeck = null;
     
-    protected $unusedDeck;
+    protected ?OracleDeck $unusedDeck = null;
     
-    protected $wishlistDeck;
+    protected ?OracleDeck $wishlistDeck = null;
     
-    protected $managedDeckList;
+    protected array $managedDeckList;
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $deckMetaChanged = false;
+    protected bool $deckMetaChanged = false;
     
-    protected $deckStockChanged = false;
+    protected bool $deckStockChanged = false;
     
     /**
      * @throws Exception
      */
-    public function __construct($playerFile, Oracle $oracle) {
+    public function __construct(string $playerFile, Oracle $oracle) {
         $this->file = $playerFile;
         $this->oracle = $oracle;
         $this->data = json_decode(file_get_contents($this->file), true);
@@ -104,7 +105,7 @@ class OraclePlayer {
         $this->initUnused();
     }
     
-    public function initRepository() {
+    public function initRepository(): void {
         if ($this->repositoryDeck) {
             $repositoryStockList = [];
             $cardList = $this->repositoryDeck->getStockNameList();
@@ -144,7 +145,7 @@ class OraclePlayer {
         }
     }
     
-    public function initUnused() {
+    public function initUnused(): void {
         if ($this->repositoryDeck and $this->unusedDeck) {
             $repositoryStockList = [];
             $cardList = $this->unusedDeck->getStockNameList();
@@ -176,7 +177,7 @@ class OraclePlayer {
         }
     }
     
-    public function createDeck($deckNo) {
+    public function createDeck(int|string $deckNo): int|string {
         // {"name":"Deck #4","key":"c68c9d99f3131a1f25ef4dfe830456e7","type":"managed","stockList":[]}
         $deckData = [];
         $deckData['name'] = 'New Deck';
@@ -191,7 +192,7 @@ class OraclePlayer {
         return $deckNo;
     }
     
-    public function removeDeck($deckNo) {
+    public function removeDeck(int|string $deckNo): int|string {
         if (isset($this->deckList[$deckNo])) {
             $this->deckMetaChanged = true;
             unset($this->deckList[$deckNo]);
@@ -199,7 +200,7 @@ class OraclePlayer {
         return $deckNo;
     }
     
-    public function moveDeck($deckNo, $offset) {
+    public function moveDeck(int|string $deckNo, $offset): int|string {
         $retNo = $deckNo;
         if (isset($this->deckList[$deckNo])) {
             $this->deckMetaChanged = true;
@@ -242,11 +243,11 @@ class OraclePlayer {
         return $retNo;
     }
     
-    public function getDeck($deckNo) {
+    public function getDeck(int|string $deckNo): ?OracleDeck {
         return $this->deckList[$deckNo] ?? null;
     }
     
-    public function getDeckByKey($deckKey) {
+    public function getDeckByKey($deckKey): ?OracleDeck {
         foreach ($this->deckList as $deck) {
             if ($deck->getKey() === $deckKey) {
                 return $deck;
@@ -258,7 +259,7 @@ class OraclePlayer {
     /**
      * @throws Exception
      */
-    public function save() {
+    public function save(): void {
         if (! $this->deckMetaChanged) {
             foreach ($this->deckList as $deck) {
                 if ($deck->hasMetaChanged()) {
@@ -287,7 +288,7 @@ class OraclePlayer {
     /**
      * @throws Exception
      */
-    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
+    public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc): array {
         $retNodes = [];
         // unused ???
         if ($request->getInputValue('deck-add') and $data = $request->getInputJSON()) {
@@ -348,27 +349,27 @@ class OraclePlayer {
         return $retNodes;
     }
     
-    public function getName() {
+    public function getName(): string {
         return $this->name;
     }
     
-    public function getFirstname() {
+    public function getFirstname(): string {
         return $this->data['firstname'] ?? '';
     }
     
-    public function getLastname() {
+    public function getLastname(): string {
         return $this->data['lastname'] ?? '';
     }
     
-    public function getDCI() {
+    public function getDCI(): int|string {
         return $this->data['dci'] ?? '';
     }
     
-    public function getKey() {
+    public function getKey(): string {
         return $this->key;
     }
     
-    public function getDeckKey(OracleDeck $deck) {
+    public function getDeckKey(OracleDeck $deck): ?string {
         $ret = null;
         foreach ($this->deckList as $no => $tmpDeck) {
             if ($tmpDeck === $deck) {
@@ -379,7 +380,7 @@ class OraclePlayer {
         return $ret;
     }
     
-    public function asObject() {
+    public function asObject(): array {
         $ret = [];
         
         // $ret['name'] = $this->getName();
@@ -398,7 +399,7 @@ class OraclePlayer {
     /**
      * @throws DOMException
      */
-    public function asNode(?DOMDocument $dataDoc = null) {
+    public function asNode(?DOMDocument $dataDoc = null): false|DOMDocument|DOMElement|null {
         $returnDocument = $dataDoc === null;
         
         if ($returnDocument) {

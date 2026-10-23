@@ -3,30 +3,31 @@ declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
 use DOMDocument;
+use DOMElement;
 use DOMException;
 
 class MKMShop {
     
-    protected $ownerMKM;
+    protected MKM $ownerMKM;
     
-    protected $data = [
+    protected array $data = [
         'name' => '',
         'uri' => '',
         'country' => ''
     ];
     
-    protected $boosterList = [];
+    protected array $boosterList = [];
     
     public function __construct(MKM $mkm, array $data) {
         $this->ownerMKM = $mkm;
         $this->setData($data);
     }
     
-    public function getName() {
+    public function getName(): string {
         return $this->data['name'];
     }
     
-    public function addBooster(array $data) {
+    public function addBooster(array $data): MKMBooster {
         $booster = new MKMBooster($this, $data);
         if ($oldBooster = $this->getBoosterByName($data['name'])) {
             if ($booster->getPrice() >= $oldBooster->getPrice()) {
@@ -37,7 +38,7 @@ class MKMShop {
         return $booster;
     }
     
-    public function getBoosterByName($name) {
+    public function getBoosterByName($name): ?MKMBooster {
         foreach ($this->boosterList as $booster) {
             if ($booster->getName() === $name) {
                 return $booster;
@@ -46,7 +47,7 @@ class MKMShop {
         return null;
     }
     
-    public function setData(array $data) {
+    public function setData(array $data): void {
         foreach ($this->data as $key => &$val) {
             if (isset($data[$key])) {
                 settype($data[$key], gettype($val));
@@ -59,7 +60,7 @@ class MKMShop {
     /**
      * @throws DOMException
      */
-    public function asNode(DOMDocument $doc) {
+    public function asNode(DOMDocument $doc): false|DOMElement {
         $retNode = $doc->createElement('shop');
         foreach ($this->data as $key => $val) {
             $retNode->setAttribute($key, $val);

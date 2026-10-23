@@ -6,7 +6,7 @@ use w3c\dom\Node;
 
 class OracleCardTable extends OracleTable {
     
-    protected function install() {
+    protected function install(): void {
         $sqlCols = [
             'id' => 'bigint NOT NULL AUTO_INCREMENT',
             'oracle_id' => 'bigint NOT NULL',
@@ -26,7 +26,7 @@ class OracleCardTable extends OracleTable {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
     
-    protected function castList(array &$dataList) {
+    protected function castList(array &$dataList): array {
         foreach ($dataList as &$data) {
             $this->cast($data);
         }
@@ -34,7 +34,7 @@ class OracleCardTable extends OracleTable {
         return $dataList;
     }
     
-    protected function cast(array &$data) {
+    protected function cast(array &$data): array {
         foreach ([
             'id',
             'parent_id',
@@ -50,7 +50,7 @@ class OracleCardTable extends OracleTable {
         return $data;
     }
     
-    public function cleanse($documentId) {
+    public function cleanse($documentId): void {
         while ($idList = $this->dbmsTable->select('id', [
             'parent_id' => null
         ], sprintf(' AND id != %d', $documentId))) {
@@ -62,26 +62,26 @@ class OracleCardTable extends OracleTable {
         }
     }
     
-    public function getDataList() {
+    public function getDataList(): array {
         $dataList = $this->dbmsTable->select();
         return $this->castList($dataList);
     }
     
-    public function getNode($id) {
+    public function getNode($id): ?array {
         $dataList = $this->dbmsTable->select(true, [
             'id' => $id
         ]);
         return $dataList ? $this->cast($dataList[0]) : null;
     }
     
-    public function getIdByAttribute($attrValue, array $attrIdList) {
+    public function getIdByAttribute($attrValue, array $attrIdList): ?int {
         $idList = $this->dbmsTable->select('parent_id', [
             'value' => $attrValue
         ], sprintf('AND parent_id IS NOT NULL AND name IN (%s) LIMIT 1', implode(',', $attrIdList)));
         return count($idList) ? (int) $idList[0] : null;
     }
     
-    public function getIdListByAttribute($attrValue, array $attrIdList) {
+    public function getIdListByAttribute($attrValue, array $attrIdList): ?array {
         $idList = $this->dbmsTable->select('parent_id', [
             'value' => $attrValue
         ], sprintf('AND parent_id IS NOT NULL AND name IN (%s)', implode(',', $attrIdList)));
@@ -92,21 +92,21 @@ class OracleCardTable extends OracleTable {
         return $idList;
     }
     
-    public function getNodeListByParent($parentId) {
+    public function getNodeListByParent($parentId): array {
         $dataList = $this->dbmsTable->select(true, [
             'parent_id' => $parentId
         ]);
         return $this->castList($dataList);
     }
     
-    public function getChildNodes($parentId) {
+    public function getChildNodes($parentId): array {
         $dataList = $this->dbmsTable->select(true, [
             'parent_id' => $parentId
         ], 'AND type != ' . Node::ATTRIBUTE_NODE);
         return $this->castList($dataList);
     }
     
-    public function getAttributes($parentId) {
+    public function getAttributes($parentId): array {
         $dataList = $this->dbmsTable->select(true, [
             'parent_id' => $parentId,
             'type' => Node::ATTRIBUTE_NODE
@@ -114,24 +114,24 @@ class OracleCardTable extends OracleTable {
         return $this->castList($dataList);
     }
     
-    public function getNodeByType($type) {
+    public function getNodeByType($type): ?array {
         $dataList = $this->dbmsTable->select(true, [
             'type' => $type
         ], 'LIMIT 1');
         return $dataList ? $this->cast($dataList[0]) : null;
     }
     
-    public function getNodeListByType($type) {
+    public function getNodeListByType($type): ?array {
         return $this->dbmsTable->select(true, [
             'type' => $type
         ]);
     }
     
-    public function getNamespaceList() {
+    public function getNamespaceList(): ?array {
         return $this->dbmsTable->select('DISTINCT namespace');
     }
     
-    public function createNode($type, $ns, $name, $value, $parentId) {
+    public function createNode($type, $ns, $name, $value, $parentId): array {
         $data = [];
         $data['type'] = $type;
         $data['namespace'] = $ns;
@@ -144,7 +144,7 @@ class OracleCardTable extends OracleTable {
         return $this->cast($data);
     }
     
-    public function updateNodeValue(Node $node, $value) {
+    public function updateNodeValue(Node $node, $value): void {
         if ($node->data['value'] !== $value) {
             $node->data['value'] = $value;
             $this->dbmsTable->update([
@@ -153,7 +153,7 @@ class OracleCardTable extends OracleTable {
         }
     }
     
-    public function updateNodeParent(Node $node, $parentId) {
+    public function updateNodeParent(Node $node, $parentId): void {
         if ($node->data['parent_id'] !== $parentId) {
             $node->data['parent_id'] = $parentId;
             $this->dbmsTable->update([

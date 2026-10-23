@@ -2,17 +2,17 @@
 declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
+use Exception;
 use Slothsoft\Core\Image;
 use Slothsoft\Core\IO\HTTPFile;
-use Exception;
 
 class OracleSetImage {
     
-    protected $oracle;
+    protected Oracle $oracle;
     
-    protected $imageDir;
+    protected string|false $imageDir;
     
-    protected $setAbbr;
+    protected string $setAbbr;
     
     /**
      * @throws Exception
@@ -31,7 +31,7 @@ class OracleSetImage {
     /**
      * @throws Exception
      */
-    public function getFile($recreate = false) {
+    public function getFile($recreate = false): ?HTTPFile {
         $fileDir = $this->imageDir;
         $fileName = sprintf('set.%s.png', $this->setAbbr);
         $fileName = strtolower($fileName);

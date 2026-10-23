@@ -660,16 +660,6 @@ class OracleInfo {
         return $ret;
     }
     
-    public static function getMarketOAuth(): array {
-        $authority = MKM::getDefaultAuthority();
-        return [
-            'appToken' => $authority->appToken,
-            'appSecret' => $authority->appSecret,
-            'accessToken' => $authority->accessToken,
-            'accessSecret' => $authority->accessSecret
-        ];
-    }
-    
     public static function getNameKey($name): string {
         $name = strtolower($name);
         $name = str_replace([

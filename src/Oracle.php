@@ -88,53 +88,6 @@ class Oracle implements Serializable {
         return $this->customTable;
     }
     
-    /**
-     * @throws Exception
-     */
-    public function getPlayer($playerFile): OraclePlayer {
-        return new OraclePlayer($playerFile, $this);
-    }
-    
-    public function getReview($reviewFile): OracleReview {
-        return new OracleReview($reviewFile, $this);
-    }
-    
-    public function getCardImage($imageDir, $oracleId, $setAbbr, $setNo): ?OracleCardImage {
-        try {
-            $ret = new OracleCardImage($this, $imageDir, $oracleId, $setAbbr, $setNo);
-        } catch (Exception) {
-            $ret = null;
-        }
-        return $ret;
-    }
-    
-    public function getRarityImage($imageDir, $setAbbr, $rarity): ?OracleRarityImage {
-        try {
-            $ret = new OracleRarityImage($this, $imageDir, $setAbbr, $rarity);
-        } catch (Exception) {
-            $ret = null;
-        }
-        return $ret;
-    }
-    
-    public function getSetImage($imageDir, $setAbbr): ?OracleSetImage {
-        try {
-            $ret = new OracleSetImage($this, $imageDir, $setAbbr);
-        } catch (Exception) {
-            $ret = null;
-        }
-        return $ret;
-    }
-    
-    public function getColorImage($imageDir, $color): ?OracleColorImage {
-        try {
-            $ret = new OracleColorImage($this, $imageDir, $color);
-        } catch (Exception) {
-            $ret = null;
-        }
-        return $ret;
-    }
-    
     public function getSetList(): array {
         $ret = [];
         if ($idTable = $this->getIdTable()) {

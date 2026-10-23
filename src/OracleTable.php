@@ -40,15 +40,22 @@ abstract class OracleTable implements Serializable {
     
     abstract protected function install();
     
-    public function serialize() {
-        return serialize([
+    public function __serialize(): array {
+        return [
             'db' => $this->dbName,
             'table' => $this->tableName
-        ]);
+        ];
     }
-    
-    public function unserialize($data) {
-        $data = unserialize($data);
+
+    public function __unserialize(array $data): void {
         $this->__construct($data['db'], $data['table']);
+    }
+
+    public function serialize(): string {
+        return serialize($this->__serialize());
+    }
+
+    public function unserialize(string $data): void {
+        $this->__unserialize(unserialize($data));
     }
 }

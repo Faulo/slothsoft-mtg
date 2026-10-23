@@ -39,6 +39,10 @@ class Oracle implements Serializable {
     ];
     
     public function __construct(string $dbName, ?DOMDocument $doc = null) {
+        $this->initialize($dbName, $doc);
+    }
+
+    private function initialize(string $dbName, ?DOMDocument $doc = null): void {
         $this->dbName = $dbName;
         
         $this->doc = $doc;
@@ -380,11 +384,19 @@ class Oracle implements Serializable {
         return new DOMHelper();
     }
     
-    public function serialize() {
+    public function __serialize(): array {
+        return ['db' => $this->dbName];
+    }
+
+    public function __unserialize(array $data): void {
+        $this->initialize($data['db']);
+    }
+
+    public function serialize(): string {
         return $this->dbName;
     }
     
-    public function unserialize($data) {
-        $this->__construct($data);
+    public function unserialize(string $data): void {
+        $this->initialize($data);
     }
 }

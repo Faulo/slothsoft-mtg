@@ -82,7 +82,7 @@ class OracleCustomTable extends OracleTable {
     public function createRow(array $data) {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;
@@ -91,7 +91,7 @@ class OracleCustomTable extends OracleTable {
     public function updateRowByName(array $data, $name) {
         try {
             $ret = (bool) $this->dbmsTable->update($data, $this->getIdListByName($name));
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;

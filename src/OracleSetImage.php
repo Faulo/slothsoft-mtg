@@ -14,6 +14,9 @@ class OracleSetImage {
     
     protected $setAbbr;
     
+    /**
+     * @throws Exception
+     */
     public function __construct(Oracle $oracle, $imageDir, $setAbbr) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
@@ -25,6 +28,9 @@ class OracleSetImage {
         $this->imageDir .= DIRECTORY_SEPARATOR;
     }
     
+    /**
+     * @throws Exception
+     */
     public function getFile($recreate = false) {
         $fileDir = $this->imageDir;
         $fileName = sprintf('set.%s.png', $this->setAbbr);

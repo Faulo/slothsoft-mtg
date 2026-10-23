@@ -17,6 +17,9 @@ class GathererDownloader {
         return sprintf('http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%s', $oracleId);
     }
     
+    /**
+     * @throws Exception
+     */
     public function getCardIdsBySetName(string $setName): iterable {
         $ret = [];
         for ($setPage = 0; $setPage < 10; $setPage ++) {
@@ -47,6 +50,9 @@ class GathererDownloader {
         return array_values($ret);
     }
     
+    /**
+     * @throws Exception
+     */
     private function getIdVariations(int $oracleId): iterable {
         $ret = [];
         $ret[] = $oracleId;
@@ -62,10 +68,16 @@ class GathererDownloader {
         return array_unique($ret);
     }
     
+    /**
+     * @throws Exception
+     */
     public function getCardById(int $oracleId): Card {
         return new Card($this->getCardDataById($oracleId));
     }
     
+    /**
+     * @throws Exception
+     */
     private function getCardDataById(int $oracleId): array {
         static $setMappingList = [
             25498 => '6e',
@@ -209,7 +221,7 @@ class GathererDownloader {
         // }
         
         if (! strlen($ret['expansion_number'])) {
-            throw new Exception(sprintf('CARD NUMBER NOT FOUND: %s [%s] #%s', $ret['name'], OracleInfo::getNameKey($ret['name']), $oracleId), true);
+            throw new Exception(sprintf('CARD NUMBER NOT FOUND: %s [%s] #%s', $ret['name'], OracleInfo::getNameKey($ret['name']), $oracleId), 1);
         }
         
         $legality = OracleInfo::getCardLegality($ret);
@@ -228,6 +240,9 @@ class GathererDownloader {
     
     private const XPATH_SET_CARDNAME = 'normalize-space(td[2])';
     
+    /**
+     * @throws Exception
+     */
     private function getCardNamesBySetAbbr(string $setAbbr): array {
         $ret = [];
         $data = [
@@ -249,4 +264,3 @@ class GathererDownloader {
         return $ret;
     }
 }
-

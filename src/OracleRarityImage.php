@@ -73,6 +73,9 @@ class OracleRarityImage {
     
     private $_convertFunction;
     
+    /**
+     * @throws Exception
+     */
     public function __construct(Oracle $oracle, $imageDir, $setAbbr, $rarity) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
@@ -86,10 +89,6 @@ class OracleRarityImage {
         if (! file_exists($this->imageDir)) {
             mkdir($this->imageDir, 0777, true);
         }
-        $this->_convertFunction = [
-            '\\Slothsoft\\Core\\Image',
-            'convertFile'
-        ];
         $this->_convertFunction = null;
     }
     
@@ -106,7 +105,7 @@ class OracleRarityImage {
         if (file_exists($filePath)) {
             $ret = HTTPFile::createFromPath($filePath, $fileName);
         } else {
-            $setAbbr = isset($this->mappingList[$this->setAbbr]) ? $this->mappingList[$this->setAbbr] : $this->setAbbr;
+            $setAbbr = $this->mappingList[$this->setAbbr] ?? $this->setAbbr;
             $url = sprintf('http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=%s&size=large&rarity=%s', $setAbbr, $this->rarity);
             
             if ($file = HTTPFile::createFromURL($url, $fileName)) {

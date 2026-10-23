@@ -15,6 +15,9 @@ class OracleColorImage {
     
     private $_convertFunction;
     
+    /**
+     * @throws Exception
+     */
     public function __construct(Oracle $oracle, $imageDir, $color) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
@@ -24,10 +27,6 @@ class OracleColorImage {
             throw new Exception('INVALID ARGUMENTS');
         }
         $this->imageDir .= DIRECTORY_SEPARATOR;
-        $this->_convertFunction = [
-            '\\Slothsoft\\Core\\Image',
-            'convertFile'
-        ];
         $this->_convertFunction = null;
     }
     

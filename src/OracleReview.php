@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
 use DOMDocument;
+use DOMException;
 
 class OracleReview {
     
@@ -77,6 +78,9 @@ class OracleReview {
         return array_keys($this->data);
     }
     
+    /**
+     * @throws DOMException
+     */
     public function asNode(?DOMDocument $dataDoc = null) {
         $returnDocument = $dataDoc === null;
         

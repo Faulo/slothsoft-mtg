@@ -79,16 +79,16 @@ class OracleIdTable extends OracleTable {
     public function searchNameByCard(array $query) {
         $ret = [];
         $sqlList = [];
-        foreach ($query as $key => $val) {
-            if (strlen($val)) {
-                if ($val[0] === '!') {
-                    $val = substr($val, 1);
+        foreach ($query as $key => $queryValue) {
+            if (strlen($queryValue)) {
+                if ($queryValue[0] === '!') {
+                    $queryValue = substr($queryValue, 1);
                     $not = true;
                 } else {
                     $not = false;
                 }
                 $sql = [];
-                $valList = explode('|', $val);
+                $valList = explode('|', $queryValue);
                 foreach ($valList as $val) {
                     $val = trim($val);
                     if (strlen($val)) {
@@ -199,10 +199,9 @@ class OracleIdTable extends OracleTable {
     }
     
     public function getNameListByOracleIdList(array $idList) {
-        $nameList = $this->dbmsTable->select('name', [
+        return $this->dbmsTable->select('name', [
             'oracle_id' => $idList
         ]);
-        return $nameList;
     }
     
     public function getNameByOracleId($id) {
@@ -288,7 +287,7 @@ class OracleIdTable extends OracleTable {
     public function createRow(array $data) {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;
@@ -297,7 +296,7 @@ class OracleIdTable extends OracleTable {
     public function updateRowByName(array $data, $name) {
         try {
             $ret = (bool) $this->dbmsTable->update($data, $this->getIdListByName($name));
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;
@@ -306,7 +305,7 @@ class OracleIdTable extends OracleTable {
     public function updateRowById(array $data, $id) {
         try {
             $ret = (bool) $this->dbmsTable->update($data, $id);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;

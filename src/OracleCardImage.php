@@ -17,8 +17,11 @@ class OracleCardImage {
     
     protected $setNo;
     
-    private $_convertFunction;
+    private array $_convertFunction;
     
+    /**
+     * @throws Exception
+     */
     public function __construct(Oracle $oracle, $imageDir, $oracleId, $setAbbr, $setNo) {
         $this->oracle = $oracle;
         $this->imageDir = realpath($imageDir);
@@ -51,7 +54,7 @@ class OracleCardImage {
             case preg_match('/^(\d+)$/', $this->setNo, $match):
                 $fileName = sprintf('%s.%03d.png', $this->setAbbr, $match[1]);
                 break;
-            case preg_match('/^(\d+)([^\d]+)$/', $this->setNo, $match):
+            case preg_match('/^(\d+)(\D+)$/', $this->setNo, $match):
                 $fileName = sprintf('%s.%03d.%s.png', $this->setAbbr, $match[1], $match[2]);
                 break;
             default:

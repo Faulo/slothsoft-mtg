@@ -7,8 +7,10 @@ use Exception;
 
 class FetchGatherer extends AbstractOracleWork {
     
+    /**
+     * @throws Exception
+     */
     protected function work(): void {
-        $oracle = $this->getOracle();
         $setName = $this->getOption('setName');
         
         $downloader = new GathererDownloader();

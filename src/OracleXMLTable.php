@@ -89,7 +89,7 @@ class OracleXMLTable extends OracleTable {
     public function createRow(array $data) {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;

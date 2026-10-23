@@ -4,6 +4,8 @@ namespace Slothsoft\MTG;
 
 use Slothsoft\Farah\HTTPRequest;
 use DOMDocument;
+use DOMException;
+use Exception;
 
 class OracleDeck {
     
@@ -75,6 +77,9 @@ class OracleDeck {
         $this->sideboard = $this->data['sideboard'];
     }
     
+    /**
+     * @throws DOMException
+     */
     public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
         $retNodes = [];
         if ($query = $request->getInputValue('search-query')) {
@@ -257,6 +262,9 @@ class OracleDeck {
         return $ret;
     }
     
+    /**
+     * @throws DOMException
+     */
     public function asNode(?DOMDocument $dataDoc = null) {
         $returnDocument = $dataDoc === null;
         
@@ -360,7 +368,7 @@ class OracleDeck {
                 $sortList[$name] = $node->getAttribute('sort');
             }
             asort($sortList);
-            foreach (arra_keys($sortList) as $name) {
+            foreach (array_keys($sortList) as $name) {
                 $node = $nodeList[$name];
                 $node->setAttribute('stock', $this->getStock($name));
                 $retFragment->appendChild($node);
@@ -382,7 +390,7 @@ class OracleDeck {
                 $sortList[$name] = $node->getAttribute('sort');
             }
             asort($sortList);
-            foreach (arra_keys($sortList) as $name) {
+            foreach (array_keys($sortList) as $name) {
                 $node = $nodeList[$name];
                 $node->setAttribute('stock', $this->getSideboard($name));
                 $retFragment->appendChild($node);
@@ -406,7 +414,7 @@ class OracleDeck {
     }
     
     public function getStock($name) {
-        return isset($this->stockList[$name]) ? $this->stockList[$name] : 0;
+        return $this->stockList[$name] ?? 0;
     }
     
     public function setSideboardList(array $stockList) {
@@ -424,7 +432,7 @@ class OracleDeck {
     }
     
     public function getSideboard($name) {
-        return isset($this->sideboard[$name]) ? $this->sideboard[$name] : 0;
+        return $this->sideboard[$name] ?? 0;
     }
     
     public function removeSideboard($name) {
@@ -474,6 +482,9 @@ class OracleDeck {
         return $this->stockChanged;
     }
     
+    /**
+     * @throws Exception
+     */
     public function save() {
         $this->ownerPlayer->save();
     }

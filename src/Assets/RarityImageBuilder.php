@@ -14,6 +14,9 @@ use SplFileInfo;
 
 class RarityImageBuilder implements ExecutableBuilderStrategyInterface {
     
+    /**
+     * @throws Exception
+     */
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         $card = [];
         $card['expansion_name'] = $args->get('expansion_name');

@@ -5,6 +5,8 @@ namespace Slothsoft\MTG;
 use Slothsoft\Core\Storage;
 use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
+use DOMException;
+use Exception;
 use Slothsoft\Core\Configuration\ConfigurationField;
 
 class MKM {
@@ -34,6 +36,8 @@ class MKM {
     protected $storageTime;
     
     protected $shopList = [];
+
+    public $oracle;
     
     public function __construct(Oracle $oracle) {
         $this->oracle = $oracle;
@@ -51,10 +55,6 @@ class MKM {
             'uri' => sprintf(self::URL_SHOP, self::HOST, $name)
         ]);
         
-        return isset($this->shopList[$name]) ? $this->shopList[$name] : $this->addShop([
-            'name' => $name,
-            'uri' => sprintf(self::URL_SHOP, self::HOST, $name)
-        ]);
     }
     
     public function addShop(array $data) {
@@ -63,6 +63,10 @@ class MKM {
         return $shop;
     }
     
+    /**
+     * @throws DOMException
+     * @throws Exception
+     */
     public function createShoppingElement(DOMDocument $doc, array $req) {
         $idTable = $this->oracle->getIdTable();
         $supplementalList = $idTable->getSetList();
@@ -149,7 +153,7 @@ class MKM {
                     // $id = (int) preg_replace('/\D+/', '', $id);
                     // my_dump($id);
                     $country = $xpath->evaluate('normalize-space(td[1]//@onmouseover[contains(., "location")])', $rowNode);
-                    $country = preg_replace('/^.+\: (.+)\'.+$/', '$1', $country);
+                    $country = preg_replace('/^.+: (.+)\'.+$/', '$1', $country);
                     $language = $xpath->evaluate('normalize-space(td[2]//@onmouseover)', $rowNode);
                     $language = preg_replace('/^.+\'(.+)\'.+$/', '$1', $language);
                     $price = $xpath->evaluate('normalize-space(td[@class="st_price"])', $rowNode);

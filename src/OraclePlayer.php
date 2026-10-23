@@ -5,6 +5,7 @@ namespace Slothsoft\MTG;
 use Slothsoft\Farah\HTTPRequest;
 use Slothsoft\Core\Storage;
 use DOMDocument;
+use DOMException;
 use Exception;
 
 class OraclePlayer {
@@ -33,6 +34,9 @@ class OraclePlayer {
     
     protected $deckStockChanged = false;
     
+    /**
+     * @throws Exception
+     */
     public function __construct($playerFile, Oracle $oracle) {
         $this->file = $playerFile;
         $this->oracle = $oracle;
@@ -54,7 +58,7 @@ class OraclePlayer {
         $this->deckList = [];
         $this->managedDeckList = [];
         $i = 0;
-        foreach ($this->data['deckList'] as &$deckData) {
+        foreach ($this->data['deckList'] as $deckData) {
             $deck = new OracleDeck($deckData, $this, $this->oracle);
             $deckNo = null;
             if ($deck->getType() === 'repository') {
@@ -110,14 +114,14 @@ class OraclePlayer {
             $managedStockList = [];
             foreach ($this->managedDeckList as $deck) {
                 $cardList = $deck->getStockNameList();
-                foreach (arra_keys($cardList) as $name) {
+                foreach ($cardList as $name) {
                     if (! isset($managedStockList[$name])) {
                         $managedStockList[$name] = 0;
                     }
                     $managedStockList[$name] += $deck->getStock($name);
                 }
                 $cardList = $deck->getSideboardNameList();
-                foreach (arra_keys($cardList) as $name) {
+                foreach ($cardList as $name) {
                     if (! isset($managedStockList[$name])) {
                         $managedStockList[$name] = 0;
                     }
@@ -202,7 +206,7 @@ class OraclePlayer {
             
             $deck = $this->deckList[$deckNo];
             $oldPos = 0;
-            foreach ($this->deckList as $tmpNo => $tmpDeck) {
+            foreach ($this->deckList as $tmpDeck) {
                 if ($tmpDeck === $deck) {
                     break;
                 }
@@ -239,7 +243,7 @@ class OraclePlayer {
     }
     
     public function getDeck($deckNo) {
-        return isset($this->deckList[$deckNo]) ? $this->deckList[$deckNo] : null;
+        return $this->deckList[$deckNo] ?? null;
     }
     
     public function getDeckByKey($deckKey) {
@@ -251,6 +255,9 @@ class OraclePlayer {
         return null;
     }
     
+    /**
+     * @throws Exception
+     */
     public function save() {
         if (! $this->deckMetaChanged) {
             foreach ($this->deckList as $deck) {
@@ -277,6 +284,9 @@ class OraclePlayer {
         }
     }
     
+    /**
+     * @throws Exception
+     */
     public function parseRequest(HTTPRequest $request, DOMDocument $dataDoc) {
         $retNodes = [];
         // unused ???
@@ -310,7 +320,7 @@ class OraclePlayer {
                     throw new Exception('DECK NOT FOUND: ' . $data['deckNo']);
                 }
                 $stock = (int) $data['stock'];
-                if ($cardName and $deck) {
+                if ($cardName) {
                     /*
                      * if ($deck->hasCard($cardName)) {
                      * $deck->setStock($cardName, $deck->getStock($cardName) + $stock);
@@ -343,15 +353,15 @@ class OraclePlayer {
     }
     
     public function getFirstname() {
-        return isset($this->data['firstname']) ? $this->data['firstname'] : '';
+        return $this->data['firstname'] ?? '';
     }
     
     public function getLastname() {
-        return isset($this->data['lastname']) ? $this->data['lastname'] : '';
+        return $this->data['lastname'] ?? '';
     }
     
     public function getDCI() {
-        return isset($this->data['dci']) ? $this->data['dci'] : '';
+        return $this->data['dci'] ?? '';
     }
     
     public function getKey() {
@@ -385,6 +395,9 @@ class OraclePlayer {
         return $ret;
     }
     
+    /**
+     * @throws DOMException
+     */
     public function asNode(?DOMDocument $dataDoc = null) {
         $returnDocument = $dataDoc === null;
         

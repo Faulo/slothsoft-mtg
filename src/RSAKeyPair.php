@@ -52,7 +52,7 @@ class RSAKeyPair {
             $b[$this->digitSize - 2] = 2;
             $b[$this->digitSize - 1] = 0;
             
-            $block = BigInt::createFromDec(0);
+            $block = BigInt::createFromDec();
             for ($j = 0, $k = 0; $k < $this->digitSize; $j ++) {
                 $block->digits[$j] = $b[$k ++];
                 $block->digits[$j] += $b[$k ++] << 8;

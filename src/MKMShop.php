@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
 use DOMDocument;
+use DOMException;
 
 class MKMShop {
     
@@ -55,6 +56,9 @@ class MKMShop {
         unset($val);
     }
     
+    /**
+     * @throws DOMException
+     */
     public function asNode(DOMDocument $doc) {
         $retNode = $doc->createElement('shop');
         foreach ($this->data as $key => $val) {

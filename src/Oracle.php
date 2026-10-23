@@ -6,34 +6,35 @@ use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\Storage;
 use Slothsoft\Core\Calendar\Seconds;
 use DOMDocument;
+use DOMException;
 use Exception;
 use Serializable;
 
 class Oracle implements Serializable {
     
-    private $doc;
+    private ?DOMDocument $doc;
     
-    private $dbName;
+    private string $dbName;
     
-    private $idTableName = 'oracle-ids';
+    private string $idTableName = 'oracle-ids';
     
-    private $xmlTableName = 'oracle-xml';
+    private string $xmlTableName = 'oracle-xml';
     
-    private $customTableName = 'oracle-custom';
+    private string $customTableName = 'oracle-custom';
     
-    private $idTable;
+    private ?OracleIdTable $idTable;
     
-    private $xmlTable;
+    private ?OracleXMLTable $xmlTable;
     
-    private $customTable;
+    private ?OracleCustomTable $customTable;
     
-    private $_oracleSetURL = 'http://gatherer.wizards.com/Pages/Advanced.aspx';
+    private string $_oracleSetURL = 'http://gatherer.wizards.com/Pages/Advanced.aspx';
     
-    private $_oracleSetQuery = '//*[@id="autoCompleteSourceBoxsetAddText0_InnerTextBoxcontainer"]/*';
+    private string $_oracleSetQuery = '//*[@id="autoCompleteSourceBoxsetAddText0_InnerTextBoxcontainer"]/*';
     
-    private $_oracleSetList = null;
+    private ?array $_oracleSetList = null;
     
-    private $_oracleSetBlacklist = [
+    private array $_oracleSetBlacklist = [
         'Promo set for Gatherer'
     ];
     
@@ -80,6 +81,9 @@ class Oracle implements Serializable {
         return $this->customTable;
     }
     
+    /**
+     * @throws Exception
+     */
     public function getPlayer($playerFile) {
         return new OraclePlayer($playerFile, $this);
     }
@@ -91,7 +95,7 @@ class Oracle implements Serializable {
     public function getCardImage($imageDir, $oracleId, $setAbbr, $setNo) {
         try {
             $ret = new OracleCardImage($this, $imageDir, $oracleId, $setAbbr, $setNo);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;
@@ -100,7 +104,7 @@ class Oracle implements Serializable {
     public function getRarityImage($imageDir, $setAbbr, $rarity) {
         try {
             $ret = new OracleRarityImage($this, $imageDir, $setAbbr, $rarity);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;
@@ -109,7 +113,7 @@ class Oracle implements Serializable {
     public function getSetImage($imageDir, $setAbbr) {
         try {
             $ret = new OracleSetImage($this, $imageDir, $setAbbr);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;
@@ -118,7 +122,7 @@ class Oracle implements Serializable {
     public function getColorImage($imageDir, $color) {
         try {
             $ret = new OracleColorImage($this, $imageDir, $color);
-        } catch (Exception $e) {
+        } catch (Exception) {
             $ret = null;
         }
         return $ret;
@@ -137,6 +141,9 @@ class Oracle implements Serializable {
         return $ret;
     }
     
+    /**
+     * @throws Exception
+     */
     public function getOracleSetList($downloadFreshCopy = false) {
         if ($this->_oracleSetList === null) {
             if ($xpath = Storage::loadExternalXPath($this->_oracleSetURL, $downloadFreshCopy ? 0 : Seconds::YEAR)) {
@@ -153,6 +160,9 @@ class Oracle implements Serializable {
         return $this->_oracleSetList;
     }
     
+    /**
+     * @throws DOMException
+     */
     public function createSearchElement(DOMDocument $dataDoc, $inputQuery, $stock = 1) {
         if (is_array($inputQuery)) {
             $query = $inputQuery;
@@ -209,6 +219,9 @@ class Oracle implements Serializable {
         return $retNode;
     }
     
+    /**
+     * @throws DOMException
+     */
     public function createSetElement(DOMDocument $dataDoc, $setName, array $stockList = []) {
         $retNode = $dataDoc->createElement('set');
         $retNode->setAttribute('name', $setName);
@@ -228,6 +241,10 @@ class Oracle implements Serializable {
         return $retNode;
     }
     
+    /**
+     * @throws DOMException
+     * @throws Exception
+     */
     public function createCategoriesElement(?DOMDocument $dataDoc = null) {
         if (! $dataDoc) {
             $dataDoc = $this->doc;
@@ -260,7 +277,7 @@ class Oracle implements Serializable {
             foreach ($fragment->childNodes as $cardNode) {
                 if ($cardNode->nodeType === XML_ELEMENT_NODE) {
                     $name = $cardNode->getAttribute('name');
-                    $stock = isset($stockList[$name]) ? $stockList[$name] : 0;
+                    $stock = $stockList[$name] ?? 0;
                     $cardNode->setAttribute('stock', (string) $stock);
                     if ($stock > 0) {
                         $cardNode->setAttribute('owned', '');
@@ -309,6 +326,10 @@ class Oracle implements Serializable {
         return $ret;
     }
     
+    /**
+     * @throws DOMException
+     * @throws Exception
+     */
     public function createChecklistElement(DOMDocument $dataDoc, array $stockList) {
         $checklistNode = $dataDoc->createElement('checklist');
         $setNameList = OracleInfo::getVintageLegalList();
@@ -320,6 +341,9 @@ class Oracle implements Serializable {
         return $checklistNode;
     }
     
+    /**
+     * @throws DOMException
+     */
     public function createPricelistElement(DOMDocument $dataDoc, array $stockList) {
         $retNode = $dataDoc->createElement('pricelist');
         

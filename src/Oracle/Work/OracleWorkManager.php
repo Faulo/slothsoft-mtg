@@ -7,7 +7,7 @@ use Slothsoft\MTG\Oracle;
 
 class OracleWorkManager extends WorkManager {
     
-    private $oracle;
+    private Oracle $oracle;
     
     public function __construct(int $treadCount, Oracle $oracle) {
         parent::__construct($treadCount);
@@ -19,4 +19,3 @@ class OracleWorkManager extends WorkManager {
         return parent::thenDo($className, $options);
     }
 }
-

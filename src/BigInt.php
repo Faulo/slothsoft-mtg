@@ -8,6 +8,7 @@ class BigInt {
     
     public static function createFromHex($hex) {
         $hex = (string) $hex;
+        $digits = [];
         
         for ($i = strlen($hex), $j = 0; $i > 0; $i -= self::DIGIT_SIZE, $j ++) {
             $digits[$j] = hexdec(substr($hex, max($i - self::DIGIT_SIZE, 0), min($i, self::DIGIT_SIZE)));
@@ -48,14 +49,11 @@ class BigInt {
     }
     
     public function shiftRight($i) {
-        $ret = clone $this;
-        return $ret;
+        return clone $this;
     }
     
     public function multiplyMod(BigInt $input, BigInt $modulus) {
-        $ret = clone $input;
-        
-        return $ret;
+        return clone $input;
     }
     
     public function powMod(BigInt $modulus, BigInt $encryptionExponent) {

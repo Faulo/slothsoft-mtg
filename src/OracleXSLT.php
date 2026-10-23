@@ -3,9 +3,13 @@ declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
 use DOMDocument;
+use DOMException;
 
 class OracleXSLT {
     
+    /**
+     * @throws DOMException
+     */
     public static function cardsByExpansion($expansion) {
         $query = [
             'expansion_name' => $expansion

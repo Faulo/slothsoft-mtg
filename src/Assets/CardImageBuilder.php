@@ -14,6 +14,9 @@ use SplFileInfo;
 
 class CardImageBuilder implements ExecutableBuilderStrategyInterface {
     
+    /**
+     * @throws Exception
+     */
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if ($name = $args->get('name')) {
             $oracle = new Oracle('mtg');

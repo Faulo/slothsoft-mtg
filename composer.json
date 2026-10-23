@@ -11,6 +11,8 @@
     "type": "library",
     "require": {
         "php": "^8.2",
+        "ext-dom": "*",
+        "ext-xsl": "*",
         "slothsoft/core": "^1.14.19",
         "slothsoft/farah": "^1.27.1",
         "slothsoft/w3c": "^1.3.0"

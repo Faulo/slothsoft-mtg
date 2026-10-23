@@ -6,7 +6,7 @@ use Slothsoft\MTG\OracleInfo;
 
 class Card {
     
-    private $data;
+    private array $data;
     
     public function __construct(array $data) {
         $this->data = $data;
@@ -40,4 +40,3 @@ class Card {
         return $this->data['expansion_number'] ?? '';
     }
 }
-

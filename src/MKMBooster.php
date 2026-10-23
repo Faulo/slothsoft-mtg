@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\MTG;
 
 use DOMDocument;
+use DOMException;
 
 class MKMBooster {
     
@@ -42,6 +43,9 @@ class MKMBooster {
         unset($val);
     }
     
+    /**
+     * @throws DOMException
+     */
     public function asNode(DOMDocument $doc) {
         $retNode = $doc->createElement('booster');
         foreach ($this->data as $key => $val) {

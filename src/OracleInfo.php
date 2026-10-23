@@ -8,49 +8,30 @@ use Exception;
 use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\ServerEnvironment;
-use Slothsoft\Core\Storage;
 use XSLTProcessor;
 
 class OracleInfo {
     
     const EXTENSION_CARDIMAGE = 'png';
     
-    const URL_ORACLE = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%s';
+    const URL_ORACLE = 'https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%s';
     
-    const URL_ORACLE_IMAGE = 'http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=%s&type=card';
-    
-    const URL_LEGALITY = 'http://gatherer.wizards.com/Pages/Card/Printings.aspx?multiverseid=%s';
+    const URL_ORACLE_IMAGE = 'https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=%s&type=card';
     
     const URL_TEMPLATE_ORACLE = 'farah://slothsoft@mtg/xsl/card-gatherer';
     
-    const URL_SET = 'http://magiccards.info/%s/en.html';
-    
-    const URL_SET_IMAGE = 'http://magiccards.info/scans/en/%s/%s.jpg';
-    
-    const URL_SET_TOKENS = 'http://magiccards.info/extras.html';
-    
-    const URL_PRICE = 'https://www.magiccardmarket.eu/Cards/%s';
-    
-    const URL_MARKET_SET_INDEX = 'https://www.magiccardmarket.eu/Products/Singles';
-    
-    const URL_MARKET_SET_LIST = 'https://www.magiccardmarket.eu/Products/Singles/%s';
-    
-    const URL_MARKET = 'https://www.mkmapi.eu/ws/v1.1/products/%s/1/1/true';
-    
-    const URL_LEGALITY_MODERN = 'http://magic.wizards.com/en/gameinfo/gameplay/formats/modern';
-    
-    const URL_LEGALITY_COMMANDER = 'http://magic.wizards.com/en/gameinfo/gameplay/formats/commander';
+    const URL_LEGALITY_MODERN = 'https://magic.wizards.com/en/gameinfo/gameplay/formats/modern';
     
     const URL_LEGALITY_VINTAGE = 'https://mtg.gamepedia.com/Set';
     
-    const URL_GALLERY_HOST = 'http://magic.wizards.com';
+    const URL_GALLERY_HOST = 'https://magic.wizards.com';
     
     const URL_GALLERY_INDEX = '/en/search-magic-ajax?f1=section&f2=18156&sort=DESC&search=&l=en';
     
     const URL_GALLERY_EXAMPLE = '/en/articles/archive/card-image-gallery/aether-revolt';
     
     // const URL_IMAGE = '/getData.php/mtg/image?id=%s&set=%s&no=%s';
-    // const URL_RARITY = '/getData.php/mtg/image?set=%s&rarity=%s'; //'http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=%s&size=large&rarity=%s';
+    // const URL_RARITY = '/getData.php/mtg/image?set=%s&rarity=%s'; //'https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=%s&size=large&rarity=%s';
     const COLOR_W = 'White';
     
     const COLOR_U = 'Blue';
@@ -173,65 +154,6 @@ class OracleInfo {
         'Beta (Limited Edition)' => 'Limited Edition Beta'
     ];
     
-    private static array $_setMapping = [
-        'mps_akh' => 'mpsakh',
-        'mps_kld' => 'mpskld',
-        'ddd' => 'gvl',
-        'dd3_evg' => 'evg',
-        'dd3_gvl' => 'gvl',
-        'dd3_dvd' => 'dvd',
-        'dd3_jvc' => 'jvc',
-        'dd2' => 'jvc',
-        'frf_ugin' => 'ugin',
-        'al' => 'ai',
-        'le' => 'lg',
-        'mi' => 'mr',
-        'st' => 'sh',
-        'ppr' => 'mbp',
-        '1e' => 'al',
-        '2e' => 'be',
-        '2u' => 'un',
-        '3e' => 'rv',
-        '8ed' => '8e',
-        '9ed' => '9e',
-        'cm1' => 'cma',
-        'cg' => 'ud',
-        'con' => 'cfx',
-        'dst' => 'ds',
-        'gpt' => 'gp',
-        'gu' => 'ul',
-        'dis' => 'di',
-        'mor' => 'mt',
-        'lrw' => 'lw',
-        'h09' => 'pds',
-        'p2' => 'po2',
-        
-        'csp' => 'cs',
-        'dde' => 'pvc',
-        'ddc' => 'dvd',
-        'drb' => 'fvd',
-        'hop' => 'pch',
-        'jud' => 'ju',
-        'hm' => 'hl',
-        'lgn' => 'le',
-        'mrd' => 'mi',
-        'ons' => 'on',
-        'plc' => 'pc',
-        'tor' => 'tr',
-        'p4' => 'st2k',
-        'p3' => 'st',
-        'tsp' => 'ts',
-        'pk' => 'p3k',
-        'scg' => 'sc',
-        'v10' => 'fvr',
-        'te' => 'tp',
-        'tsb' => 'tsts',
-        'v09' => 'fve',
-        'v11' => 'fvl',
-        'unh' => 'uh',
-        'uz' => 'us'
-    ];
-    
     private static ?DOMHelper $_dom = null;
     
     private static function domHelper(): DOMHelper {
@@ -283,17 +205,29 @@ class OracleInfo {
     public static function getSetFragment(DOMDocument $dataDoc): DOMNode|false|null {
         static $retFragment = null;
         if (! $retFragment) {
-            $setList = self::getSetList();
-            $xml = '';
-            foreach ($setList as $set) {
+            $doc = new DOMDocument();
+            $retFragment = $doc->createDocumentFragment();
+            foreach (self::getSetList() as $set) {
                 $time = strtotime($set['date']);
-                $xml .= sprintf('<set href="%s" date="%s" date-year="%s" date-month="%s" date-day="%s" type="%s">%s</set>', $set['href'], $set['date'], date('Y', $time), date('m', $time), date('d', $time), $set['type'], $set['name']);
+                $node = $doc->createElement('set');
+                $attributes = [
+                    'href' => $set['href'],
+                    'date' => $set['date'],
+                    'date-year' => date('Y', $time),
+                    'date-month' => date('m', $time),
+                    'date-day' => date('d', $time),
+                    'type' => $set['type']
+                ];
+                foreach ($attributes as $name => $value) {
+                    $node->setAttribute($name, $value);
+                }
+                $node->appendChild($doc->createTextNode($set['name']));
+                $retFragment->appendChild($node);
             }
-            $retFragment = self::domHelper()->parse($xml);
         }
         return $dataDoc->importNode($retFragment, true);
     }
-    
+
     public static function getLegalityFragment(DOMDocument $dataDoc): DOMNode|false|null {
         static $retFragment = null;
         if (! $retFragment) {
@@ -324,10 +258,10 @@ class OracleInfo {
                     $legal = self::isModernLegal($card);
                     break;
                 case 'Commander':
-                    $legal = self::isCommanderLegal($card);
+                    $legal = self::isCommanderLegal();
                     break;
                 case 'Vintage':
-                    $legal = self::isVintageLegal($card);
+                    $legal = self::isVintageLegal();
                     break;
             }
             if ($legal) {
@@ -367,7 +301,7 @@ class OracleInfo {
     protected static function _initLegalityModernList(): void {
         if (self::$_legalityModernList === null) {
             self::$_legalityModernList = self::$_legalityStandardList;
-            if ($xpath = Storage::loadExternalXPath(self::URL_LEGALITY_MODERN, Seconds::MONTH)) {
+            if ($xpath = (new RemoteDocumentLoader())->loadXPath(self::URL_LEGALITY_MODERN, Seconds::MONTH)) {
                 $nodeList = $xpath->evaluate('//*[@class="list"]//em');
                 foreach ($nodeList as $node) {
                     $setName = $xpath->evaluate('normalize-space(.)', $node);
@@ -418,7 +352,7 @@ class OracleInfo {
             $_setXPathTable = '//h2[.//*[@id="List_of_Magic_expansions_and_sets"]]/following::table[1]';
             $_setXPathCell = './/tr/td[2]';
             $setList = [];
-            if ($xpath = Storage::loadExternalXPath(self::URL_LEGALITY_VINTAGE, Seconds::MONTH)) {
+            if ($xpath = (new RemoteDocumentLoader())->loadXPath(self::URL_LEGALITY_VINTAGE, Seconds::MONTH)) {
                 // output($xpath->document);die();
                 $tableNodeList = $xpath->evaluate($_setXPathTable);
                 foreach ($tableNodeList as $tableNode) {
@@ -443,7 +377,7 @@ class OracleInfo {
                                 case 'expansion set':
                                 case 'core set':
                                     $href = self::URL_LEGALITY_VINTAGE . '/..' . $href;
-                                    if ($setXPath = Storage::loadExternalXPath($href, Seconds::MONTH)) {
+                                    if ($setXPath = (new RemoteDocumentLoader())->loadXPath($href, Seconds::MONTH)) {
                                         if ($time = $setXPath->evaluate('normalize-space(//tr[normalize-space(td[1]) = "Release date"]/td[2]/text())')) {
                                             if ($time = strtotime($time)) {
                                                 $date = date('Y-m-d', $time);
@@ -470,11 +404,11 @@ class OracleInfo {
         }
     }
     
-    public static function isCommanderLegal(array $card): true {
+    public static function isCommanderLegal(): true {
         return true;
     }
     
-    public static function isVintageLegal(array $card): true {
+    public static function isVintageLegal(): true {
         return true;
     }
     
@@ -610,56 +544,24 @@ class OracleInfo {
         return $i;
     }
     
-    public static function getColorKey($colorName): ?string {
-        $ret = null;
-        switch ($colorName) {
-            case self::COLOR_NO:
-                $ret = 'C';
-                break;
-            case self::COLOR_W:
-                $ret = 'W';
-                break;
-            case self::COLOR_U:
-                $ret = 'U';
-                break;
-            case self::COLOR_B:
-                $ret = 'B';
-                break;
-            case self::COLOR_R:
-                $ret = 'R';
-                break;
-            case self::COLOR_G:
-                $ret = 'G';
-                break;
-        }
-        return $ret;
+    private const COLOR_NAMES = [
+        'C' => self::COLOR_NO,
+        'W' => self::COLOR_W,
+        'U' => self::COLOR_U,
+        'B' => self::COLOR_B,
+        'R' => self::COLOR_R,
+        'G' => self::COLOR_G
+    ];
+
+    public static function getColorKey(string $colorName): ?string {
+        $key = array_search($colorName, self::COLOR_NAMES, true);
+        return $key === false ? null : $key;
     }
-    
-    public static function getColorName($colorKey): ?string {
-        $ret = null;
-        switch ($colorKey) {
-            case 'C':
-                $ret = self::COLOR_NO;
-                break;
-            case 'W':
-                $ret = self::COLOR_W;
-                break;
-            case 'U':
-                $ret = self::COLOR_U;
-                break;
-            case 'B':
-                $ret = self::COLOR_B;
-                break;
-            case 'R':
-                $ret = self::COLOR_R;
-                break;
-            case 'G':
-                $ret = self::COLOR_G;
-                break;
-        }
-        return $ret;
+
+    public static function getColorName(string $colorKey): ?string {
+        return self::COLOR_NAMES[$colorKey] ?? null;
     }
-    
+
     public static function getNameKey($name): string {
         $name = strtolower($name);
         $name = str_replace([
@@ -690,7 +592,7 @@ class OracleInfo {
         self::_initOracleXSLT();
         $ret = null;
         if ($url = self::getOracleURL($card)) {
-            if ($dataDoc = Storage::loadExternalDocument($url, Seconds::MONTH)) {
+            if ($dataDoc = (new RemoteDocumentLoader())->loadDocument($url, Seconds::MONTH)) {
                 $resDoc = self::$_oracleXSLT->transformToDoc($dataDoc);
                 if ($cardNode = $resDoc->documentElement) {
                     $ret = [];
@@ -746,27 +648,25 @@ class OracleInfo {
     protected static function _initOracleImageGallery(): void {
         if (self::$_oracleImageGallery === null) {
             self::$_oracleImageGallery = [];
-            $res = Storage::loadExternalJSON(self::URL_GALLERY_HOST . self::URL_GALLERY_INDEX, Seconds::WEEK);
+            $res = (new RemoteDocumentLoader())->loadJson(self::URL_GALLERY_HOST . self::URL_GALLERY_INDEX, Seconds::WEEK);
             if ($res) {
                 $dom = self::domHelper();
                 foreach ($res['data'] as $html) {
                     if ($node = $dom->parse($html, null, true)) {
                         $xpath = $dom->loadXPath($node->ownerDocument);
-                        if ($xpath) {
-                            $setName = $xpath->evaluate('normalize-space(.//h3)', $node);
-                            $href = $xpath->evaluate('normalize-space(.//a/@href)', $node);
-                            if ($setName and $href) {
-                                $xpath = Storage::loadExternalXPath(self::URL_GALLERY_HOST . $href);
-                                if ($xpath) {
-                                    self::$_oracleImageGallery[$setName] = [];
-                                    $nodeList = $xpath->evaluate('//*[@alt][starts-with(@src, "http://media.wizards.com")]');
-                                    foreach ($nodeList as $node) {
-                                        $cardName = $node->getAttribute('alt');
-                                        $cardImage = $node->getAttribute('src');
-                                        $cardName = str_replace(' /// ', ' // ', $cardName); // Amonkhet
-                                        if ($cardName and $cardImage) {
-                                            self::$_oracleImageGallery[$setName][$cardName] = $cardImage;
-                                        }
+                        $setName = $xpath->evaluate('normalize-space(.//h3)', $node);
+                        $href = $xpath->evaluate('normalize-space(.//a/@href)', $node);
+                        if ($setName and $href) {
+                            $xpath = (new RemoteDocumentLoader())->loadXPath(self::URL_GALLERY_HOST . $href);
+                            if ($xpath) {
+                                self::$_oracleImageGallery[$setName] = [];
+                                $nodeList = $xpath->evaluate('//*[@alt][starts-with(substring-after(@src, "://"), "media.wizards.com/")]');
+                                foreach ($nodeList as $node) {
+                                    $cardName = $node->getAttribute('alt');
+                                    $cardImage = $node->getAttribute('src');
+                                    $cardName = str_replace(' /// ', ' // ', $cardName); // Amonkhet
+                                    if ($cardName and $cardImage) {
+                                        self::$_oracleImageGallery[$setName][$cardName] = $cardImage;
                                     }
                                 }
                             }
@@ -775,60 +675,6 @@ class OracleInfo {
                 }
             }
         }
-    }
-    
-    public static function getLegalityURL(array $card): string {
-        return sprintf(self::URL_LEGALITY, $card['oracle_id']);
-    }
-    
-    public static function getSetURL(array $card): string {
-        $abbr = $card['expansion_abbr'];
-        if (isset(self::$_setMapping[$abbr])) {
-            $abbr = self::$_setMapping[$abbr];
-        }
-        return sprintf(self::URL_SET, $abbr);
-    }
-    
-    public static function getSetImageURL(array $card): string {
-        $abbr = $card['expansion_abbr'];
-        if (isset(self::$_setMapping[$abbr])) {
-            $abbr = self::$_setMapping[$abbr];
-        }
-        $no = $card['expansion_number'];
-        return sprintf(self::URL_SET_IMAGE, $abbr, $no);
-    }
-    
-    public static function getPriceURL(array $card): ?string {
-        return $card['oracle_id'] > 0 ? sprintf(self::URL_PRICE, rawurlencode($card['name'])) : null;
-    }
-    
-    public static function getMarketURL(array $card): string {
-        $name = $card['name'];
-        $name = str_replace([
-            'Æ'
-        ], [
-            'AE'
-        ], $name);
-        $name = rawurlencode($name);
-        return sprintf(self::URL_MARKET, $name);
-    }
-    
-    /**
-     * @throws Exception
-     */
-    public static function getMarketSetURLList(): array {
-        $ret = [];
-        if ($xpath = Storage::loadExternalXPath(self::URL_MARKET_SET_INDEX, Seconds::WEEK)) {
-            $nodeList = $xpath->evaluate('//*[@name="idExpansion"]/*[@value > 0]');
-            foreach ($nodeList as $node) {
-                $setName = $xpath->evaluate('normalize-space(.)', $node);
-                // $setName = trim(preg_replace('/\s+/u', ' ', $setName));
-                $ret[self::translateSetName($setName)] = sprintf(self::URL_MARKET_SET_LIST, rawurlencode($setName));
-            }
-        } else {
-            // $ret[] = Storage::loadExternalFile(self::URL_MARKET_SET_INDEX, Seconds::MONTH);
-        }
-        return $ret;
     }
     
     public static function getCardImageName(array $card): string {

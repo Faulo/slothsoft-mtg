@@ -11,7 +11,6 @@ use Exception;
 use Serializable;
 use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\DOMHelper;
-use Slothsoft\Core\Storage;
 
 class Oracle implements Serializable {
     
@@ -31,7 +30,7 @@ class Oracle implements Serializable {
     
     private ?OracleCustomTable $customTable;
     
-    private string $_oracleSetURL = 'http://gatherer.wizards.com/Pages/Advanced.aspx';
+    private string $_oracleSetURL = 'https://gatherer.wizards.com/Pages/Advanced.aspx';
     
     private string $_oracleSetQuery = '//*[@id="autoCompleteSourceBoxsetAddText0_InnerTextBoxcontainer"]/*';
     
@@ -106,7 +105,7 @@ class Oracle implements Serializable {
      */
     public function getOracleSetList($downloadFreshCopy = false): ?array {
         if ($this->_oracleSetList === null) {
-            if ($xpath = Storage::loadExternalXPath($this->_oracleSetURL, $downloadFreshCopy ? 0 : Seconds::YEAR)) {
+            if ($xpath = (new RemoteDocumentLoader())->loadXPath($this->_oracleSetURL, $downloadFreshCopy ? 0 : Seconds::YEAR)) {
                 $this->_oracleSetList = [];
                 $nodeList = $xpath->evaluate($this->_oracleSetQuery);
                 foreach ($nodeList as $node) {
@@ -139,18 +138,8 @@ class Oracle implements Serializable {
                 ];
             }
         }
-        $query = array_merge([
-            'name' => '',
-            'type' => '',
-            'rarity' => '',
-            'expansion_name' => '',
-            'description' => '',
-            'cost' => '',
-            'legality' => '',
-            'cmc' => '',
-            'expansion_abbr' => '',
-            'expansion_number' => ''
-        ], $query);
+        $defaults = array_fill_keys(['name', 'type', 'rarity', 'expansion_name', 'description', 'cost', 'legality', 'cmc', 'expansion_abbr', 'expansion_number'], '');
+        $query = array_merge($defaults, $query);
         foreach ($query as &$val) {
             if (is_array($val)) {
                 $val = implode(' ', $val);
@@ -262,26 +251,6 @@ class Oracle implements Serializable {
             if ($fragment = $this->dom()->parse($xml, $dataDoc)) {
                 $ret = $fragment->removeChild($fragment->firstChild);
             }
-        }
-        return $ret;
-    }
-    
-    public function createCardElementList(?DOMDocument $dataDoc = null, array $nameList = []): array {
-        foreach ($nameList as &$name) {
-            $name = $this->_sanitizeName($name);
-        }
-        unset($name);
-        if (! $dataDoc) {
-            $dataDoc = $this->doc;
-        }
-        $ret = [];
-        $xmlTable = $this->getXMLTable();
-        $xml = $xmlTable->getXMLListByNameList($nameList);
-        $xml = implode('', $xml);
-        $fragment = $this->dom()->parse($xml, $dataDoc);
-        while ($fragment->hasChildNodes()) {
-            $node = $fragment->removeChild($fragment->firstChild);
-            $ret[$node->getAttribute('name')] = $node;
         }
         return $ret;
     }

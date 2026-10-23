@@ -15,6 +15,10 @@ class Card {
     public function getName(): string {
         return $this->data['name'] ?? '';
     }
+
+    public function getData(): array {
+        return $this->data;
+    }
     
     public function getType(): string {
         return $this->data['type'] ?? '';

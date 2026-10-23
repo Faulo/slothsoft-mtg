@@ -4,7 +4,6 @@ namespace Slothsoft\MTG;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use ReflectionException;
 use ReflectionProperty;
 use XSLTProcessor;
 
@@ -15,7 +14,6 @@ final class NativeTypeRegressionTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws ReflectionException
      */
     public function testCardDataWithoutAnOracleUrlStillReturnsNull(): void {
         (new ReflectionProperty(OracleInfo::class, '_oracleXSLT'))->setValue(null, new XSLTProcessor());

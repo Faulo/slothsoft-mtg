@@ -24,19 +24,21 @@ class OracleXMLTable extends OracleTable {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
     
+    private function buildNameQuery(string $name): string {
+        $sqlList = [];
+        foreach (explode(' ', $name) as $part) {
+            $part = trim($part);
+            if (strlen($part)) {
+                $sqlList[] = sprintf('name LIKE "%s%s%s"', '%', $this->dbmsTable->escape($part), '%');
+            }
+        }
+        return implode(' AND ', $sqlList);
+    }
+
     public function searchCardByName($name): array {
         $ret = [];
         if (strlen($name)) {
-            $name = explode(' ', $name);
-            $sqlList = [];
-            foreach ($name as $n) {
-                // $n = str_replace(' & ', ' // ', $n);
-                $n = trim($n);
-                if (strlen($n)) {
-                    $sqlList[] = sprintf('name LIKE "%s%s%s"', '%', $this->dbmsTable->escape($n), '%');
-                }
-            }
-            $sqlList = implode(' AND ', $sqlList);
+            $sqlList = $this->buildNameQuery($name);
             $resList = $this->dbmsTable->select([
                 'name',
                 'xml'
@@ -51,16 +53,7 @@ class OracleXMLTable extends OracleTable {
     public function searchNameByName($name): ?array {
         $ret = [];
         if (strlen($name)) {
-            $name = explode(' ', $name);
-            $sqlList = [];
-            foreach ($name as $n) {
-                // $n = str_replace(' & ', ' // ', $n);
-                $n = trim($n);
-                if (strlen($n)) {
-                    $sqlList[] = sprintf('name LIKE "%s%s%s"', '%', $this->dbmsTable->escape($n), '%');
-                }
-            }
-            $sqlList = implode(' AND ', $sqlList);
+            $sqlList = $this->buildNameQuery($name);
             $ret = $this->dbmsTable->select('name', $sqlList);
         }
         return $ret;

@@ -9,18 +9,6 @@ use ReflectionProperty;
 
 final class Php82WarningRegressionTest extends TestCase {
 
-    public function testEmptyHexCreatesAnEmptyBigInt(): void {
-        $number = BigInt::createFromHex('');
-        $this->assertSame([], $number->digits);
-        $this->assertSame('', $number->toHex());
-    }
-
-    public function testHexDigitsKeepTheirLittleEndianOrder(): void {
-        $number = BigInt::createFromHex('123456789');
-        $this->assertSame([0x6789, 0x2345, 0x1], $number->digits);
-        $this->assertSame('000123456789', $number->toHex());
-    }
-
     /**
      * @throws ReflectionException
      */

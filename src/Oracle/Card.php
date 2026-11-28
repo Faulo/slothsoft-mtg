@@ -1,13 +1,18 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle;
 
 use Slothsoft\MTG\OracleInfo;
 
 class Card {
     
+    /** @var array<string, mixed> */
     private array $data;
     
+    /**
+     * @param array<string, mixed> $data
+     */
     public function __construct(array $data) {
         $this->data = $data;
     }
@@ -15,7 +20,10 @@ class Card {
     public function getName(): string {
         return $this->data['name'] ?? '';
     }
-
+    
+    /**
+     * @return array<string, mixed>
+     */
     public function getData(): array {
         return $this->data;
     }

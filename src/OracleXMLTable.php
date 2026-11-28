@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use Exception;
@@ -34,8 +35,11 @@ class OracleXMLTable extends OracleTable {
         }
         return implode(' AND ', $sqlList);
     }
-
-    public function searchCardByName($name): array {
+    
+    /**
+     * @return array<array-key, string>
+     */
+    public function searchCardByName(string $name): array {
         $ret = [];
         if (strlen($name)) {
             $sqlList = $this->buildNameQuery($name);
@@ -43,14 +47,17 @@ class OracleXMLTable extends OracleTable {
                 'name',
                 'xml'
             ], $sqlList);
-            foreach ($resList as $res) {
+            foreach ($resList ?? [] as $res) {
                 $ret[$res['name']] = $res['xml'];
             }
         }
         return $ret;
     }
     
-    public function searchNameByName($name): ?array {
+    /**
+     * @return array<string>|null
+     */
+    public function searchNameByName(string $name): ?array {
         $ret = [];
         if (strlen($name)) {
             $sqlList = $this->buildNameQuery($name);
@@ -59,6 +66,10 @@ class OracleXMLTable extends OracleTable {
         return $ret;
     }
     
+    /**
+     * @param array<array-key, string> $nameList
+     * @return array<array-key, string>
+     */
     public function getCardListByNameList(array $nameList): array {
         $ret = [];
         $resList = $this->dbmsTable->select([
@@ -67,18 +78,25 @@ class OracleXMLTable extends OracleTable {
         ], [
             'name' => $nameList
         ]);
-        foreach ($resList as $res) {
+        foreach ($resList ?? [] as $res) {
             $ret[$res['name']] = $res['xml'];
         }
         return $ret;
     }
     
+    /**
+     * @param array<array-key, string> $nameList
+     * @return array<string>|null
+     */
     public function getXMLListByNameList(array $nameList): ?array {
         return $this->dbmsTable->select('xml', [
             'name' => $nameList
         ]);
     }
     
+    /**
+     * @param array<string, mixed> $data
+     */
     public function createRow(array $data): ?bool {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
@@ -88,7 +106,7 @@ class OracleXMLTable extends OracleTable {
         return $ret;
     }
     
-    public function createCard($name, $xml): ?bool {
+    public function createCard(string $name, string $xml): ?bool {
         $data = [];
         $data['name'] = $name;
         $data['xml'] = $xml;

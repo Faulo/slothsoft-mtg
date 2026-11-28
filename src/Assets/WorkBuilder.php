@@ -1,9 +1,8 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Assets;
 
-use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
-use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunkWriterDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
@@ -22,29 +21,15 @@ use Slothsoft\MTG\Oracle\Work\Start;
 class WorkBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
-        $delegate = function (): ChunkWriterInterface {
-            $oracle = new Oracle('mtg');
-            
-            $manager = new OracleWorkManager(8, $oracle);
-            
-            return $manager->thenDo(Start::class)
-                ->thenWait()
-                ->thenDo(PrepareCustom::class, [
-                'imageDir' => 'todo',
-                'setDir' => 'todo'
-            ])
-                ->thenDo(PrepareGatherer::class)
-                ->thenWait()
-                ->thenDo(PreparePrices::class)
-                ->thenWait()
-                ->thenDo(PrepareXml::class)
-                ->thenDo(PrepareImages::class, [
-                'imageDir' => 'todo'
-            ])
-                ->thenWait()
-                ->thenDo(End::class);
-        };
-        $writer = new ChunkWriterFromChunkWriterDelegate($delegate);
+        $oracle = new Oracle('mtg');
+        $writer = (new OracleWorkManager())
+            ->thenDo(new Start($oracle))
+            ->thenDo(new PrepareCustom($oracle))
+            ->thenDo(new PrepareGatherer($oracle))
+            ->thenDo(new PreparePrices($oracle))
+            ->thenDo(new PrepareXml($oracle))
+            ->thenDo(new PrepareImages($oracle))
+            ->thenDo(new End($oracle));
         $resultBuilder = new ChunkWriterResultBuilder($writer, 'work.txt');
         return new ExecutableStrategies($resultBuilder);
     }

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use DOMDocument;
@@ -10,7 +11,7 @@ class OracleXSLT {
     /**
      * @throws DOMException
      */
-    public static function cardsByExpansion($expansion): DOMDocument {
+    public static function cardsByExpansion(string $expansion): DOMDocument {
         $query = [
             'expansion_name' => $expansion
         ];

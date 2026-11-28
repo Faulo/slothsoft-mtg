@@ -1,10 +1,14 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use DOMDocument;
-use DOMNode;
+use DOMDocumentFragment;
+use DOMElement;
+use DOMException;
 use Exception;
+use RuntimeException;
 use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\ServerEnvironment;
@@ -44,6 +48,7 @@ class OracleInfo {
     
     const COLOR_NO = 'Colorless';
     
+    /** @var list<string> */
     private static array $_typeList = [
         'Land',
         'Planeswalker',
@@ -63,6 +68,7 @@ class OracleInfo {
         'Other'
     ];
     
+    /** @var list<string> */
     private static array $_rarityList = [
         'Common',
         'Uncommon',
@@ -70,6 +76,7 @@ class OracleInfo {
         'Mythic Rare'
     ];
     
+    /** @var list<string> */
     private static array $_colorList = [
         'White',
         'Blue',
@@ -79,6 +86,7 @@ class OracleInfo {
         'Colorless'
     ];
     
+    /** @var list<string> */
     private static array $_legalityList = [
         'Standard',
         'Modern',
@@ -88,6 +96,7 @@ class OracleInfo {
         // 'Un-Sets',
     ];
     
+    /** @var list<string> */
     private static array $_legalityStandardList = [
         'Ixalan',
         
@@ -110,16 +119,21 @@ class OracleInfo {
         // 'Khans of Tarkir',
     ];
     
+    /** @var list<string>|null */
     private static ?array $_legalityModernList = null;
     
+    /** @var list<string>|null */
     private static ?array $_legalityVintageList = null;
     
+    /** @var list<array{name: string, date: string, type: string, href: string}>|null */
     private static ?array $_setList = null;
     
+    /** @var array<string, array<string, string>>|null */
     private static ?array $_oracleImageGallery = null;
     
     private static ?XSLTProcessor $_oracleXSLT = null;
     
+    /** @var array<string, string> */
     private static array $_setTranslations = [
         // MKM
         'Battle Royale' => 'Battle Royale Box Set',
@@ -163,7 +177,10 @@ class OracleInfo {
         return self::$_dom;
     }
     
-    public static function getTypeFragment(DOMDocument $dataDoc): DOMNode|false|null {
+    /**
+     * @throws DOMException
+     */
+    public static function getTypeFragment(DOMDocument $dataDoc): DOMDocumentFragment {
         static $retFragment = null;
         if (! $retFragment) {
             $xml = '';
@@ -172,10 +189,13 @@ class OracleInfo {
             }
             $retFragment = self::domHelper()->parse($xml);
         }
-        return $dataDoc->importNode($retFragment, true);
+        return self::importFragment($dataDoc, $retFragment);
     }
     
-    public static function getRarityFragment(DOMDocument $dataDoc): DOMNode|false|null {
+    /**
+     * @throws DOMException
+     */
+    public static function getRarityFragment(DOMDocument $dataDoc): DOMDocumentFragment {
         static $retFragment = null;
         if (! $retFragment) {
             $xml = '';
@@ -184,10 +204,13 @@ class OracleInfo {
             }
             $retFragment = self::domHelper()->parse($xml);
         }
-        return $dataDoc->importNode($retFragment, true);
+        return self::importFragment($dataDoc, $retFragment);
     }
     
-    public static function getColorFragment(DOMDocument $dataDoc): DOMNode|false|null {
+    /**
+     * @throws DOMException
+     */
+    public static function getColorFragment(DOMDocument $dataDoc): DOMDocumentFragment {
         static $retFragment = null;
         if (! $retFragment) {
             $xml = '';
@@ -196,13 +219,14 @@ class OracleInfo {
             }
             $retFragment = self::domHelper()->parse($xml);
         }
-        return $dataDoc->importNode($retFragment, true);
+        return self::importFragment($dataDoc, $retFragment);
     }
     
     /**
+     * @throws DOMException
      * @throws Exception
      */
-    public static function getSetFragment(DOMDocument $dataDoc): DOMNode|false|null {
+    public static function getSetFragment(DOMDocument $dataDoc): DOMDocumentFragment {
         static $retFragment = null;
         if (! $retFragment) {
             $doc = new DOMDocument();
@@ -213,9 +237,9 @@ class OracleInfo {
                 $attributes = [
                     'href' => $set['href'],
                     'date' => $set['date'],
-                    'date-year' => date('Y', $time),
-                    'date-month' => date('m', $time),
-                    'date-day' => date('d', $time),
+                    'date-year' => $time === false ? '' : date('Y', $time),
+                    'date-month' => $time === false ? '' : date('m', $time),
+                    'date-day' => $time === false ? '' : date('d', $time),
                     'type' => $set['type']
                 ];
                 foreach ($attributes as $name => $value) {
@@ -225,10 +249,13 @@ class OracleInfo {
                 $retFragment->appendChild($node);
             }
         }
-        return $dataDoc->importNode($retFragment, true);
+        return self::importFragment($dataDoc, $retFragment);
     }
-
-    public static function getLegalityFragment(DOMDocument $dataDoc): DOMNode|false|null {
+    
+    /**
+     * @throws DOMException
+     */
+    public static function getLegalityFragment(DOMDocument $dataDoc): DOMDocumentFragment {
         static $retFragment = null;
         if (! $retFragment) {
             $nameList = self::$_legalityList;
@@ -238,12 +265,25 @@ class OracleInfo {
             }
             $retFragment = self::domHelper()->parse($xml);
         }
-        return $dataDoc->importNode($retFragment, true);
+        return self::importFragment($dataDoc, $retFragment);
+    }
+    
+    /**
+     * @throws DOMException
+     */
+    private static function importFragment(DOMDocument $document, DOMDocumentFragment $fragment): DOMDocumentFragment {
+        $imported = $document->importNode($fragment, true);
+        if (! $imported instanceof DOMDocumentFragment) {
+            throw new RuntimeException('Could not import Oracle metadata.');
+        }
+        return $imported;
     }
     
     // Legality...
-
+    
     /**
+     * @param array<string, mixed> $card
+     * @return list<string>
      * @throws Exception
      */
     public static function getCardLegality(array $card): array {
@@ -271,28 +311,35 @@ class OracleInfo {
         return $ret;
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function isStandardLegal(array $card): bool {
         return in_array($card['expansion_name'], self::$_legalityStandardList);
     }
     
+    /**
+     * @return list<string>
+     */
     public static function getStandardLegalList(): array {
         return self::$_legalityStandardList;
     }
     
     /**
+     * @param array<string, mixed> $card
      * @throws Exception
      */
     public static function isModernLegal(array $card): bool {
-        self::_initLegalityModernList();
-        return in_array($card['expansion_name'], self::$_legalityModernList);
+        return in_array($card['expansion_name'], self::getModernLegalList());
     }
     
     /**
+     * @return list<string>
      * @throws Exception
      */
-    public static function getModernLegalList(): ?array {
+    public static function getModernLegalList(): array {
         self::_initLegalityModernList();
-        return self::$_legalityModernList;
+        return self::$_legalityModernList ?? [];
     }
     
     /**
@@ -316,11 +363,12 @@ class OracleInfo {
     }
     
     /**
+     * @return list<string>
      * @throws Exception
      */
-    public static function getVintageLegalList(): ?array {
+    public static function getVintageLegalList(): array {
         self::_initLegalityVintageList();
-        return self::$_legalityVintageList;
+        return self::$_legalityVintageList ?? [];
     }
     
     /**
@@ -337,11 +385,12 @@ class OracleInfo {
     }
     
     /**
+     * @return list<array{name: string, date: string, type: string, href: string}>
      * @throws Exception
      */
-    public static function getSetList(): ?array {
+    public static function getSetList(): array {
         self::_initSetList();
-        return self::$_setList;
+        return self::$_setList ?? [];
     }
     
     /**
@@ -417,6 +466,10 @@ class OracleInfo {
     }
     
     // Type...
+    
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getCardTypeName(array $card): string {
         $type = ! str_contains($card['type'], 'Token') ? $card['type'] : 'Token';
         $name = 'Other';
@@ -428,6 +481,9 @@ class OracleInfo {
         return $name;
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getCardTypeIndex(array $card): int {
         $type = ! str_contains($card['type'], 'Token') ? $card['type'] : 'Token';
         $i = count(self::$_typeList) - 1;
@@ -439,11 +495,18 @@ class OracleInfo {
         return $i;
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function isCardToken(array $card): bool {
         return self::getCardTypeIndex($card) > 6;
     }
     
     // Rarity...
+    
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getCardRarityName(array $card): string {
         $ret = 0;
         foreach (self::$_rarityList as $i => $name) {
@@ -455,6 +518,9 @@ class OracleInfo {
         return self::$_rarityList[$ret];
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getCardRarityIndex(array $card): int {
         $ret = 0;
         foreach (self::$_rarityList as $i => $name) {
@@ -466,6 +532,10 @@ class OracleInfo {
         return $ret;
     }
     
+    /**
+     * @param array<string, mixed> $card
+     * @return array<string, int|float>
+     */
     public static function getCardColorList(array $card): array {
         $retList = [];
         foreach (self::$_colorList as $color) {
@@ -505,6 +575,9 @@ class OracleInfo {
         return $retList;
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getCardCMC(array $card): int {
         $ret = 0;
         if (isset($card['cost'])) {
@@ -515,7 +588,7 @@ class OracleInfo {
                         $ret += (int) $match;
                     } else {
                         if ($match !== 'X') {
-                            $ret ++;
+                            $ret++;
                         }
                     }
                 }
@@ -524,6 +597,9 @@ class OracleInfo {
         return $ret;
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getCardColors(array $card): float|int {
         $ret = self::getCardColorList($card);
         unset($ret['Colorless']);
@@ -534,7 +610,7 @@ class OracleInfo {
         return array_sum($ret);
     }
     
-    public static function getColorIndex($colorName): int {
+    public static function getColorIndex(string $colorName): int {
         $i = count(self::$_colorList) - 1;
         foreach (self::$_colorList as $i => $name) {
             if ($colorName === $name) {
@@ -552,17 +628,17 @@ class OracleInfo {
         'R' => self::COLOR_R,
         'G' => self::COLOR_G
     ];
-
+    
     public static function getColorKey(string $colorName): ?string {
         $key = array_search($colorName, self::COLOR_NAMES, true);
         return $key === false ? null : $key;
     }
-
+    
     public static function getColorName(string $colorKey): ?string {
         return self::COLOR_NAMES[$colorKey] ?? null;
     }
-
-    public static function getNameKey($name): string {
+    
+    public static function getNameKey(string $name): string {
         $name = strtolower($name);
         $name = str_replace([
             '!',
@@ -581,23 +657,30 @@ class OracleInfo {
         return trim($name);
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getOracleURL(array $card): ?string {
         return $card['oracle_id'] > 0 ? sprintf(self::URL_ORACLE, $card['oracle_id']) : null;
     }
     
     /**
+     * @param array<string, mixed> $card
+     * @return array<string, string>|null
      * @throws Exception
      */
     public static function getOracleCardData(array $card): ?array {
-        self::_initOracleXSLT();
+        $xslt = self::_initOracleXSLT();
         $ret = null;
         if ($url = self::getOracleURL($card)) {
             if ($dataDoc = (new RemoteDocumentLoader())->loadDocument($url, Seconds::MONTH)) {
-                $resDoc = self::$_oracleXSLT->transformToDoc($dataDoc);
-                if ($cardNode = $resDoc->documentElement) {
+                $resDoc = $xslt->transformToDoc($dataDoc);
+                if ($resDoc !== false && ($cardNode = $resDoc->documentElement) !== null) {
                     $ret = [];
                     foreach ($cardNode->childNodes as $node) {
-                        $ret[$node->tagName] = $node->textContent;
+                        if ($node instanceof DOMElement) {
+                            $ret[$node->tagName] = $node->textContent;
+                        }
                     }
                 } else {
                     trigger_error('Could not transform Oracle URL: ' . $url);
@@ -612,18 +695,20 @@ class OracleInfo {
     /**
      * @throws Exception
      */
-    protected static function _initOracleXSLT(): void {
+    protected static function _initOracleXSLT(): XSLTProcessor {
         if (self::$_oracleXSLT === null) {
-            self::$_oracleXSLT = new XSLTProcessor();
-            self::$_oracleXSLT->registerPHPFunctions();
-            $success = self::$_oracleXSLT->importStylesheet(self::domHelper()->load(self::URL_TEMPLATE_ORACLE));
-            if (! $success) {
+            $xslt = new XSLTProcessor();
+            $xslt->registerPHPFunctions();
+            if (! $xslt->importStylesheet(self::domHelper()->load(self::URL_TEMPLATE_ORACLE))) {
                 throw new Exception('Failed to load template: ' . self::URL_TEMPLATE_ORACLE);
             }
+            self::$_oracleXSLT = $xslt;
         }
+        return self::$_oracleXSLT;
     }
     
     /**
+     * @param array<string, mixed> $card
      * @throws Exception
      */
     public static function getOracleImageURL(array $card): ?string {
@@ -649,11 +734,14 @@ class OracleInfo {
         if (self::$_oracleImageGallery === null) {
             self::$_oracleImageGallery = [];
             $res = (new RemoteDocumentLoader())->loadJson(self::URL_GALLERY_HOST . self::URL_GALLERY_INDEX, Seconds::WEEK);
-            if ($res) {
+            $snippets = $res['data'] ?? null;
+            if (is_array($snippets)) {
                 $dom = self::domHelper();
-                foreach ($res['data'] as $html) {
-                    if ($node = $dom->parse($html, null, true)) {
-                        $xpath = $dom->loadXPath($node->ownerDocument);
+                foreach ($snippets as $html) {
+                    if (is_string($html)) {
+                        $doc = new DOMDocument();
+                        $node = $dom->parse($html, $doc, true);
+                        $xpath = DOMHelper::loadXPath($doc);
                         $setName = $xpath->evaluate('normalize-space(.//h3)', $node);
                         $href = $xpath->evaluate('normalize-space(.//a/@href)', $node);
                         if ($setName and $href) {
@@ -677,10 +765,16 @@ class OracleInfo {
         }
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getCardImageName(array $card): string {
         return strtolower(sprintf('%s-%03d.%s', $card['expansion_abbr'], $card['expansion_index'], self::EXTENSION_CARDIMAGE));
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getImageURL(array $card): string {
         // return sprintf(self::URL_IMAGE, $card['oracle_id'], $card['expansion_abbr'], $card['expansion_number']);
         /*
@@ -693,18 +787,30 @@ class OracleInfo {
         return sprintf('/getData.php/mtg/image-card?name=%s', rawurlencode($card['name']));
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getImagePath(array $card): string {
         return sprintf('%s/images/set-%s/%s', ServerEnvironment::getDataDirectory(), strtolower($card['expansion_abbr']), self::getCardImageName($card));
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getRarityURL(array $card): string {
         return sprintf('/getData.php/mtg/image-rarity?expansion_abbr=%s&rarity=%s', strtolower($card['expansion_abbr']), strtolower($card['rarity']));
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getRarityPath(array $card): string {
         return sprintf('%s/images/set-%s/%s-%s.png', ServerEnvironment::getDataDirectory(), strtolower($card['expansion_abbr']), strtolower($card['expansion_abbr']), substr(strtolower($card['rarity']), 0, 1));
     }
     
+    /**
+     * @param array<string, mixed> $card
+     */
     public static function getColorPath(array $card): string {
         return sprintf('%s/mtg/images/color.%s.png', ServerEnvironment::getRootDirectory(), strtolower($card['color']));
     }

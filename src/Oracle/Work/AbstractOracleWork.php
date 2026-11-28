@@ -1,19 +1,23 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle\Work;
 
-use Slothsoft\Farah\PThreads\AbstractWorkThread;
+use Generator;
+use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Slothsoft\MTG\Oracle;
 
-abstract class AbstractOracleWork extends AbstractWorkThread {
+abstract class AbstractOracleWork implements ChunkWriterInterface {
     
-    protected function getOracle(): Oracle {
-        return $this->getOption('oracle');
+    public function __construct(protected readonly Oracle $oracle) {
     }
     
-    protected function thenDo(string $className, array $options = []): void {
-        $options['oracle'] = $this->getOracle();
-        parent::thenDo($className, $options);
+    /**
+     * @return Generator<int, string>
+     */
+    abstract public function toChunks(): Generator;
+    
+    protected function log(string $message, bool $important = false): string {
+        return ($important ? '* ' : '') . $message . PHP_EOL;
     }
 }
-

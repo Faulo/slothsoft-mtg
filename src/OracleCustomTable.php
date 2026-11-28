@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use Exception;
@@ -45,40 +46,62 @@ class OracleCustomTable extends OracleTable {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
     
-    public function getNameListBySetName($setName): ?array {
+    /**
+     * @return array<string>|null
+     */
+    public function getNameListBySetName(string $setName): ?array {
         return $this->dbmsTable->select('name', [
             'expansion_name' => $setName
         ], 'ORDER BY expansion_index');
     }
     
-    public function getIdListByName($name): ?array {
+    /**
+     * @return array<int|string>|null
+     */
+    public function getIdListByName(string $name): ?array {
         return $this->dbmsTable->select('id', [
             'name' => $name
         ]);
     }
     
+    /**
+     * @return array<array<string, mixed>>|null
+     */
     public function getCardList(): ?array {
-        return $this->dbmsTable->select(true, null, 'ORDER BY expansion_abbr, expansion_index');
+        return $this->dbmsTable->select(true, '', 'ORDER BY expansion_abbr, expansion_index');
     }
     
-    public function getCardListBySetName($setName): ?array {
+    /**
+     * @return array<array<string, mixed>>|null
+     */
+    public function getCardListBySetName(string $setName): ?array {
         return $this->dbmsTable->select(true, [
             'expansion_name' => $setName
         ], 'ORDER BY expansion_index');
     }
     
-    public function getCardListBySetAbbr($setAbbr): ?array {
+    /**
+     * @return array<array<string, mixed>>|null
+     */
+    public function getCardListBySetAbbr(string $setAbbr): ?array {
         return $this->dbmsTable->select(true, [
             'expansion_abbr' => $setAbbr
         ], 'ORDER BY expansion_index');
     }
     
+    /**
+     * @param array<array-key, string> $nameList
+     * @return array<array<string, mixed>>|null
+     */
     public function getCardListByNameList(array $nameList): ?array {
         return $this->dbmsTable->select(true, [
             'name' => $nameList
         ]);
     }
     
+    /**
+     * @param array<string, mixed> $data
+     */
     public function createRow(array $data): ?bool {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
@@ -88,18 +111,23 @@ class OracleCustomTable extends OracleTable {
         return $ret;
     }
     
-    public function updateRowByName(array $data, $name): ?bool {
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function updateRowByName(array $data, string $name): ?bool {
         try {
-            $ret = (bool) $this->dbmsTable->update($data, $this->getIdListByName($name));
+            $ids = $this->getIdListByName($name);
+            $ret = $ids === null ? null : (bool) $this->dbmsTable->update($data, $ids);
         } catch (Exception) {
             $ret = null;
         }
         return $ret;
     }
     
-    public function deleteCardsBySetAbbr($setAbbr): int|string|null {
-        return $this->dbmsTable->delete($this->dbmsTable->select('id', [
+    public function deleteCardsBySetAbbr(string $setAbbr): int|string|null {
+        $ids = $this->dbmsTable->select('id', [
             'expansion_abbr' => $setAbbr
-        ]));
+        ]);
+        return $ids === null ? null : $this->dbmsTable->delete($ids);
     }
 }

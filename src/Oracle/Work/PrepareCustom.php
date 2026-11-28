@@ -1,12 +1,17 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle\Work;
+
+use Generator;
 
 class PrepareCustom extends AbstractOracleWork {
     
-    protected function work(): void {
-        
-        $this->thenDo(FetchCustom::class);
+    /**
+     * @return Generator<int, string>
+     */
+    public function toChunks(): Generator {
+        yield from (new FetchCustom($this->oracle))->toChunks();
     }
 }
 

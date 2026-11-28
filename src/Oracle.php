@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use DOMDocument;
@@ -8,6 +9,7 @@ use DOMElement;
 use DOMException;
 use DOMNode;
 use Exception;
+use LogicException;
 use Serializable;
 use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\Core\DOMHelper;
@@ -34,8 +36,10 @@ class Oracle implements Serializable {
     
     private string $_oracleSetQuery = '//*[@id="autoCompleteSourceBoxsetAddText0_InnerTextBoxcontainer"]/*';
     
+    /** @var list<string>|null */
     private ?array $_oracleSetList = null;
     
+    /** @var list<string> */
     private array $_oracleSetBlacklist = [
         'Promo set for Gatherer'
     ];
@@ -43,7 +47,7 @@ class Oracle implements Serializable {
     public function __construct(string $dbName, ?DOMDocument $doc = null) {
         $this->initialize($dbName, $doc);
     }
-
+    
     private function initialize(string $dbName, ?DOMDocument $doc = null): void {
         $this->dbName = $dbName;
         
@@ -66,50 +70,59 @@ class Oracle implements Serializable {
         $table->init();
     }
     
-    public function getIdTable(): ?OracleIdTable {
+    public function getIdTable(): OracleIdTable {
         if (! $this->idTable) {
             $this->idTable = new OracleIdTable($this->dbName, $this->idTableName);
         }
         return $this->idTable;
     }
     
-    public function getXMLTable(): ?OracleXMLTable {
+    public function getXMLTable(): OracleXMLTable {
         if (! $this->xmlTable) {
             $this->xmlTable = new OracleXMLTable($this->dbName, $this->xmlTableName);
         }
         return $this->xmlTable;
     }
     
-    public function getCustomTable(): ?OracleCustomTable {
+    public function getCustomTable(): OracleCustomTable {
         if (! $this->customTable) {
             $this->customTable = new OracleCustomTable($this->dbName, $this->customTableName);
         }
         return $this->customTable;
     }
     
+    /**
+     * @return array<array-key, array{name: string, count: int}>
+     */
     public function getSetList(): array {
         $ret = [];
-        if ($idTable = $this->getIdTable()) {
-            $nameList = $idTable->getExpansionList();
-            foreach ($nameList as $name) {
-                $arr['name'] = $name;
-                $arr['count'] = count($idTable->getNameListBySetName($name));
-                $ret[$name] = $arr;
-            }
+        $idTable = $this->getIdTable();
+        foreach ($idTable->getExpansionList() ?? [] as $name) {
+            $ret[$name] = [
+                'name' => $name,
+                'count' => count($idTable->getNameListBySetName($name) ?? [])
+            ];
         }
         return $ret;
     }
     
     /**
+     * @return list<string>|null
      * @throws Exception
      */
-    public function getOracleSetList($downloadFreshCopy = false): ?array {
+    public function getOracleSetList(bool $downloadFreshCopy = false): ?array {
         if ($this->_oracleSetList === null) {
             if ($xpath = (new RemoteDocumentLoader())->loadXPath($this->_oracleSetURL, $downloadFreshCopy ? 0 : Seconds::YEAR)) {
+                $nodeList = $xpath->query($this->_oracleSetQuery);
+                if ($nodeList === false) {
+                    throw new LogicException('Invalid Oracle set XPath expression.');
+                }
                 $this->_oracleSetList = [];
-                $nodeList = $xpath->evaluate($this->_oracleSetQuery);
                 foreach ($nodeList as $node) {
-                    $set = $xpath->evaluate('normalize-space(.)', $node);
+                    if (! $node instanceof DOMElement) {
+                        continue;
+                    }
+                    $set = (string) $xpath->evaluate('normalize-space(.)', $node);
                     if (strlen($set) and ! in_array($set, $this->_oracleSetBlacklist)) {
                         $this->_oracleSetList[] = $set;
                     }
@@ -120,9 +133,10 @@ class Oracle implements Serializable {
     }
     
     /**
+     * @param array<string, string|array<array-key, string>>|string $inputQuery
      * @throws DOMException
      */
-    public function createSearchElement(DOMDocument $dataDoc, $inputQuery, $stock = 1): false|DOMElement {
+    public function createSearchElement(DOMDocument $dataDoc, array|string $inputQuery, int|string $stock = 1): DOMElement {
         if (is_array($inputQuery)) {
             $query = $inputQuery;
         } else {
@@ -139,18 +153,15 @@ class Oracle implements Serializable {
             }
         }
         $defaults = array_fill_keys(['name', 'type', 'rarity', 'expansion_name', 'description', 'cost', 'legality', 'cmc', 'expansion_abbr', 'expansion_number'], '');
-        $query = array_merge($defaults, $query);
-        foreach ($query as &$val) {
-            if (is_array($val)) {
-                $val = implode(' ', $val);
-            }
-        }
-        unset($val);
+        $query = array_map(
+            static fn(array|string $value): string => is_array($value) ? implode(' ', $value) : $value,
+            array_merge($defaults, $query)
+        );
         // my_dump([$stock, $query]);
         $retNode = $dataDoc->createElement('search');
-        $retNode->setAttribute('query', (strlen($query['name']) or is_array($inputQuery)) ? (string) $query['name'] : (string) $inputQuery);
+        $retNode->setAttribute('query', ($query['name'] !== '' || is_array($inputQuery)) ? $query['name'] : $inputQuery);
         foreach ($query as $key => $val) {
-            $retNode->setAttribute('query-' . $key, (string) $val);
+            $retNode->setAttribute('query-' . $key, $val);
         }
         $retNode->setAttribute('stock', (string) $stock);
         // my_dump($query);
@@ -160,7 +171,7 @@ class Oracle implements Serializable {
          * : $this->getIdTable()->searchNameByCard($query);
          * //
          */
-        $cardList = $this->getIdTable()->searchNameByCard($query);
+        $cardList = $this->getIdTable()->searchNameByCard($query) ?? [];
         // my_dump($cardList);
         if ($searchFragment = $this->createCardFragment($dataDoc, $cardList)) {
             $retNode->appendChild($searchFragment);
@@ -169,14 +180,15 @@ class Oracle implements Serializable {
     }
     
     /**
+     * @param array<array-key, int> $stockList
      * @throws DOMException
      */
-    public function createSetElement(DOMDocument $dataDoc, $setName, array $stockList = []): false|DOMElement {
+    public function createSetElement(DOMDocument $dataDoc, string $setName, array $stockList = []): DOMElement {
         $retNode = $dataDoc->createElement('set');
         $retNode->setAttribute('name', $setName);
         
         $idTable = $this->getIdTable();
-        $nameList = $idTable->getNameListBySetName($setName);
+        $nameList = $idTable->getNameListBySetName($setName) ?? [];
         if ($fragment = $this->createCardFragment($dataDoc, $nameList, $stockList)) {
             $retNode->appendChild($fragment);
         }
@@ -194,10 +206,8 @@ class Oracle implements Serializable {
      * @throws DOMException
      * @throws Exception
      */
-    public function createCategoriesElement(?DOMDocument $dataDoc = null): false|DOMElement {
-        if (! $dataDoc) {
-            $dataDoc = $this->doc;
-        }
+    public function createCategoriesElement(?DOMDocument $dataDoc = null): DOMElement {
+        $dataDoc ??= $this->doc ?? new DOMDocument();
         $categoryNode = $dataDoc->createElement('categories');
         $categoryNode->appendChild(OracleInfo::getTypeFragment($dataDoc));
         $categoryNode->appendChild(OracleInfo::getRarityFragment($dataDoc));
@@ -207,24 +217,23 @@ class Oracle implements Serializable {
         return $categoryNode;
     }
     
+    /**
+     * @param array<array-key, string> $nameList
+     * @param array<array-key, int>|null $stockList
+     * @throws DOMException
+     */
     public function createCardFragment(?DOMDocument $dataDoc = null, array $nameList = [], ?array $stockList = null): ?DOMDocumentFragment {
-        if (! $dataDoc) {
-            $dataDoc = $this->doc;
-        }
+        $dataDoc ??= $this->doc;
         foreach ($nameList as &$name) {
             $name = $this->_sanitizeName($name);
         }
         unset($name);
-        if (! $dataDoc) {
-            $dataDoc = $this->doc;
-        }
-        $xmlTable = $this->getXMLTable();
-        $xml = $xmlTable->getXMLListByNameList($nameList);
+        $xml = $this->getXMLTable()->getXMLListByNameList($nameList) ?? [];
         $xml = implode('', $xml);
         $fragment = $this->dom()->parse($xml, $dataDoc);
         if (is_array($stockList)) {
             foreach ($fragment->childNodes as $cardNode) {
-                if ($cardNode->nodeType === XML_ELEMENT_NODE) {
+                if ($cardNode instanceof DOMElement) {
                     $name = $cardNode->getAttribute('name');
                     $stock = $stockList[$name] ?? 0;
                     $cardNode->setAttribute('stock', (string) $stock);
@@ -237,10 +246,11 @@ class Oracle implements Serializable {
         return $fragment->hasChildNodes() ? $fragment : null;
     }
     
-    public function createCardElement(?DOMDocument $dataDoc = null, $name = ''): DOMNode|false|null {
-        if (! $dataDoc) {
-            $dataDoc = $this->doc;
-        }
+    /**
+     * @throws DOMException
+     */
+    public function createCardElement(?DOMDocument $dataDoc = null, string $name = ''): DOMNode|false|null {
+        $dataDoc ??= $this->doc;
         $name = $this->_sanitizeName($name);
         $ret = null;
         $xmlTable = $this->getXMLTable();
@@ -248,7 +258,8 @@ class Oracle implements Serializable {
             $name
         ])) {
             $xml = implode('', $xml);
-            if ($fragment = $this->dom()->parse($xml, $dataDoc)) {
+            $fragment = $this->dom()->parse($xml, $dataDoc);
+            if ($fragment->firstChild !== null) {
                 $ret = $fragment->removeChild($fragment->firstChild);
             }
         }
@@ -256,24 +267,24 @@ class Oracle implements Serializable {
     }
     
     /**
+     * @param array<array-key, int> $stockList
      * @throws DOMException
      * @throws Exception
      */
-    public function createChecklistElement(DOMDocument $dataDoc, array $stockList): false|DOMElement {
+    public function createChecklistElement(DOMDocument $dataDoc, array $stockList): DOMElement {
         $checklistNode = $dataDoc->createElement('checklist');
         $setNameList = OracleInfo::getVintageLegalList();
         foreach ($setNameList as $setName) {
-            if ($setNode = $this->createSetElement($dataDoc, $setName, $stockList)) {
-                $checklistNode->appendChild($setNode);
-            }
+            $checklistNode->appendChild($this->createSetElement($dataDoc, $setName, $stockList));
         }
         return $checklistNode;
     }
     
     /**
+     * @param array<array-key, int> $stockList
      * @throws DOMException
      */
-    public function createPricelistElement(DOMDocument $dataDoc, array $stockList): false|DOMElement {
+    public function createPricelistElement(DOMDocument $dataDoc, array $stockList): DOMElement {
         $retNode = $dataDoc->createElement('pricelist');
         
         // $idTable = $this->getIdTable();
@@ -281,7 +292,7 @@ class Oracle implements Serializable {
         $setNode->setAttribute('name', 'Magiccardmarket');
         $setNode->setAttribute('href', 'https://www.magiccardmarket.eu/');
         
-        $nameList = array_keys($stockList);
+        $nameList = array_map(strval(...), array_keys($stockList));
         if ($fragment = $this->createCardFragment($dataDoc, $nameList, $stockList)) {
             $setNode->appendChild($fragment);
         }
@@ -312,11 +323,14 @@ class Oracle implements Serializable {
     public function __serialize(): array {
         return ['db' => $this->dbName];
     }
-
+    
+    /**
+     * @param array{db: string} $data
+     */
     public function __unserialize(array $data): void {
         $this->initialize($data['db']);
     }
-
+    
     public function serialize(): string {
         return $this->dbName;
     }

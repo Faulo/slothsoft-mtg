@@ -1,8 +1,10 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use Exception;
+use RuntimeException;
 
 class OracleIdTable extends OracleTable {
     
@@ -59,23 +61,29 @@ class OracleIdTable extends OracleTable {
         $this->dbmsTable->createTable($sqlCols, $sqlKeys);
     }
     
+    /**
+     * @param array<array-key, array<string, mixed>> $dataList
+     * @return array<array-key, array<string, mixed>>
+     */
     protected function castList(array &$dataList): array {
-        foreach ($dataList as &$data) {
-            $this->cast($data);
+        foreach ($dataList as $key => $data) {
+            $dataList[$key] = $this->cast($data);
         }
-        unset($data);
         return $dataList;
     }
     
-    protected function cast(array &$data): array {
-        foreach ([] as $key) {
-            if (isset($data[$key])) {
-                $data[$key] = (int) $data[$key];
-            }
-        }
+    /**
+     * @param array<string, mixed> $data
+     * @return array<string, mixed>
+     */
+    protected function cast(array $data): array {
         return $data;
     }
     
+    /**
+     * @param array<string, string> $query
+     * @return array<string>|null
+     */
     public function searchNameByCard(array $query): ?array {
         $ret = [];
         $sqlList = [];
@@ -145,9 +153,10 @@ class OracleIdTable extends OracleTable {
         return $ret;
     }
     
-    public function getMissingOracleId(): int|string {
+    public function getMissingOracleId(): int {
         $ret = 1;
-        $idList = $this->dbmsTable->select('oracle_id', '1 ORDER BY oracle_id ASC');
+        $idList = $this->dbmsTable->select('oracle_id', '', 'ORDER BY oracle_id ASC')
+            ?? throw new RuntimeException('Could not read Oracle IDs.');
         array_unshift($idList, 0);
         foreach ($idList as $i => $id) {
             if ($i !== (int) $id) {
@@ -160,25 +169,40 @@ class OracleIdTable extends OracleTable {
     
     public function getLastOracleId(): int|string|false {
         $idList = $this->dbmsTable->select('oracle_id', '1 ORDER BY oracle_id DESC LIMIT 1');
-        return current($idList);
+        return current($idList ?? []);
     }
     
+    /**
+     * @return array<int|string>|null
+     */
     public function getOracleIdList(): ?array {
         return $this->dbmsTable->select('oracle_id');
     }
     
+    /**
+     * @return array<string>|null
+     */
     public function getExpansionList(): ?array {
         return $this->dbmsTable->select('DISTINCT expansion_name');
     }
     
+    /**
+     * @return array<string>|null
+     */
     public function getSetAbbrList(): ?array {
         return $this->dbmsTable->select('DISTINCT expansion_abbr');
     }
     
+    /**
+     * @return array<string>|null
+     */
     public function getCustomSetAbbrList(): ?array {
         return $this->dbmsTable->select('DISTINCT expansion_abbr', 'expansion_abbr LIKE "custom-%"');
     }
     
+    /**
+     * @return array<array-key, string>
+     */
     public function getSetList(): array {
         $ret = [];
         // SELECT expansion_name, expansion_abbr, count(id) cards FROM `oracle-ids` group by expansion_abbr ORDER BY cards DESC
@@ -188,76 +212,111 @@ class OracleIdTable extends OracleTable {
             'expansion_name',
             'count(id) cards'
         ], '', 'GROUP BY expansion_abbr ORDER BY cards DESC');
-        foreach ($res as $row) {
+        foreach ($res ?? [] as $row) {
             $ret[$row['expansion_abbr']] = $row['expansion_name'];
         }
         return $ret;
     }
     
+    /**
+     * @param array<array-key, int|string> $idList
+     * @return array<array-key, int|string>
+     */
     public function getMissingOracleIdList(array $idList): array {
-        return array_diff($idList, $this->dbmsTable->select('oracle_id', sprintf('oracle_id IN (%s)', implode(',', $idList))));
+        $existingIds = $this->dbmsTable->select('oracle_id', ['oracle_id' => $idList])
+            ?? throw new RuntimeException('Could not read Oracle IDs.');
+        return array_diff($idList, $existingIds);
     }
     
+    /**
+     * @param array<array-key, int|string> $idList
+     * @return array<string>|null
+     */
     public function getNameListByOracleIdList(array $idList): ?array {
         return $this->dbmsTable->select('name', [
             'oracle_id' => $idList
         ]);
     }
     
-    public function getNameByOracleId($id): string|false {
+    public function getNameByOracleId(int|string $id): string|false {
         $nameList = $this->dbmsTable->select('name', [
             'oracle_id' => $id
         ]);
-        return current($nameList);
+        return current($nameList ?? []);
     }
     
-    public function getNameListBySetName($setName): ?array {
+    /**
+     * @return array<string>|null
+     */
+    public function getNameListBySetName(string $setName): ?array {
         return $this->dbmsTable->select('name', [
             'expansion_name' => $setName
         ], 'ORDER BY expansion_index');
     }
     
-    public function getIdListByName($name): ?array {
+    /**
+     * @return array<int|string>|null
+     */
+    public function getIdListByName(string $name): ?array {
         return $this->dbmsTable->select('id', [
             'name' => $name
         ]);
     }
     
-    public function getCardListBySetName($setName): ?array {
+    /**
+     * @return array<array<string, mixed>>|null
+     */
+    public function getCardListBySetName(string $setName): ?array {
         return $this->dbmsTable->select(true, [
             'expansion_name' => $setName
         ], 'ORDER BY expansion_index');
     }
     
-    public function getCardListBySetAbbr($setAbbr): ?array {
+    /**
+     * @return array<array<string, mixed>>|null
+     */
+    public function getCardListBySetAbbr(string $setAbbr): ?array {
         return $this->dbmsTable->select(true, [
             'expansion_abbr' => $setAbbr
         ], 'ORDER BY expansion_index');
     }
     
-    public function getCardByName($name): ?array {
+    /**
+     * @return array<string, mixed>|null
+     */
+    public function getCardByName(string $name): ?array {
         $ret = $this->dbmsTable->select(true, [
             'name' => $name
         ], 'ORDER BY oracle_id DESC');
         return $ret ? reset($ret) : null;
     }
     
-    public function getCardListByName($name): ?array {
+    /**
+     * @return array<array<string, mixed>>|null
+     */
+    public function getCardListByName(string $name): ?array {
         return $this->dbmsTable->select(true, [
             'name' => $name
         ]);
     }
     
+    /**
+     * @param array<array-key, string> $nameList
+     * @return array<array<string, mixed>>|null
+     */
     public function getCardListByNameList(array $nameList): ?array {
         return $this->dbmsTable->select(true, [
             'name' => $nameList
         ]);
     }
     
+    /**
+     * @return list<array<string, mixed>>
+     */
     public function getUniqueCardList(): array {
         $retList = [];
         $nameList = $this->dbmsTable->select('DISTINCT name');
-        foreach ($nameList as $name) {
+        foreach ($nameList ?? [] as $name) {
             if ($resList = $this->dbmsTable->select(true, [
                 'name' => $name
             ], 'ORDER BY oracle_id DESC')) {
@@ -284,6 +343,9 @@ class OracleIdTable extends OracleTable {
         return $retList;
     }
     
+    /**
+     * @param array<string, mixed> $data
+     */
     public function createRow(array $data): ?bool {
         try {
             $ret = (bool) $this->dbmsTable->insert($data, $data);
@@ -293,16 +355,23 @@ class OracleIdTable extends OracleTable {
         return $ret;
     }
     
-    public function updateRowByName(array $data, $name): ?bool {
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function updateRowByName(array $data, string $name): ?bool {
         try {
-            $ret = (bool) $this->dbmsTable->update($data, $this->getIdListByName($name));
+            $ids = $this->getIdListByName($name);
+            $ret = $ids === null ? null : (bool) $this->dbmsTable->update($data, $ids);
         } catch (Exception) {
             $ret = null;
         }
         return $ret;
     }
     
-    public function updateRowById(array $data, $id): ?bool {
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function updateRowById(array $data, int|string $id): ?bool {
         try {
             $ret = (bool) $this->dbmsTable->update($data, $id);
         } catch (Exception) {
@@ -311,7 +380,7 @@ class OracleIdTable extends OracleTable {
         return $ret;
     }
     
-    public function createCard($oracleId, $name, $expansion): ?bool {
+    public function createCard(int|string $oracleId, string $name, string $expansion): ?bool {
         $data = [];
         $data['oracle_id'] = $oracleId;
         $data['name'] = $name;
@@ -320,6 +389,7 @@ class OracleIdTable extends OracleTable {
     }
     
     public function deleteCustomCards(): int|string|null {
-        return $this->dbmsTable->delete($this->dbmsTable->select('id', 'oracle_id < 0'));
+        $ids = $this->dbmsTable->select('id', 'oracle_id < 0');
+        return $ids === null ? null : $this->dbmsTable->delete($ids);
     }
 }

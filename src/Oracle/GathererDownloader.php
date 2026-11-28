@@ -1,11 +1,13 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle;
 
+use DOMElement;
+use Exception;
 use Slothsoft\Core\Calendar\Seconds;
 use Slothsoft\MTG\OracleInfo;
 use Slothsoft\MTG\RemoteDocumentLoader;
-use Exception;
 
 class GathererDownloader {
     
@@ -18,17 +20,21 @@ class GathererDownloader {
     }
     
     /**
+     * @return iterable<int, int>
      * @throws Exception
      */
     public function getCardIdsBySetName(string $setName): iterable {
         $ret = [];
-        for ($setPage = 0; $setPage < 10; $setPage ++) {
+        for ($setPage = 0; $setPage < 10; $setPage++) {
             $setURI = self::getSetCardsUrl($setName, $setPage);
             $newCards = false;
             
             if ($xpath = (new RemoteDocumentLoader())->loadXPath($setURI, Seconds::DAY)) {
-                $nodeList = $xpath->evaluate('//html:tr[@class = "cardItem"]');
+                $nodeList = $xpath->query('//html:tr[@class = "cardItem"]') ?: [];
                 foreach ($nodeList as $node) {
+                    if (! $node instanceof DOMElement) {
+                        continue;
+                    }
                     $cardId = (int) $xpath->evaluate('substring-after(.//html:a[@class = "nameLink"]/@href, "multiverseid=")', $node);
                     if ($cardId > 0) {
                         $idList = $this->getIdVariations($cardId);
@@ -51,17 +57,20 @@ class GathererDownloader {
     }
     
     /**
+     * @return array<int, int>
      * @throws Exception
      */
-    private function getIdVariations(int $oracleId): iterable {
+    private function getIdVariations(int $oracleId): array {
         $ret = [];
         $ret[] = $oracleId;
         
         $url = self::getCardDetailsUrl($oracleId);
         if ($xpath = (new RemoteDocumentLoader())->loadXPath($url, Seconds::YEAR)) {
-            $nodeList = $xpath->evaluate('//*[@class="variationLink"]');
+            $nodeList = $xpath->query('//*[@class="variationLink"]') ?: [];
             foreach ($nodeList as $node) {
-                $ret[] = (int) $node->getAttribute('id');
+                if ($node instanceof DOMElement) {
+                    $ret[] = (int) $node->getAttribute('id');
+                }
             }
         }
         
@@ -76,6 +85,7 @@ class GathererDownloader {
     }
     
     /**
+     * @return array<string, string|int|float|null>
      * @throws Exception
      */
     private function getCardDataById(int $oracleId): array {

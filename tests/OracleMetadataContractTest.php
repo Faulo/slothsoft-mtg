@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use DOMDocument;
@@ -12,7 +13,7 @@ use ReflectionProperty;
  * @runTestsInSeparateProcesses
  */
 final class OracleMetadataContractTest extends TestCase {
-
+    
     /**
      * @throws DOMException
      * @throws Exception
@@ -29,6 +30,7 @@ final class OracleMetadataContractTest extends TestCase {
         $doc->appendChild($root);
         $root->appendChild(OracleInfo::getSetFragment($doc));
         $set = $doc->getElementsByTagName('set')->item(0);
+        $this->assertNotNull($set);
         $this->assertSame('Duel & Decks', $set->textContent);
         $this->assertSame('https://fixtures.example.test/?a=1&b=2', $set->getAttribute('href'));
         $this->assertSame('2020-01-02', $set->getAttribute('date'));
@@ -36,9 +38,11 @@ final class OracleMetadataContractTest extends TestCase {
         $this->assertSame('01', $set->getAttribute('date-month'));
         $this->assertSame('02', $set->getAttribute('date-day'));
         $this->assertSame('expansion set', $set->getAttribute('type'));
-        $this->assertStringContainsString('Duel &amp; Decks', $doc->saveXML());
+        $xml = $doc->saveXML();
+        $this->assertIsString($xml);
+        $this->assertStringContainsString('Duel &amp; Decks', $xml);
     }
-
+    
     public function testColorMappingsKeepBothDirectionsAndUnknownValues(): void {
         foreach (['C' => 'Colorless', 'W' => 'White', 'U' => 'Blue', 'B' => 'Black', 'R' => 'Red', 'G' => 'Green'] as $key => $name) {
             $this->assertSame($name, OracleInfo::getColorName($key));

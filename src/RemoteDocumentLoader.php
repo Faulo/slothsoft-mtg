@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use DOMDocument;
@@ -10,16 +11,16 @@ use Slothsoft\Core\CacheDirectoryStorage;
 use Slothsoft\Core\DOMHelper;
 
 final class RemoteDocumentLoader {
-
+    
     private Client $client;
-
+    
     private CacheDirectoryStorage $cache;
-
+    
     public function __construct(?Client $client = null, ?CacheDirectoryStorage $cache = null) {
         $this->client = $client ?? new Client();
         $this->cache = $cache ?? new CacheDirectoryStorage('mtg-remote');
     }
-
+    
     private function loadText(string $url, int $cacheTime): ?string {
         if ($cacheTime > 0) {
             $cached = $this->cache->retrieve($url, time() - $cacheTime);
@@ -38,7 +39,10 @@ final class RemoteDocumentLoader {
         $this->cache->store($url, $text, time());
         return $text;
     }
-
+    
+    /**
+     * @phpstan-impure
+     */
     public function loadDocument(string $url, int $cacheTime = 0): ?DOMDocument {
         $text = $this->loadText($url, $cacheTime);
         if ($text === null) {
@@ -57,12 +61,15 @@ final class RemoteDocumentLoader {
             libxml_use_internal_errors($previous);
         }
     }
-
+    
     public function loadXPath(string $url, int $cacheTime = 0): ?DOMXPath {
         $document = $this->loadDocument($url, $cacheTime);
         return $document ? DOMHelper::loadXPath($document) : null;
     }
-
+    
+    /**
+     * @return array<array-key, mixed>|null
+     */
     public function loadJson(string $url, int $cacheTime = 0): ?array {
         $text = $this->loadText($url, $cacheTime);
         if ($text === null) {

@@ -1,24 +1,30 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle\Work;
 
-use Slothsoft\MTG\Oracle\GathererDownloader;
 use Exception;
+use Generator;
+use Slothsoft\MTG\Oracle;
+use Slothsoft\MTG\Oracle\GathererDownloader;
 
 class FetchGatherer extends AbstractOracleWork {
     
+    public function __construct(Oracle $oracle, private readonly string $setName) {
+        parent::__construct($oracle);
+    }
+    
     /**
+     * @return Generator<int, string>
      * @throws Exception
      */
-    protected function work(): void {
-        $setName = $this->getOption('setName');
-        
+    public function toChunks(): Generator {
         $downloader = new GathererDownloader();
         
-        $this->log(sprintf('Fetching "%s"...', $setName));
+        yield $this->log(sprintf('Fetching "%s"...', $this->setName));
         
         $cardList = [];
-        foreach ($downloader->getCardIdsBySetName($setName) as $cardId) {
+        foreach ($downloader->getCardIdsBySetName($this->setName) as $cardId) {
             try {
                 $card = $downloader->getCardById($cardId);
                 
@@ -34,7 +40,7 @@ class FetchGatherer extends AbstractOracleWork {
                     continue;
                 }
                 if ($type === 'Other') {
-                    $this->log(sprintf('Will not import non-card #%s: %s (%s)', $cardId, $card->getName(), $card->getType()), true);
+                    yield $this->log(sprintf('Will not import non-card #%s: %s (%s)', $cardId, $card->getName(), $card->getType()), true);
                     continue;
                 }
                 
@@ -46,16 +52,13 @@ class FetchGatherer extends AbstractOracleWork {
                 
                 $cardList[$number] = $card;
             } catch (Exception $e) {
-                $this->log($e->getMessage(), true);
+                yield $this->log($e->getMessage(), true);
             }
         }
         ksort($cardList, SORT_NATURAL);
         
-        $this->thenDo(UpdateIdTable::class, [
-            'cards' => $cardList
-        ]);
-        
-        $this->log(sprintf('Prepared to update %d cards from "%s"!', count($cardList), $setName));
+        yield $this->log(sprintf('Prepared to update %d cards from "%s"!', count($cardList), $this->setName));
+        yield from (new UpdateIdTable($this->oracle, $cardList))->toChunks();
     }
 }
 

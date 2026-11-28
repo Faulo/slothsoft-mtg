@@ -1,33 +1,47 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle\Work;
+
+use Generator;
+use Slothsoft\MTG\Oracle;
+use Slothsoft\MTG\Oracle\Card;
 
 class UpdateIdTable extends AbstractOracleWork {
     
-    protected function work(): void {
-        $oracle = $this->getOracle();
-        $idTable = $oracle->getIdTable();
-        $cards = $this->getOption('cards');
+    /**
+     * @param array<string, Card> $cards
+     */
+    public function __construct(Oracle $oracle, private readonly array $cards) {
+        parent::__construct($oracle);
+    }
+    
+    /**
+     * @return Generator<int, string>
+     */
+    public function toChunks(): Generator {
+        $idTable = null;
         
         $lastCard = null;
         $successCount = 0;
         $totalCount = 0;
         
         $i = 0;
-        foreach ($cards as $card) {
+        foreach ($this->cards as $card) {
             $data = $card->getData();
             
-            $totalCount ++;
+            $totalCount++;
             $data['expansion_index'] = $i;
+            $idTable ??= $this->oracle->getIdTable();
             $res = $idTable->createRow($data);
             if ($res === null) {
-                $this->log(sprintf('ERROR in %s, row %d!', $data['expansion_name'], $i + 1), true);
+                yield $this->log(sprintf('ERROR in %s, row %d!', $data['expansion_name'], $i + 1), true);
                 break;
             } else {
-                $i ++;
+                $i++;
                 if ($res) {
                     $lastCard = $data;
-                    $successCount ++;
+                    $successCount++;
                 }
             }
         }
@@ -38,7 +52,7 @@ class UpdateIdTable extends AbstractOracleWork {
             $lastCard = '';
         }
         
-        $this->log(sprintf('Updated %3d/%3d cards!%s', $successCount, $totalCount, $lastCard), $successCount > 0);
+        yield $this->log(sprintf('Updated %3d/%3d cards!%s', $successCount, $totalCount, $lastCard), $successCount > 0);
     }
 }
 

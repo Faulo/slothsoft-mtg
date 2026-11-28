@@ -1,21 +1,27 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle\Work;
 
-use Slothsoft\Farah\PThreads\WorkManager;
-use Slothsoft\MTG\Oracle;
+use Generator;
+use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 
-class OracleWorkManager extends WorkManager {
+class OracleWorkManager implements ChunkWriterInterface {
     
-    private Oracle $oracle;
+    /** @var list<AbstractOracleWork> */
+    private array $jobs = [];
     
-    public function __construct(int $treadCount, Oracle $oracle) {
-        parent::__construct($treadCount);
-        $this->oracle = $oracle;
+    public function thenDo(AbstractOracleWork $job): self {
+        $this->jobs[] = $job;
+        return $this;
     }
     
-    public function thenDo(string $className, array $options = []): WorkManager {
-        $options['oracle'] = $this->oracle;
-        return parent::thenDo($className, $options);
+    /**
+     * @return Generator<int, string>
+     */
+    public function toChunks(): Generator {
+        foreach ($this->jobs as $job) {
+            yield from $job->toChunks();
+        }
     }
 }

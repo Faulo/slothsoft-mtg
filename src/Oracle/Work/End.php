@@ -1,11 +1,17 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle\Work;
+
+use Generator;
 
 class End extends AbstractOracleWork {
     
-    protected function work(): void {
-        $this->log('Finished!');
+    /**
+     * @return Generator<int, string>
+     */
+    public function toChunks(): Generator {
+        yield $this->log('Finished!');
     }
 }
 

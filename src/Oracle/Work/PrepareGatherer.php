@@ -1,23 +1,28 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG\Oracle\Work;
 
 use Exception;
+use Generator;
+use RuntimeException;
 
 class PrepareGatherer extends AbstractOracleWork {
-
+    
     /**
+     * @return Generator<int, string>
      * @throws Exception
      */
-    protected function work(): void {
-        $oracle = $this->getOracle();
-        
-        $setList = $oracle->getOracleSetList();
-        $this->log(sprintf('Preparing %d set download threads!', count($setList)));
+    public function toChunks(): Generator {
+        $setList = $this->oracle->getOracleSetList()
+            ?? throw new RuntimeException('Could not load the Oracle set list.');
+        yield $this->log(sprintf('Preparing %d set downloads!', count($setList)));
         foreach ($setList as $setName) {
-            $this->thenDo(FetchGatherer::class, [
-                'setName' => $setName
-            ]);
+            try {
+                yield from (new FetchGatherer($this->oracle, $setName))->toChunks();
+            } catch (Exception $error) {
+                yield $this->log($error->getMessage(), true);
+            }
         }
     }
 }

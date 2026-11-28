@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use Serializable;
@@ -47,15 +48,18 @@ abstract class OracleTable implements Serializable {
             'table' => $this->tableName
         ];
     }
-
+    
+    /**
+     * @param array{db: string, table: string} $data
+     */
     public function __unserialize(array $data): void {
         $this->__construct($data['db'], $data['table']);
     }
-
+    
     public function serialize(): string {
         return serialize($this->__serialize());
     }
-
+    
     public function unserialize(string $data): void {
         $this->__unserialize(unserialize($data));
     }

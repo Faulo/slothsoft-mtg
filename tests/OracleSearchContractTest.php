@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\MTG;
 
 use DOMDocument;
@@ -8,8 +9,10 @@ use DOMXPath;
 use PHPUnit\Framework\TestCase;
 
 final class OracleSearchContractTest extends TestCase {
-
+    
     /**
+     * @param array<string, string|list<string>>|string $input
+     * @param array<string, string> $expected
      * @dataProvider queryProvider
      * @throws DOMException
      */
@@ -38,7 +41,10 @@ final class OracleSearchContractTest extends TestCase {
         }
         $this->assertSame('Forest', (new DOMXPath($doc))->evaluate('string(/search/card/@name)'));
     }
-
+    
+    /**
+     * @return iterable<string, array{array<string, string|list<string>>|string, array<string, string>}>
+     */
     public function queryProvider(): iterable {
         yield 'server array query' => [['name' => 'Forest', 'rarity' => ['Common', 'Uncommon']], ['name' => 'Forest', 'rarity' => 'Common Uncommon']];
         yield 'plain name' => ['Forest', ['name' => 'Forest']];
